@@ -1,0 +1,15 @@
+---
+description: PrometeyLabs knowledge base — CLAUDE.md, skills, заборони
+alwaysApply: true
+---
+
+# Prometey Vault — база знань цього проєкту
+
+Vault: `/Users/olegbonislavskyi/Library/Mobile Documents/com~apple~CloudDocs/Prometey_vault`
+
+1. Перед будь-яким завданням прочитай `CLAUDE.md` у корені vault (секція «⛔ АБСОЛЮТНІ ЗАБОРОНИ» — обов'язково).
+2. Скіли: `05_System/Skills/{category}/{filename}.md` — шляхи від кореня vault. Аргумент `/skill` = ім'я файлу без `.md`.
+3. Маршрутизація: тип сайту → «Крок 2» у CLAUDE.md; інтеграції → «Крок 6».
+4. Відповіді українською. Стек за замовчуванням: Django 5+ / HTMX / Vanilla JS / plain CSS / Docker + nginx / DigitalOcean. Без React/SPA, без `!important`, без inline `style=""`/`onclick=""`, без секретів у коді.
+5. Нові `.md`-звіти в репозиторії не створювати. Після операцій над vault — append у `log.md`.
+6. Нотатки клієнтських проєктів — `01_Projects/` у vault (frontmatter з `03_Templates/Project_Template.md`).
