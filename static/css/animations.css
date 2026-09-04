@@ -1,0 +1,89 @@
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity var(--motion-reveal) var(--ease-reveal),
+              transform var(--motion-reveal) var(--ease-reveal);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
+.reveal-delay-1 { --reveal-delay: 80ms; }
+.reveal-delay-2 { --reveal-delay: 160ms; }
+.reveal--left { transform: translate3d(-28px, 0, 0); }
+.reveal--right { transform: translate3d(28px, 0, 0); }
+.reveal--left.is-visible,
+.reveal--right.is-visible { transform: translate3d(0, 0, 0); }
+
+.card--frame {
+  position: relative;
+  overflow: hidden;
+}
+.card--frame::before,
+.card--frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-accent);
+  opacity: 0;
+  transition: opacity var(--duration-ui) var(--ease-out),
+              transform var(--duration-ui) var(--ease-out);
+}
+.card--frame::before {
+  top: 10px; left: 10px;
+  border-right: 0; border-bottom: 0;
+  transform: translate3d(-6px, -6px, 0);
+}
+.card--frame::after {
+  right: 10px; bottom: 10px;
+  border-left: 0; border-top: 0;
+  transform: translate3d(6px, 6px, 0);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card--frame:hover::before,
+  .card--frame:hover::after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.partners-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.partners-marquee__track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: partners-loop 28s linear infinite;
+}
+.partners-marquee__track .partner-tile { min-width: 168px; }
+@keyframes partners-loop {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+#lead-form,
+#career,
+#routes,
+#services,
+#faq {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.hero__content.reveal { transform: translate3d(0, 20px, 0); }
+.hero__form-card.reveal { transform: translate3d(24px, 0, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .hero__content.reveal,
+  .hero__form-card.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .partners-marquee__track { animation: none; }
+  .card--frame::before,
+  .card--frame::after { display: none; }
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Послуги — ПРИВАТ-ТРАНС</title>
+<meta name="description" content="Вісім послуг ПРИВАТ-ТРАНС: міжнародні перевезення, збірні вантажі, повні авто, спецвантажі, контейнери, склади, митне оформлення, страхування.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти до змісту</a>
+
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">ПТ</span>
+      ПРИВАТ-ТРАНС
+    </a>
+    <nav class="nav" aria-label="Основна навігація">
+      <ul class="nav__list">
+        <li><a class="nav__link is-active" href="services.html">Послуги</a></li>
+        <li><a class="nav__link" href="about.html">Про нас</a></li>
+        <li><a class="nav__link" href="faq.html">FAQ</a></li>
+        <li><a class="nav__link" href="calculator.html">Калькулятор</a></li>
+        <li><a class="nav__link" href="contacts.html">Контакти</a></li>
+      </ul>
+    </nav>
+    <div class="header__actions">
+      <div class="lang-switch" role="group" aria-label="Мова сайту">
+        <button type="button" class="lang-switch__btn is-active" data-lang-btn="uk">UK</button>
+        <button type="button" class="lang-switch__btn" data-lang-btn="en">EN</button>
+      </div>
+      <a class="btn btn--primary btn--sm" href="index.html#lead-form">Залишити заявку</a>
+      <button type="button" class="menu-toggle" data-drawer-toggle aria-expanded="false" aria-controls="mobile-drawer" aria-label="Відкрити меню">
+        <span class="menu-toggle__box"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" data-drawer id="mobile-drawer" data-open="false">
+  <div class="drawer__backdrop"></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Меню">
+    <div class="drawer__head">
+      <span class="brand">ПРИВАТ-ТРАНС</span>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="Закрити меню">✕</button>
+    </div>
+    <nav class="drawer__nav" aria-label="Мобільна навігація">
+      <a class="drawer__link" href="services.html">Послуги</a>
+      <a class="drawer__link" href="about.html">Про нас</a>
+      <a class="drawer__link" href="faq.html">FAQ</a>
+      <a class="drawer__link" href="calculator.html">Калькулятор</a>
+      <a class="drawer__link" href="contacts.html">Контакти</a>
+    </nav>
+    <div class="drawer__foot">
+      <a class="btn btn--primary btn--block" href="index.html#lead-form">Залишити заявку</a>
+      <a class="btn btn--secondary btn--block" href="tel:+380000000000">Зателефонувати</a>
+    </div>
+  </div>
+</div>
+
+<main class="main has-mobile-bar" id="main">
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumbs"><a href="index.html">Головна</a> / <span>Послуги</span></p>
+      <h1 class="page-title">Послуги</h1>
+      <p class="page-lead">Вісім напрямків роботи — від збірних 10 кг до перевезень «під ключ».</p>
+    </div>
+  </div>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Міжнародні перевезення</h2>
+            <p class="service-row__text">Експорт/імпорт, 10 кг–23 т, Європа та Азія.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Міжнародні%20перевезення">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Збірні вантажі від 10 кг</h2>
+            <p class="service-row__text">Дрібна партія — не потрібно чекати повну фуру.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Збірні%20від%2010%20кг">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Повні авто / тенти</h2>
+            <p class="service-row__text">FTL до 23 т, власний автопарк.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Повні%20авто%20%2F%20тенти">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Спецвантажі</h2>
+            <p class="service-row__text">Температурний режим, небезпечні (ADR), негабарит.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Спецвантажі">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Контейнери</h2>
+            <p class="service-row__text">Мультимодал: море + авто, документи на весь ланцюг.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Контейнери">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Власні склади</h2>
+            <p class="service-row__text">Консолідація, зберігання, видача в ланцюгу «під ключ».</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Власні%20склади">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Митне оформлення</h2>
+            <p class="service-row__text">Власна послуга — без сторонніх посередників.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Митне%20оформлення">Детальніше</a>
+        </div>
+        <div class="service-row">
+          <div>
+            <h2 class="service-row__title">Страхування</h2>
+            <p class="service-row__text">Вантаж і авто — окремо від перевезення.</p>
+          </div>
+          <a class="btn btn--secondary" href="service-detail.html?service=Страхування">Детальніше</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand"><span class="brand__mark" aria-hidden="true">ПТ</span>ПРИВАТ-ТРАНС</div>
+      <p class="footer__lead">Транспортно-експедиційна логістична компанія. Майже 20 років міжнародних перевезень: Європа та Азія, від 10 кг до 23 т під ключ.</p>
+    </div>
+    <div>
+      <div class="footer__heading">Компанія</div>
+      <ul class="footer__list">
+        <li><a href="about.html">Про нас</a></li>
+        <li><a href="about.html#career">Кар'єра</a></li>
+        <li><a href="index.html#partners">Партнери</a></li>
+        <li><a href="index.html#reviews">Відгуки</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__heading">Послуги</div>
+      <ul class="footer__list">
+        <li><a href="service-detail.html?service=Міжнародні%20перевезення">Міжнародні перевезення</a></li>
+        <li><a href="service-detail.html?service=Збірні%20від%2010%20кг">Збірні від 10 кг</a></li>
+        <li><a href="service-detail.html?service=Повні%20авто%20%2F%20тенти">Повні авто / тенти</a></li>
+        <li><a href="service-detail.html?service=Спецвантажі">Спецвантажі</a></li>
+        <li><a href="service-detail.html?service=Контейнери">Контейнери</a></li>
+        <li><a href="service-detail.html?service=Власні%20склади">Власні склади</a></li>
+        <li><a href="service-detail.html?service=Митне%20оформлення">Митне оформлення</a></li>
+        <li><a href="service-detail.html?service=Страхування">Страхування</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__heading">Інформація</div>
+      <ul class="footer__list">
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="calculator.html">Калькулятор вартості</a></li>
+        <li><a href="contacts.html">Контакти</a></li>
+        <li><a href="privacy.html">Політика конфіденційності</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© 2026 ПП «ПРИВАТ-ТРАНС». Усі права захищено.</span>
+    <span>+380 00 000 00 00 · info@privattrans.example</span>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a class="btn btn--secondary" href="tel:+380000000000">Зателефонувати</a>
+  <a class="btn btn--primary" href="index.html#lead-form">Заявка</a>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

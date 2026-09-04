@@ -1,0 +1,71 @@
+/* Layout only for CMS section editor (admin). No colors on inputs. */
+.site-content-editor {
+  max-width: 52rem;
+}
+
+.site-content-editor__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.site-content-editor__fieldset {
+  margin-bottom: 1rem;
+}
+
+.site-content-editor__actions {
+  margin-top: 1.5rem;
+}
+
+.site-content-editor .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.site-content-editor .form-row label {
+  font-weight: 600;
+}
+
+.cms-lang-tabs__nav {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-base-700, #374151);
+}
+
+.cms-lang-tabs__btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  margin-bottom: -1px;
+  padding: 0.65rem 1rem;
+}
+
+.cms-lang-tabs__btn.is-active {
+  border-bottom-color: var(--color-primary-500, #3b82f6);
+}
+
+.cms-lang-tabs__panel[hidden] {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .site-content-editor__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cms-lang-tabs__btn {
+    flex: 1;
+    text-align: center;
+  }
+}

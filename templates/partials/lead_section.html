@@ -1,0 +1,13 @@
+{% load i18n %}
+<section class="section section--dark lead-section" id="lead-form">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">{% trans "Заявка" %}</span>
+      <h2 class="section__title">{% trans "Залишити заявку" %}</h2>
+      <p class="section__lead">{% trans "Ім’я, телефон і маршрут — розрахунок за 15 хвилин." %}</p>
+    </div>
+    <div class="calculator-card calculator-card--lead reveal" id="lead-form-slot">
+      {% include "leads/_form.html" %}
+    </div>
+  </div>
+</section>

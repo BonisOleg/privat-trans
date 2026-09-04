@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n site_content %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Про нас" %}</nav>
+    <h1 class="page-title">{{ page_h1|default:_("Про нас") }}</h1>
+    <div class="page-lead">{% block_html 'about' 'about_lead' %}</div>
+  </div>
+</header>
+<section class="section">
+  <div class="container">
+    <div class="about-stats">
+      <div class="stat"><div class="stat__value">2007</div><p class="stat__label">{% trans "старт на ринку" %}</p></div>
+      <div class="stat"><div class="stat__value">20 {% trans "р" %}</div><p class="stat__label">{% trans "на ринку перевезень" %}</p></div>
+      <div class="stat"><div class="stat__value">2</div><p class="stat__label">{% trans "напрямки: Європа і Азія" %}</p></div>
+      <div class="stat"><div class="stat__value">23 т</div><p class="stat__label">{% trans "повне авто" %}</p></div>
+    </div>
+    <div class="about-block">
+      <div>
+        <h2>{% block_plain 'about' 'about_infra_title' %}</h2>
+        <div class="about-block__list">{% block_html 'about' 'about_infra_body' %}</div>
+      </div>
+      <div>
+        <h2>{% block_plain 'about' 'about_geo_title' %}</h2>
+        <div class="page-lead">{% block_html 'about' 'about_geo_body' %}</div>
+      </div>
+    </div>
+  </div>
+</section>
+{% if vacancies %}
+<section class="section" id="career">
+  <div class="container">
+    <h2 class="section__title">{% block_plain 'about' 'about_career_title' %}</h2>
+    <div class="grid-2 mt-md">
+      {% for vacancy in vacancies %}
+      <article class="card">
+        <h3 class="card__title">{{ vacancy.title }}</h3>
+        <p class="card__text">{{ vacancy.text|safe }}</p>
+        <div class="card__footer"><a class="card-link" href="mailto:{{ site_settings.email }}">{% trans "Надіслати резюме" %}</a></div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

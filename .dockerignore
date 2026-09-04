@@ -1,0 +1,13 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+.DS_Store
+.env
+staticfiles
+media
+_reference
+*.sqlite3
+.cursor
+.htmlcov

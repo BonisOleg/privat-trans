@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n site_content %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Послуги" %}</nav>
+    <h1 class="page-title">{{ page_h1|default:_("Послуги") }}</h1>
+    {% block_plain 'services' 'services_lead' as services_lead %}
+    {% if services_lead %}<div class="page-lead">{{ services_lead }}</div>{% endif %}
+  </div>
+</header>
+<section class="section">
+  <div class="container">
+    {% for service in services %}
+    <article class="service-row">
+      <div>
+        <h2 class="service-row__title">{{ service.title }}</h2>
+        <p class="service-row__text">{{ service.teaser }}</p>
+      </div>
+      <a class="btn btn--secondary" href="{{ service.get_absolute_url }}">{% trans "Детальніше" %}</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

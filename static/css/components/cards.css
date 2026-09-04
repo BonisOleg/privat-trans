@@ -1,0 +1,407 @@
+/*
+  Компоненти, спільні для головної та внутрішніх сторінок:
+  картки, сітки, бейджі, accordion, карта маршрутів, toast, брейдкрамби.
+*/
+
+/* ---------- Cards ---------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.6rem;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--color-border); }
+}
+
+.card__icon {
+  width: 46px; height: 46px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem;
+}
+.card__title { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.card__text { color: var(--color-text-muted); font-size: 0.95rem; flex: 1; }
+.card__footer { margin-top: auto; padding-top: 1rem; }
+
+.card-link { color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem; }
+.card-link:hover, .card-link:focus-visible { color: var(--color-accent-hover); }
+.card-link svg { transition: transform var(--t-fast); }
+.card-link:hover svg { transform: translateX(3px); }
+
+.card__index {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ff-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+.card--service {
+  background: var(--color-bg);
+  position: relative;
+}
+.card--service .card__index {
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card--service:hover {
+    border-color: rgba(29, 78, 216, 0.32);
+    background: var(--color-accent-soft);
+  }
+}
+
+/* Спільна "світла картка" для форм (заявка, калькулятор, деталі послуги) — RULE-17: один bundle. */
+.calculator-card {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  box-shadow: var(--shadow-sm);
+}
+.calculator-card--lead {
+  background: rgba(243, 245, 248, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+  color: var(--color-text);
+  max-width: 44rem;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .calculator-card--lead { background: var(--color-bg-alt); }
+}
+
+/* Відома фіксована кількість (сценарії=3, послуги=8) — repeat(N), без сироти */
+.grid-3 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+.grid-8 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid-8 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-8 { grid-template-columns: repeat(4, 1fr); } }
+
+.grid-2 { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+
+/* Змінна кількість (відгуки/партнери) — auto-fit, без порожньої комірки */
+.grid-auto { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid-auto--partners { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+/* ---------- Badges / eyebrow chips ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 0.8rem; font-weight: 600;
+}
+
+/* ---------- Scenario / region cards ---------- */
+.region-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.75rem 1.6rem;
+  color: var(--color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid transparent;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+}
+.region-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(255, 255, 255, 0.1), transparent 55%),
+    linear-gradient(160deg, var(--color-bg-dark-2), var(--color-bg-dark));
+}
+.region-card--europe {
+  border-color: rgba(127, 163, 255, 0.22);
+}
+.region-card--europe::before {
+  background:
+    radial-gradient(90% 70% at 0% 0%, rgba(59, 130, 246, 0.35), transparent 50%),
+    radial-gradient(80% 60% at 100% 100%, rgba(14, 165, 233, 0.18), transparent 45%),
+    linear-gradient(155deg, #13233F 0%, #0F172A 55%, #0B1220 100%);
+}
+.region-card--asia {
+  border-color: rgba(251, 191, 36, 0.2);
+}
+.region-card--asia::before {
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(245, 158, 11, 0.28), transparent 50%),
+    radial-gradient(80% 60% at 0% 100%, rgba(234, 88, 12, 0.16), transparent 45%),
+    linear-gradient(155deg, #1A1520 0%, #16213B 50%, #0F172A 100%);
+}
+@media (hover: hover) and (pointer: fine) {
+  .region-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .region-card--europe:hover { border-color: rgba(127, 163, 255, 0.4); }
+  .region-card--asia:hover { border-color: rgba(251, 191, 36, 0.38); }
+}
+
+.region-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.region-card__kicker {
+  font-family: var(--ff-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+}
+.region-card--europe .region-card__kicker {
+  border-color: rgba(147, 197, 253, 0.35);
+  color: #BFDBFE;
+}
+.region-card--asia .region-card__kicker {
+  border-color: rgba(252, 211, 77, 0.35);
+  color: #FDE68A;
+}
+.region-card__route { flex-shrink: 0; color: rgba(255, 255, 255, 0.75); }
+.region-card__route circle { fill: currentColor; }
+.region-card__route path { stroke: currentColor; }
+.region-card--europe .region-card__route { color: #93C5FD; }
+.region-card--asia .region-card__route { color: #FCD34D; }
+
+.region-card__title { font-size: 1.45rem; margin-bottom: 0.55rem; letter-spacing: -0.01em; }
+.region-card__text { color: var(--color-text-inverse-muted); flex: 1; font-size: 0.98rem; }
+.region-card__chips {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.region-card__chips li {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(245, 247, 250, 0.88);
+}
+.region-card--europe .region-card__chips li {
+  border-color: rgba(147, 197, 253, 0.22);
+}
+.region-card--asia .region-card__chips li {
+  border-color: rgba(252, 211, 77, 0.2);
+}
+
+.region-card__list { margin-top: 1.1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.region-card__list li { display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.92rem; color: var(--color-text-inverse-muted); }
+.region-card__list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #7FA3FF; flex-shrink: 0; transform: translateY(-2px); }
+
+/* ---------- Routes map ---------- */
+.routes-map {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #D7E6F4;
+  isolation: isolate;
+}
+.routes-map__base,
+.routes-map__overlay {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.routes-map__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+.routes-map__note { margin-top: 0.75rem; font-size: 0.8rem; color: var(--color-text-dim); }
+
+/* ---------- FAQ accordion (controlled button, CSS grid animation) ---------- */
+.faq-item { border-bottom: 1px solid var(--color-border); }
+.faq-item__q {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.1rem 0.1rem;
+  text-align: left;
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.faq-item__chevron { flex-shrink: 0; transition: transform var(--t-base); color: var(--color-accent); }
+.faq-item[data-open="true"] .faq-item__chevron { transform: rotate(180deg); }
+
+.faq-item__wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t-base); overflow: hidden; }
+.faq-item[data-open="true"] .faq-item__wrap { grid-template-rows: 1fr; }
+.faq-item__answer { min-height: 0; padding-bottom: 1.1rem; color: var(--color-text-muted); }
+
+/* ---------- Process steps (corridor stations) ---------- */
+.steps {
+  --step-station: 2.4rem;
+  --step-gap: 1.5rem;
+  position: relative;
+  display: grid;
+  gap: var(--step-gap);
+  grid-template-columns: 1fr;
+  counter-reset: step;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.step {
+  position: relative;
+  padding-left: calc(var(--step-station) + 1rem);
+  padding-top: 0.15rem;
+  min-height: var(--step-station);
+}
+.step__station {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--step-station);
+  height: var(--step-station);
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+  z-index: 1;
+}
+.step__station::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--step-station) / 2 - 1px);
+  top: var(--step-station);
+  bottom: calc(-1 * var(--step-gap));
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-accent) 0%, rgba(29, 78, 216, 0.2) 100%);
+  z-index: 0;
+}
+.step__title { font-size: 1.05rem; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+.step__text { color: var(--color-text-muted); font-size: 0.92rem; max-width: 18rem; }
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    padding-top: 0.25rem;
+  }
+  .steps::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--step-station) / 2 - 1px);
+    left: calc(var(--step-station) / 2);
+    right: calc(var(--step-station) / 2);
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, rgba(29, 78, 216, 0.25) 100%);
+    z-index: 0;
+  }
+  .step {
+    padding-left: 0;
+    padding-top: calc(var(--step-station) + 1rem);
+  }
+  .step__station { left: 0; }
+  .step:not(:last-child)::after { display: none; }
+  .step__text { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step__station { box-shadow: none; }
+}
+
+/* ---------- Review / partner placeholders ---------- */
+.partner-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 84px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-dim);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-bg);
+}
+.review-card__stars { color: var(--color-accent); margin-bottom: 0.75rem; letter-spacing: 0.15em; }
+.review-card__quote { flex: 1; font-size: 0.98rem; }
+.review-card__author { margin-top: auto; padding-top: 1rem; font-weight: 600; font-size: 0.9rem; color: var(--color-text-muted); }
+.review-card__flag { margin-top: 0.4rem; font-size: 0.75rem; color: var(--color-text-dim); }
+
+/* ---------- Breadcrumbs (shared page chrome) ---------- */
+.page-header { padding-block: 2.4rem 1.4rem; background: var(--color-bg-soft); }
+.breadcrumbs { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--color-text-dim); margin-bottom: 0.75rem; }
+.breadcrumbs a:hover { color: var(--color-accent); }
+.page-title { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.page-lead { margin-top: 0.6rem; color: var(--color-text-muted); max-width: 42rem; }
+
+/* ---------- Centered CTA banner (кінець FAQ/сторінок) ---------- */
+.cta-banner { text-align: center; }
+.cta-banner .section__lead { margin-inline: auto; max-width: 34rem; }
+
+/* ---------- Toast (lang stub) ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(1.5rem + var(--safe-bottom));
+  transform: translate(-50%, 12px);
+  z-index: var(--z-skip-link);
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.875rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-base), transform var(--t-base);
+}
+.toast[data-visible="true"] { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+@media (min-width: 960px) {
+  .toast { bottom: 1.5rem; }
+}

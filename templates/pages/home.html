@@ -1,0 +1,447 @@
+{% extends "base.html" %}
+{% load static i18n site_content %}
+
+{% block content %}
+{% section_visible 'home' 'hero_section_visible' as show_hero %}
+{% if show_hero %}
+<section class="hero" data-hero>
+  <div class="hero__media" data-parallax="0.18" data-parallax-mode="scroll">
+    {% if site_settings.hero_poster %}
+    {% with poster_url=site_settings.hero_poster.url %}
+    <img class="hero__poster" src="{{ poster_url }}" alt="" width="1920" height="1080" aria-hidden="true">
+    <video class="hero__video" data-hero-video autoplay muted loop playsinline preload="metadata"
+      poster="{{ poster_url }}" aria-hidden="true">
+      {% endwith %}
+      {% else %}
+      <img class="hero__poster" src="{% static 'media/hero-poster.jpg' %}" alt="" width="1920" height="1080"
+        aria-hidden="true">
+      <video class="hero__video" data-hero-video autoplay muted loop playsinline preload="metadata"
+        poster="{% static 'media/hero-poster.jpg' %}" aria-hidden="true">
+        {% endif %}
+        {% if site_settings.hero_video or site_settings.hero_video_webm %}
+        {% if site_settings.hero_video_webm %}
+        <source src="{{ site_settings.hero_video_webm.url }}" type="video/webm">
+        {% endif %}
+        {% if site_settings.hero_video %}
+        <source src="{{ site_settings.hero_video.url }}" type="video/mp4">
+        {% endif %}
+        {% else %}
+        <source src="{% static 'media/hero-video.webm' %}" type="video/webm">
+        <source src="{% static 'media/hero-video.mp4' %}" type="video/mp4">
+        {% endif %}
+      </video>
+      <div class="hero__scrim"></div>
+  </div>
+  <div class="container hero__inner">
+    <div class="hero__content reveal">
+      <span class="hero__badge">{% block_plain 'home' 'hero_badge' %}</span>
+      <h1 class="hero__title">{% block_plain 'home' 'hero_title' %}</h1>
+      <p class="hero__lead">{% block_plain 'home' 'hero_lead' %}</p>
+      <div class="hero__actions">
+        <a class="btn btn--glass" href="tel:{{ site_settings.phone_href }}" data-qa="hero-call">{% trans "Зателефонувати" %}</a>
+        {% if site_settings.telegram %}
+        <a class="btn btn--glass" href="{{ site_settings.telegram }}" target="_blank" rel="noopener">{% trans "Написати в Telegram" %}</a>
+        {% endif %}
+      </div>
+      <p class="hero__fact"><strong>{% block_plain 'home' 'hero_fact_year' %}</strong> {% block_plain 'home' 'hero_fact_rest' %}</p>
+    </div>
+    <form class="hero__form-card hero__form reveal reveal--right" data-hero-form novalidate data-qa="hero-quote">
+      <h2 class="hero__form-title">{% block_plain 'home' 'hero_form_title' %}</h2>
+      <div class="field">
+        <label class="field__label" for="hero-from">{% trans "Звідки" %}</label>
+        <div class="pt-select" data-pt-select>
+          <select class="field__select pt-select__native" id="hero-from" name="from" required data-pt-select-native data-cities-select>
+            <option value="">{% trans "Оберіть місто" %}</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="hero-to">{% trans "Куди" %}</label>
+        <div class="pt-select" data-pt-select>
+          <select class="field__select pt-select__native" id="hero-to" name="to" required data-pt-select-native data-cities-select>
+            <option value="">{% trans "Оберіть місто" %}</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="hero-cargo">{% trans "Тип вантажу" %}</label>
+        <div class="pt-select" data-pt-select>
+          <select class="field__select pt-select__native" id="hero-cargo" name="cargo" data-pt-select-native>
+            <option>{% trans "Збірний від 10 кг" %}</option>
+            <option>{% trans "Повне авто (FTL) до 23 тонн" %}</option>
+            <option>{% trans "Під ключ (склад + митниця)" %}</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="hero-phone">{% trans "Телефон" %}</label>
+        <input class="field__input" id="hero-phone" type="tel" name="phone" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block" data-qa="hero-submit">{% trans "Отримати розрахунок" %}</button>
+    </form>
+  </div>
+</section>
+{% endif %}
+
+{% include "partials/home_scenarios.html" %}
+
+<section class="chapter chapter--regions" id="regions" data-chapter>
+  <div class="chapter__bg" aria-hidden="true">
+    <img class="chapter__img" src="{% static 'media/chapters/chapter-regions.jpg' %}" alt="" width="1920" height="1280" loading="lazy" decoding="async">
+    <div class="chapter__scrim"></div>
+  </div>
+  <div class="chapter__body">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="section__eyebrow">{% trans "Географія" %}</span>
+        <h2 class="section__title">{% trans "Два напрямки — Європа та Азія" %}</h2>
+      </div>
+      <div class="regions-grid">
+        <article class="region-card region-card--europe reveal reveal--left">
+          <div class="region-card__top">
+            <span class="region-card__kicker">EU</span>
+            <svg class="region-card__route" viewBox="0 0 72 28" width="72" height="28" aria-hidden="true" focusable="false">
+              <circle cx="8" cy="14" r="4" />
+              <circle cx="64" cy="14" r="4" />
+              <path d="M14 14C28 4 44 4 58 14" fill="none" stroke-width="2" stroke-linecap="round" />
+              <path d="M14 14C28 24 44 24 58 14" fill="none" stroke-width="1.4" stroke-linecap="round" opacity="0.4" />
+            </svg>
+          </div>
+          <h3 class="region-card__title">{% trans "Європа" %}</h3>
+          <p class="region-card__text">{% trans "Регулярні рейси між Україною та країнами ЄС — тенти, повні авто та збірні вантажі." %}</p>
+          <ul class="region-card__chips" aria-label="{% trans 'Країни Європи' %}">
+            <li>{% trans "Польща" %}</li>
+            <li>{% trans "Німеччина" %}</li>
+            <li>{% trans "Італія" %}</li>
+            <li>{% trans "Чехія" %}</li>
+          </ul>
+        </article>
+        <article class="region-card region-card--asia reveal reveal--right">
+          <div class="region-card__top">
+            <span class="region-card__kicker">AS</span>
+            <svg class="region-card__route" viewBox="0 0 72 28" width="72" height="28" aria-hidden="true" focusable="false">
+              <circle cx="8" cy="14" r="4" />
+              <circle cx="64" cy="14" r="4" />
+              <path d="M14 14C28 4 44 4 58 14" fill="none" stroke-width="2" stroke-linecap="round" />
+              <path d="M14 14C28 24 44 24 58 14" fill="none" stroke-width="1.4" stroke-linecap="round" opacity="0.4" />
+            </svg>
+          </div>
+          <h3 class="region-card__title">{% trans "Азія" %}</h3>
+          <p class="region-card__text">{% trans "Автомобільні та мультимодальні маршрути через Туреччину, Кавказ і Центральну Азію." %}</p>
+          <ul class="region-card__chips" aria-label="{% trans 'Країни Азії' %}">
+            <li>{% trans "Туреччина" %}</li>
+            <li>{% trans "Грузія" %}</li>
+            <li>{% trans "Казахстан" %}</li>
+            <li>{% trans "Узбекистан" %}</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft corridor-bridge" id="corridor-bridge" aria-labelledby="corridor-bridge-title">
+  <div class="container">
+    <div class="corridor-bridge__inner reveal">
+      <div class="corridor-bridge__copy">
+        <span class="section__eyebrow">{% trans "Зв’язок напрямків" %}</span>
+        <h2 class="section__title" id="corridor-bridge-title">{% trans "Від географії — до контрольованих коридорів" %}</h2>
+        <p class="section__lead">{% trans "Європа та Азія — це не просто регіони на карті. Це регулярні маршрути з єдиним супроводом вантажу на всьому шляху." %}</p>
+      </div>
+      <ul class="corridor-bridge__facts">
+        <li>
+          <strong>2007</strong>
+          <span>{% trans "на ринку перевезень" %}</span>
+        </li>
+        <li>
+          <strong>10 кг – 23 т</strong>
+          <span>{% trans "збірні та повні авто" %}</span>
+        </li>
+        <li>
+          <strong>EU ↔ AS</strong>
+          <span>{% trans "два напрямки під контролем" %}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter chapter--routes" id="routes" data-chapter>
+  <div class="chapter__bg" aria-hidden="true">
+    <img class="chapter__img" src="{% static 'media/chapters/chapter-routes.jpg' %}" alt="" width="1920" height="1280" loading="lazy" decoding="async">
+    <div class="chapter__scrim"></div>
+  </div>
+  <div class="chapter__body">
+    <div class="container">
+      <div class="chapter__surface">
+        <div class="section__head reveal">
+          <span class="section__eyebrow">{% trans "Маршрути" %}</span>
+          <h2 class="section__title">{% trans "Логістичні коридори, які ми контролюємо" %}</h2>
+          <p class="section__lead">{% trans "Регулярні маршрути в обох напрямках із власним автопарком і партнерською мережею." %}</p>
+        </div>
+        <div class="routes-toolbar" role="group" aria-label="{% trans 'Фільтр регіону' %}">
+          <button type="button" class="routes-toolbar__btn is-active" data-routes-filter="all">{% trans "Усі" %}</button>
+          <button type="button" class="routes-toolbar__btn" data-routes-filter="europe">{% trans "Європа" %}</button>
+          <button type="button" class="routes-toolbar__btn" data-routes-filter="asia">{% trans "Азія" %}</button>
+        </div>
+        <div class="routes-map" data-routes-map role="img" aria-label="{% trans 'Коридори Європа — Азія' %}">
+          <img class="routes-map__base" src="{% static 'media/routes-map-base.jpg' %}" alt="" width="1600" height="820"
+            loading="lazy">
+          <img class="routes-map__overlay" src="{% static 'media/routes-map-overlay.svg' %}" alt="" width="1600"
+            height="820" loading="lazy">
+        </div>
+        <ul class="routes-countries" data-routes-countries>
+          <li data-region="europe">{% trans "Польща" %}</li>
+          <li data-region="europe">{% trans "Німеччина" %}</li>
+          <li data-region="europe">{% trans "Італія" %}</li>
+          <li data-region="europe">{% trans "Франція" %}</li>
+          <li data-region="europe">{% trans "Велика Британія" %}</li>
+          <li data-region="europe">{% trans "Румунія" %}</li>
+          <li data-region="europe">{% trans "Угорщина" %}</li>
+          <li data-region="europe">{% trans "Чехія" %}</li>
+          <li data-region="asia">{% trans "Туреччина" %}</li>
+          <li data-region="asia">{% trans "Грузія" %}</li>
+          <li data-region="asia">{% trans "Казахстан" %}</li>
+          <li data-region="asia">{% trans "Узбекистан" %}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="services">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">{% trans "Що ми перевозимо" %}</span>
+      <h2 class="section__title">{% trans "Вісім послуг під ваш вантаж" %}</h2>
+    </div>
+    <div class="grid-8">
+      {% for service in services %}
+      <article class="card card--frame card--service reveal">
+        <span class="card__index" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+        <h3 class="card__title">{{ service.title }}</h3>
+        <p class="card__text">{{ service.teaser }}</p>
+        <div class="card__footer">
+          <a class="card-link" href="{{ service.get_absolute_url }}">
+            {% trans "Детальніше" %}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="chapter chapter--fleet" id="fleet" data-chapter>
+  <div class="chapter__bg" aria-hidden="true">
+    <img class="chapter__img" src="{% static 'media/chapters/chapter-fleet.jpg' %}" alt="" width="1920" height="1280" loading="lazy" decoding="async">
+    <div class="chapter__scrim"></div>
+  </div>
+  <div class="chapter__body">
+    <div class="container">
+      <article class="fleet-card">
+        <div class="fleet-card__copy reveal">
+          <span class="section__eyebrow">{% trans "Автопарк та можливості" %}</span>
+          <h2 class="section__title">{% trans "Наш автопарк" %}</h2>
+          <p class="section__lead">{% trans "Завдяки гнучкому поєднанню власного автопарку та перевіреного партнерського флоту, ми забезпечуємо безперебійну логістику та закриваємо будь-які об'єми перевезень навіть у пікові сезони." %}</p>
+        </div>
+        <ul class="fleet-card__facts reveal">
+          <li class="fleet-fact">
+            <span class="fleet-fact__value">10 кг – 23 т</span>
+            <span class="fleet-fact__label">{% trans "Від збірних до повного авто" %}</span>
+          </li>
+          <li class="fleet-fact">
+            <span class="fleet-fact__value">{% trans "Тент · реф" %}</span>
+            <span class="fleet-fact__label">{% trans "Кузови під різні вантажі" %}</span>
+          </li>
+          <li class="fleet-fact">
+            <span class="fleet-fact__value">{% trans "Власний + партнери" %}</span>
+            <span class="fleet-fact__label">{% trans "Гнучкий флот у пікові сезони" %}</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft" id="advantages">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title">{% trans "Чому з нами" %}</h2>
+    </div>
+    <div class="grid-3">
+      <article class="advantage-card reveal">
+        <div class="advantage-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.5"/>
+            <path d="M12 7.5V12l3 2"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="card__title">{% trans "Підтримка 24/7" %}</h3>
+          <p class="card__text">{% trans "Постійний зв’язок та моніторинг вантажу на кожному етапі." %}</p>
+        </div>
+      </article>
+      <article class="advantage-card reveal">
+        <div class="advantage-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3.2"/>
+            <path d="M5.5 19c1.4-3 3.9-4.5 6.5-4.5S17.1 16 18.5 19"/>
+            <path d="M17.5 8.5h3M19 7v3"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="card__title">{% trans "Досвідчені менеджери" %}</h3>
+          <p class="card__text">{% trans "Професіоналізм та персональний підхід до кожного маршруту." %}</p>
+        </div>
+      </article>
+      <article class="advantage-card reveal">
+        <div class="advantage-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.5l7 3v5.2c0 4.2-2.8 7.4-7 8.8-4.2-1.4-7-4.6-7-8.8V6.5l7-3z"/>
+            <path d="M9.2 12.1l2 2 3.8-4"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="card__title">{% trans "Обов’язкове страхування" %}</h3>
+          <p class="card__text">{% trans "Повний фінансовий та юридичний захист вашого майна." %}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">{% trans "Маршрут угоди" %}</span>
+      <h2 class="section__title">{% trans "Як це відбувається" %}</h2>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step__station" aria-hidden="true"></span>
+        <h3 class="step__title">{% trans "Заявка" %}</h3>
+        <p class="step__text">{% trans "Маршрут і тип вантажу." %}</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__station" aria-hidden="true"></span>
+        <h3 class="step__title">{% trans "Розрахунок" %}</h3>
+        <p class="step__text">{% trans "Орієнтовна вартість і слот." %}</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__station" aria-hidden="true"></span>
+        <h3 class="step__title">{% trans "Документи" %}</h3>
+        <p class="step__text">{% trans "Митниця Т1/Т2, EX1." %}</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__station" aria-hidden="true"></span>
+        <h3 class="step__title">{% trans "Рейс" %}</h3>
+        <p class="step__text">{% trans "Моніторинг 24/7." %}</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--soft" id="calculator-teaser">
+  <div class="container">
+    <div class="calc-teaser reveal">
+      <div class="calc-teaser__copy">
+        <span class="section__eyebrow">{% trans "Калькулятор" %}</span>
+        <h2 class="section__title">{% trans "Орієнтовний розрахунок" %}</h2>
+        <ul class="calc-teaser__list">
+          <li>{% trans "Звідки / куди, вага, тип кузова" %}</li>
+          <li>{% trans "Результат — діапазон у євро, не оферта" %}</li>
+        </ul>
+        <p class="mt-md"><a class="btn btn--primary" href="{% url 'calculator:page' %}">{% trans "Відкрити калькулятор" %}</a></p>
+      </div>
+      <aside class="calc-teaser__panel" aria-label="{% trans 'Приклад орієнтовного діапазону' %}">
+        <p class="calc-teaser__panel-label">{% trans "Приклад" %}</p>
+        <p class="calc-teaser__route">Київ → Warsaw</p>
+        <p class="calc-teaser__meta">{% trans "Збірний · ~1.2 т · тент" %}</p>
+        <p class="calc-teaser__range">
+          <span class="calc-teaser__currency">€</span>
+          <span class="calc-teaser__from">420</span>
+          <span class="calc-teaser__sep">–</span>
+          <span class="calc-teaser__to">560</span>
+        </p>
+        <p class="calc-teaser__note">{% trans "Це не фінальна ціна. Менеджер підтвердить тариф." %}</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% if faq_home %}
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title">FAQ</h2>
+    </div>
+    <div data-faq>
+      {% for item in faq_home %}
+      <article class="faq-item" data-open="false">
+        <button type="button" class="faq-item__q" aria-expanded="false">{{ item.question }}<span
+            class="faq-item__chevron">▾</span></button>
+        <div class="faq-item__wrap">
+          <div class="faq-item__answer">{{ item.answer|safe }}</div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="section__foot"><a class="btn btn--secondary" href="{% url 'faq:list' %}">{% trans "Усі питання" %}</a></p>
+  </div>
+</section>
+{% endif %}
+
+{% if reviews %}
+<section class="section section--alt" id="reviews">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title">{% trans "Відгуки" %}</h2>
+    </div>
+    <div class="grid-auto">
+      {% for review in reviews %}
+      <article class="card review-card reveal">
+        <p class="review-card__quote">{{ review.quote|safe }}</p>
+        <p class="review-card__author">{{ review.author }}</p>
+        <p class="review-card__flag">{{ review.flag }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if partners %}
+<section class="section" id="partners">
+  <div class="container">
+    <div class="section__head reveal">
+      <h2 class="section__title">{% trans "Партнери" %}</h2>
+    </div>
+    <div class="partners-marquee">
+      <div class="partners-marquee__track">
+        {% for partner in partners %}<div class="partner-tile">{{ partner.name }}</div>{% endfor %}
+        {% for partner in partners %}<div class="partner-tile" aria-hidden="true">{{ partner.name }}</div>{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if vacancies %}
+<section class="section section--alt" id="career-teaser">
+  <div class="container">
+    <div class="career-teaser reveal">
+      <div class="career-teaser__copy">
+        <span class="career-teaser__kicker">{% trans "Кар’єра" %}</span>
+        <h2 class="section__title">{% trans "Приєднуйтесь до команди" %}</h2>
+        <p class="career-teaser__text">{% trans "Шукаємо менеджерів логістики та спеціалістів митного оформлення." %}</p>
+      </div>
+      <a class="btn btn--glass" href="{% url 'pages:about' %}#career">{% trans "Вакансії" %}</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% include "partials/lead_section.html" %}
+{% endblock %}

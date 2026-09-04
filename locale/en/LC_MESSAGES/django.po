@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "Перейти до змісту"
+msgstr "Skip to content"
+
+msgid "Послуги"
+msgstr "Services"
+
+msgid "Про нас"
+msgstr "About"
+
+msgid "Калькулятор"
+msgstr "Calculator"
+
+msgid "Контакти"
+msgstr "Contacts"
+
+msgid "Залишити заявку"
+msgstr "Request a quote"
+
+msgid "Зателефонувати"
+msgstr "Call us"
+
+msgid "Надіслати заявку"
+msgstr "Send request"
+
+msgid "Дякуємо за заявку"
+msgstr "Thank you for your request"
+
+msgid "Повний логістичний супровід на всіх етапах роботи з вантажем"
+msgstr "Full logistics support at every cargo stage"
+
+msgid "Комплексна доставка вантажів Європа ↔️ Україна ↔️ Азія"
+msgstr "End-to-end freight Europe ↔ Ukraine ↔ Asia"
+
+msgid "З 2007 року"
+msgstr "Since 2007"
+
+msgid "на ринку міжнародних перевезень"
+msgstr "on the international freight market"
+
+msgid "20 р на ринку міжнародних перевезень. Повний логістичний супровід на всіх етапах роботи з вантажем."
+msgstr "20 years in international freight. Full logistics support at every cargo stage."
+
+msgid "Політика конфіденційності"
+msgstr "Privacy policy"
+
+msgid "Погоджуюсь на обробку персональних даних"
+msgstr "I agree to personal data processing"
+
+msgid "Ім’я"
+msgstr "Name"
+
+msgid "Телефон"
+msgstr "Phone"
+
+msgid "Звідки"
+msgstr "From"
+
+msgid "Куди"
+msgstr "To"
+
+msgid "Тип вантажу"
+msgstr "Cargo type"

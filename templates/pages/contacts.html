@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n site_content %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Контакти" %}</nav>
+    <h1 class="page-title">{{ page_h1|default:_("Контакти") }}</h1>
+    {% block_plain 'contacts' 'contacts_lead' as contacts_lead %}
+    {% if contacts_lead %}<div class="page-lead">{{ contacts_lead }}</div>{% endif %}
+  </div>
+</header>
+<section class="section">
+  <div class="container contacts-grid">
+    <div>
+      <div class="contact-item">
+        <div>
+          <div class="contact-item__label">{% trans "Адреса" %}</div>
+          <div class="contact-item__value">{{ site_settings.address }}</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div>
+          <div class="contact-item__label">{% trans "Телефон" %}</div>
+          <a class="contact-item__value" href="tel:{{ site_settings.phone_href }}">{{ site_settings.phone }}</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div>
+          <div class="contact-item__label">Email</div>
+          <a class="contact-item__value" href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div>
+          <div class="contact-item__label">{% trans "Реквізити" %}</div>
+          <p class="contact-item__value">ЄДРПОУ {{ site_settings.edrpou }} · ІПН {{ site_settings.ipn }}</p>
+          <p class="mt-sm">{{ site_settings.vat_note }}</p>
+        </div>
+      </div>
+      {% if site_settings.map_embed_url %}
+      <iframe class="map-frame" src="{{ site_settings.map_embed_url }}" title="{% trans 'Карта' %}" loading="lazy"></iframe>
+      {% else %}
+      <div class="map-frame">{{ site_settings.address }}</div>
+      {% endif %}
+    </div>
+    <div id="lead-form-slot" class="calculator-card">
+      {% include "leads/_form.html" %}
+    </div>
+  </div>
+</section>
+{% endblock %}

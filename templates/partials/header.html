@@ -1,0 +1,48 @@
+{% load i18n %}
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="{% url 'pages:home' %}" data-qa="brand">
+      <span class="brand__mark brand__mark--route" aria-hidden="true">
+        <svg class="brand__route" viewBox="0 0 40 40" width="34" height="34" focusable="false">
+          <circle class="brand__route-dot" cx="7" cy="20" r="3.2" />
+          <circle class="brand__route-dot" cx="33" cy="20" r="3.2" />
+          <path class="brand__route-arc" d="M11 20C16 9 24 9 29 20" fill="none" stroke-width="2.2" stroke-linecap="round" />
+          <path class="brand__route-arc brand__route-arc--soft" d="M11 20C16 31 24 31 29 20" fill="none" stroke-width="1.6" stroke-linecap="round" />
+          <text class="brand__route-label" x="7" y="33" text-anchor="middle">EU</text>
+          <text class="brand__route-label" x="33" y="33" text-anchor="middle">AS</text>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <span>{{ site_settings.brand_name }}</span>
+        <span class="brand__slogan">{{ site_settings.slogan }}</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="{% trans 'Основна навігація' %}">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="{% url 'services:list' %}" data-qa="nav-services">{% trans "Послуги" %}</a></li>
+        <li><a class="nav__link" href="{% url 'pages:about' %}" data-qa="nav-about">{% trans "Про нас" %}</a></li>
+        <li><a class="nav__link" href="{% url 'faq:list' %}" data-qa="nav-faq">FAQ</a></li>
+        <li><a class="nav__link" href="{% url 'calculator:page' %}" data-qa="nav-calculator">{% trans "Калькулятор" %}</a></li>
+        <li><a class="nav__link" href="{% url 'pages:contacts' %}" data-qa="nav-contacts">{% trans "Контакти" %}</a></li>
+      </ul>
+    </nav>
+    <div class="header__actions">
+      {% if site_settings.phone_href %}
+      <a class="header__phone" href="tel:{{ site_settings.phone_href }}" data-qa="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3.5 5.7 2 2 0 0 1 5.5 3.5z" stroke-linejoin="round"/></svg>
+        <span class="header__phone-text">{{ site_settings.phone }}</span>
+      </a>
+      {% endif %}
+      {% if site_settings.telegram %}
+      <a class="header__icon-link" href="{{ site_settings.telegram }}" target="_blank" rel="noopener" aria-label="Telegram" data-qa="header-telegram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 3.5 2.8 10.8c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.7.4.9 1 .9.6 0 .9-.3 1.2-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2.1-.9L22.9 5c.3-1.3-.5-1.9-1.4-1.5zM9.4 14.3l-.3 3.4 1.5-2 7.8-7c.3-.3-.1-.4-.4-.2l-8.6 5.8z"/></svg>
+      </a>
+      {% endif %}
+      {% include "partials/lang_switch.html" %}
+      <a class="btn btn--primary btn--sm" href="{% url 'pages:home' %}#lead-form" data-qa="cta-lead">{% trans "Залишити заявку" %}</a>
+      <button type="button" class="menu-toggle" data-drawer-toggle aria-expanded="false" aria-controls="mobile-drawer" aria-label="{% trans 'Відкрити меню' %}" data-qa="menu-toggle">
+        <span class="menu-toggle__box"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>

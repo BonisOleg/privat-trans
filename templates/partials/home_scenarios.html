@@ -1,0 +1,60 @@
+{% load site_content %}
+{% section_visible 'home' 'scenarios_section_visible' as show_scenarios %}
+{% if show_scenarios %}
+<section class="section section--alt" id="scenarios">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="section__eyebrow">{% block_plain 'home' 'scenarios_eyebrow' %}</span>
+      <h2 class="section__title">{% block_plain 'home' 'scenarios_title' %}</h2>
+      <div class="section__lead">{% block_html 'home' 'scenarios_lead' %}</div>
+    </div>
+    <div class="grid-3">
+      {% block_plain 'home' 'scenario_1_slug' as scenario_1_slug %}
+      <article class="card scenario-card reveal">
+        <div class="card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="14" height="10" rx="1.5"/><path d="M17 10h2.5L21 13v4h-4"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+        </div>
+        <h3 class="card__title">{% block_plain 'home' 'scenario_1_title' %}</h3>
+        <div class="card__text">{% block_html 'home' 'scenario_1_text' %}</div>
+        {% if scenario_1_slug %}
+        <div class="card__footer">
+          <a class="card-link" href="{% url 'services:detail' scenario_1_slug %}">{% block_plain 'home' 'scenarios_cta' %}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        {% endif %}
+      </article>
+      {% block_plain 'home' 'scenario_2_slug' as scenario_2_slug %}
+      <article class="card scenario-card reveal reveal-delay-1">
+        <div class="card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="8" width="13" height="9" rx="1.2"/><path d="M15 11h3.5L21 14v3h-6"/><circle cx="6" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg>
+        </div>
+        <h3 class="card__title">{% block_plain 'home' 'scenario_2_title' %}</h3>
+        <div class="card__text">{% block_html 'home' 'scenario_2_text' %}</div>
+        {% if scenario_2_slug %}
+        <div class="card__footer">
+          <a class="card-link" href="{% url 'services:detail' scenario_2_slug %}">{% block_plain 'home' 'scenarios_cta' %}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        {% endif %}
+      </article>
+      {% block_plain 'home' 'scenario_3_slug' as scenario_3_slug %}
+      <article class="card scenario-card reveal reveal-delay-2">
+        <div class="card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h3 class="card__title">{% block_plain 'home' 'scenario_3_title' %}</h3>
+        <div class="card__text">{% block_html 'home' 'scenario_3_text' %}</div>
+        {% if scenario_3_slug %}
+        <div class="card__footer">
+          <a class="card-link" href="{% url 'services:detail' scenario_3_slug %}">{% block_plain 'home' 'scenarios_cta' %}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        {% endif %}
+      </article>
+    </div>
+  </div>
+</section>
+{% endif %}

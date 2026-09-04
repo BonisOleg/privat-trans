@@ -1,0 +1,83 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/admin/site_content.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  {{ media }}
+  <script src="{% static 'js/admin/cms_lang_tabs.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="site-content-editor">
+  <div class="site-content-editor__head">
+    <div>
+      <h1 class="text-font-important-light dark:text-font-important-dark">{{ title }}</h1>
+      {% if section.description %}
+      <p class="text-font-subtle-light dark:text-font-subtle-dark">{{ section.description }}</p>
+      {% endif %}
+    </div>
+    {% if preview_url %}
+    <a class="border border-base-200 dark:border-base-700 rounded-default px-3 py-2"
+       href="{{ preview_url }}" target="_blank" rel="noopener">Переглянути на сайті</a>
+    {% endif %}
+  </div>
+
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div>{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    {% if form.section_visible %}
+    <fieldset class="site-content-editor__fieldset border border-base-200 dark:border-base-700 rounded-default shadow-sm dark:bg-base-900 p-4 md:p-5">
+      <div class="form-row">
+        {{ form.section_visible }}
+        <label for="{{ form.section_visible.id_for_label }}">{{ form.section_visible.label }}</label>
+      </div>
+    </fieldset>
+    {% endif %}
+
+    <div class="cms-lang-tabs" data-cms-lang-tabs>
+      <div class="cms-lang-tabs__nav" role="tablist">
+        <button type="button" class="cms-lang-tabs__btn is-active" role="tab" aria-selected="true" data-cms-lang="uk">Українська</button>
+        <button type="button" class="cms-lang-tabs__btn" role="tab" aria-selected="false" data-cms-lang="en">English</button>
+      </div>
+
+      <div class="cms-lang-tabs__panel is-active" role="tabpanel" data-cms-panel="uk">
+        {% for field in form.uk_fields %}
+        <fieldset class="site-content-editor__fieldset border border-base-200 dark:border-base-700 rounded-default shadow-sm dark:bg-base-900 p-4 md:p-5">
+          <div class="form-row field-{{ field.name }}">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        </fieldset>
+        {% endfor %}
+      </div>
+
+      <div class="cms-lang-tabs__panel" role="tabpanel" data-cms-panel="en" hidden>
+        {% for field in form.en_fields %}
+        <fieldset class="site-content-editor__fieldset border border-base-200 dark:border-base-700 rounded-default shadow-sm dark:bg-base-900 p-4 md:p-5">
+          <div class="form-row field-{{ field.name }}">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+          </div>
+        </fieldset>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="site-content-editor__actions">
+      <button type="submit" class="bg-primary-600 text-white rounded-default px-4 py-2">
+        Зберегти
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

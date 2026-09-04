@@ -1,0 +1,5 @@
+{% load i18n %}
+<div class="mobile-bar">
+  <a class="btn btn--secondary" href="tel:{{ site_settings.phone_href }}" data-qa="mobile-call">{% trans "Зателефонувати" %}</a>
+  <a class="btn btn--primary" href="{% url 'pages:home' %}#lead-form" data-qa="mobile-lead">{% trans "Заявка" %}</a>
+</div>

@@ -66,7 +66,8 @@ body {
 
 .lead {
   font-size: 1.02rem;
-  max-width: 42rem;
+  max-width: 46rem;
+  margin: 0 0 0.45rem;
 }
 
 h2 {
@@ -76,10 +77,22 @@ h2 {
   color: var(--head);
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem;
+.card-grid {
+  --grid-cols: 1;
+  --grid-gap: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--grid-gap);
+  width: 100%;
+}
+
+.card-grid > .card {
+  width: calc((100% - (var(--grid-cols) - 1) * var(--grid-gap)) / var(--grid-cols));
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
@@ -88,6 +101,12 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 0.75rem 0.85rem;
+}
+
+.card--wide {
+  width: 100%;
+  flex: 0 0 100%;
+  margin-bottom: 0.2rem;
 }
 
 .card h3 {
@@ -100,16 +119,23 @@ h2 {
 .card p {
   margin: 0;
   font-size: 0.92rem;
+  flex: 1 1 auto;
 }
 
-.card ul {
-  margin: 0.35rem 0 0;
-  padding-left: 1.1rem;
-  font-size: 0.9rem;
+.card__note {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
-.card li {
-  margin: 0.12rem 0;
+.flow {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+}
+
+.flow li {
+  margin: 0.28rem 0;
 }
 
 .plain {
@@ -126,19 +152,15 @@ h2 {
   font-size: 0.92rem;
 }
 
-@media (max-width: 767px) {
-  :root {
-    --pad: 1rem;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
+@media (min-width: 768px) {
+  .card-grid--cols-2 {
+    --grid-cols: 2;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 767px) {
+  :root {
+    --pad: 1rem;
   }
 }
 
@@ -178,7 +200,7 @@ h2 {
 
   .lead {
     font-size: 10pt;
-    margin: 0 0 6pt;
+    margin: 0 0 4pt;
   }
 
   h2 {
@@ -188,9 +210,8 @@ h2 {
     page-break-after: avoid;
   }
 
-  .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 5pt;
+  .card-grid {
+    --grid-gap: 5pt;
   }
 
   .card {
@@ -205,12 +226,14 @@ h2 {
   }
 
   .card p,
-  .card ul,
+  .card__note,
+  .flow,
   .plain,
   .foot {
     font-size: 9.5pt;
   }
 
+  .flow li,
   .plain li {
     margin: 2pt 0;
   }

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> /
+      <a href="{% url 'services:list' %}">{% trans "Послуги" %}</a> /
+      {{ service.title }}
+    </nav>
+    <h1 class="page-title">{{ service.title }}</h1>
+    <p class="page-lead">{{ service.teaser }}</p>
+  </div>
+</header>
+<section class="section">
+  <div class="container service-hero">
+    <div>
+      <p>{{ service.body|safe }}</p>
+    </div>
+    <div class="service-hero__card" id="lead-form-slot">
+      {% include "leads/_form.html" %}
+    </div>
+  </div>
+</section>
+{% endblock %}

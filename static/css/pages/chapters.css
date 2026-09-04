@@ -1,0 +1,138 @@
+/*
+  Sticky chapters — full-bleed фон закріплюється, контент скролиться поверх.
+  Без background-attachment: fixed (iOS).
+  Glass-панелі БЕЗ .reveal на собі: opacity ламає backdrop-filter.
+*/
+.chapter {
+  display: grid;
+  position: relative;
+  min-height: 145vh;
+}
+.chapter__bg,
+.chapter__body {
+  grid-area: 1 / 1;
+}
+.chapter__bg {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  align-self: start;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+}
+.chapter__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+.chapter__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.62) 0%, rgba(15, 23, 42, 0.38) 45%, rgba(15, 23, 42, 0.7) 100%);
+}
+.chapter--routes .chapter__scrim {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.66) 0%, rgba(15, 23, 42, 0.4) 45%, rgba(15, 23, 42, 0.74) 100%);
+}
+.chapter--fleet .chapter__scrim {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.58) 0%, rgba(15, 23, 42, 0.32) 42%, rgba(15, 23, 42, 0.68) 100%);
+}
+
+.chapter__body {
+  position: relative;
+  z-index: 1;
+  min-height: 145vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(3.25rem, 8vw, 6.25rem);
+}
+
+.chapter .section__eyebrow { color: #93C5FD; }
+.chapter .section__title { color: #fff; }
+.chapter .section__lead { color: rgba(245, 247, 250, 0.78); }
+.chapter .section__head { margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem); }
+
+.chapter__surface {
+  background: rgba(243, 245, 248, 0.58);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.15rem, 3vw, 1.75rem);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  color: var(--color-text);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .chapter__surface { background: rgba(243, 245, 248, 0.94); }
+}
+
+.chapter__surface .section__eyebrow { color: var(--color-accent); }
+.chapter__surface .section__title { color: var(--color-text); }
+.chapter__surface .section__lead { color: var(--color-text-muted); }
+
+.chapter.chapter--fleet .fleet-card {
+  background: rgba(243, 245, 248, 0.55);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .chapter.chapter--fleet .fleet-card { background: rgba(243, 245, 248, 0.94); }
+}
+.chapter.chapter--fleet .fleet-card .section__eyebrow { color: var(--color-accent); }
+.chapter.chapter--fleet .fleet-card .section__title { color: var(--color-text); }
+.chapter.chapter--fleet .fleet-card .section__lead { color: var(--color-text-muted); }
+.chapter.chapter--fleet .fleet-fact {
+  background: rgba(245, 247, 250, 0.88);
+  border-color: rgba(226, 232, 240, 0.85);
+}
+
+.chapter .routes-toolbar { margin-bottom: 1rem; }
+.chapter .routes-countries li {
+  background: rgba(245, 247, 250, 0.82);
+}
+.chapter .routes-map {
+  background: rgba(215, 230, 244, 0.88);
+}
+
+@media (max-width: 767px) {
+  .chapter,
+  .chapter__body {
+    min-height: 125vh;
+  }
+  .chapter__bg {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .chapter__body {
+    padding-block: clamp(2.5rem, 7vw, 3.5rem);
+  }
+  .chapter__surface,
+  .chapter.chapter--fleet .fleet-card {
+    background: rgba(243, 245, 248, 0.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter,
+  .chapter__body {
+    min-height: 0;
+  }
+  .chapter__bg {
+    position: absolute;
+    inset: 0;
+    height: auto;
+  }
+  .chapter__body {
+    justify-content: flex-start;
+  }
+}

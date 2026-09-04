@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load i18n site_content %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Калькулятор" %}</nav>
+    <h1 class="page-title">{{ page_h1|default:_("Орієнтовний розрахунок") }}</h1>
+    <div class="page-lead">{% block_html 'calculator' 'calculator_lead' %}</div>
+  </div>
+</header>
+<section class="section">
+  <div class="container calculator-layout">
+    <form class="calculator-card" data-calculator-form data-qa="calculator-form">
+      <div class="field-row field-row--2">
+        <div class="field">
+          <label class="field__label" for="calc-from">{% trans "Звідки" %}</label>
+          <input class="field__input" id="calc-from" name="from" list="pt-cities" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="calc-to">{% trans "Куди" %}</label>
+          <input class="field__input" id="calc-to" name="to" list="pt-cities" required>
+        </div>
+      </div>
+      <div class="field field--mt">
+        <label class="field__label" for="calc-type">{% trans "Тип відправлення" %}</label>
+        <select class="field__select" id="calc-type" name="type">
+          <option value="ltl">{% trans "Збірний / LTL" %}</option>
+          <option value="ftl">{% trans "Повне авто / FTL" %}</option>
+          <option value="container">{% trans "Контейнер" %}</option>
+        </select>
+      </div>
+      <div class="field-row field-row--2 field--mt">
+        <div class="field">
+          <label class="field__label" for="calc-weight">{% trans "Вага, кг" %}</label>
+          <input class="field__input" id="calc-weight" name="weight" type="number" min="10" value="500">
+        </div>
+        <div class="field">
+          <label class="field__label" for="calc-volume">{% trans "Об’єм, м³" %}</label>
+          <input class="field__input" id="calc-volume" name="volume" type="number" min="0" step="0.1" value="2">
+        </div>
+      </div>
+      <div class="field field--mt">
+        <label class="field__label" for="calc-body">{% trans "Тип кузова" %}</label>
+        <select class="field__select" id="calc-body" name="body">
+          <option value="tent">{% trans "Тент" %}</option>
+          <option value="reef">{% trans "Рефрижератор" %}</option>
+          <option value="adr">ADR</option>
+          <option value="oversize">{% trans "Негабарит" %}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="calc-submit">{% trans "Розрахувати орієнтовно" %}</button>
+      <datalist id="pt-cities" data-cities></datalist>
+    </form>
+    <div>
+      <p class="calc-empty" data-calc-empty>{% trans "Заповніть форму — покажемо діапазон у €." %}</p>
+      <div class="calc-result" data-calc-result>
+        <p>{% trans "Орієнтовно" %}</p>
+        <p class="calc-result__range" data-calc-range></p>
+        <p data-calc-summary></p>
+        <p class="calc-result__disclaimer">{% trans "Це не фінальна ціна. Менеджер підтвердить тариф." %}</p>
+        <a class="btn btn--secondary mt-md" data-calc-to-lead href="{% url 'pages:home' %}#lead-form">{% trans "Залишити заявку" %}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

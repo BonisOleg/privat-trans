@@ -1,0 +1,43 @@
+{% load i18n %}
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand"><span class="brand__mark" aria-hidden="true">ПТ</span>{{ site_settings.brand_name }}</div>
+      <p class="footer__lead">{% trans "20 р на ринку міжнародних перевезень. Повний логістичний супровід на всіх етапах роботи з вантажем." %}</p>
+      <div class="footer__legal">
+        <p>{{ site_settings.address }}</p>
+        <p><a href="tel:{{ site_settings.phone_href }}">{{ site_settings.phone }}</a> · <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
+        <p>ЄДРПОУ {{ site_settings.edrpou }} · ІПН {{ site_settings.ipn }}</p>
+        <p>{{ site_settings.vat_note }}</p>
+      </div>
+    </div>
+    <div>
+      <div class="footer__heading">{% trans "Компанія" %}</div>
+      <ul class="footer__list">
+        <li><a href="{% url 'pages:about' %}">{% trans "Про нас" %}</a></li>
+        <li><a href="{% url 'faq:list' %}">FAQ</a></li>
+        <li><a href="{% url 'calculator:page' %}">{% trans "Калькулятор" %}</a></li>
+        <li><a href="{% url 'pages:contacts' %}">{% trans "Контакти" %}</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__heading">{% trans "Послуги" %}</div>
+      <ul class="footer__list">
+        {% for service in nav_services %}
+          <li><a href="{{ service.get_absolute_url }}">{{ service.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <div class="footer__heading">{% trans "Інформація" %}</div>
+      <ul class="footer__list">
+        <li><a href="{% url 'pages:privacy' %}">{% trans "Політика конфіденційності" %}</a></li>
+        <li>{% include "partials/lang_switch.html" %}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© {% now "Y" %} {{ site_settings.brand_name }}</span>
+    <span>PrometeyLabs</span>
+  </div>
+</footer>

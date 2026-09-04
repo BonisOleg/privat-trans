@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n site_content %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / FAQ</nav>
+    <h1 class="page-title">{{ page_h1|default:"FAQ" }}</h1>
+    {% block_plain 'faq' 'faq_lead' as faq_lead %}
+    {% if faq_lead %}<div class="page-lead">{{ faq_lead }}</div>{% endif %}
+  </div>
+</header>
+<section class="section">
+  <div class="container">
+    <div data-faq>
+      {% for item in faq_items %}
+      <article class="faq-item" data-open="false">
+        <button type="button" class="faq-item__q" aria-expanded="false">{{ item.question }}<span class="faq-item__chevron">▾</span></button>
+        <div class="faq-item__wrap"><div class="faq-item__answer">{{ item.answer|safe }}</div></div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% include "partials/lead_section.html" %}
+{% endblock %}

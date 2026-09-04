@@ -1,0 +1,45 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ current_language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block title %}{{ page_title|default:site_settings.default_title }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ meta_description|default:site_settings.default_description }}{% endblock %}">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  <link rel="alternate" hreflang="uk" href="{{ request.scheme }}://{{ request.get_host }}{{ lang_switch_urls.uk }}">
+  <link rel="alternate" hreflang="en" href="{{ request.scheme }}://{{ request.get_host }}{{ lang_switch_urls.en }}">
+  <link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}{{ lang_switch_urls.uk }}">
+  <meta property="og:title" content="{{ page_title|default:site_settings.default_title }}">
+  <meta property="og:description" content="{{ meta_description|default:site_settings.default_description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/cards.css' %}">
+  <link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/pages/chapters.css' %}">
+  <link rel="stylesheet" href="{% static 'css/pages/inner.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+  {% block page_css %}{% endblock %}
+  {% include "partials/analytics.html" %}
+</head>
+<body>
+  <a class="skip-link" href="#main">{% trans "Перейти до змісту" %}</a>
+  {% include "partials/header.html" %}
+  {% include "partials/drawer.html" %}
+  <main class="main has-mobile-bar" id="main">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.html" %}
+  {% include "partials/mobile_bar.html" %}
+  <script src="{% static 'js/htmx.min.js' %}" defer></script>
+  {% load django_htmx %}{% django_htmx_script %}
+  <script type="module" src="{% static 'js/main.js' %}"></script>
+  {% block page_js %}{% endblock %}
+</body>
+</html>

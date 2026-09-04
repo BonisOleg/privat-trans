@@ -1,0 +1,21 @@
+{% load i18n %}
+<div class="drawer" data-drawer id="mobile-drawer" data-open="false">
+  <div class="drawer__backdrop"></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{% trans 'Меню' %}">
+    <div class="drawer__head">
+      <span class="brand">{{ site_settings.brand_name }}</span>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="{% trans 'Закрити меню' %}">✕</button>
+    </div>
+    <nav class="drawer__nav" aria-label="{% trans 'Мобільна навігація' %}">
+      <a class="drawer__link" href="{% url 'services:list' %}">{% trans "Послуги" %}</a>
+      <a class="drawer__link" href="{% url 'pages:about' %}">{% trans "Про нас" %}</a>
+      <a class="drawer__link" href="{% url 'faq:list' %}">FAQ</a>
+      <a class="drawer__link" href="{% url 'calculator:page' %}">{% trans "Калькулятор" %}</a>
+      <a class="drawer__link" href="{% url 'pages:contacts' %}">{% trans "Контакти" %}</a>
+    </nav>
+    <div class="drawer__foot">
+      <a class="btn btn--primary btn--block" href="{% url 'pages:home' %}#lead-form">{% trans "Залишити заявку" %}</a>
+      <a class="btn btn--secondary btn--block" href="tel:{{ site_settings.phone_href }}">{% trans "Зателефонувати" %}</a>
+    </div>
+  </div>
+</div>

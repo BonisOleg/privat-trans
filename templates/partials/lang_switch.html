@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="lang-switch" role="group" aria-label="{% trans 'Мова сайту' %}">
+  <form method="post" action="{% url 'set_language' %}">
+    {% csrf_token %}
+    <input type="hidden" name="language" value="uk">
+    <input type="hidden" name="next" value="{{ lang_switch_urls.uk }}">
+    <button type="submit" class="lang-switch__btn{% if current_language == 'uk' %} is-active{% endif %}" data-qa="lang-uk">UK</button>
+  </form>
+  <form method="post" action="{% url 'set_language' %}">
+    {% csrf_token %}
+    <input type="hidden" name="language" value="en">
+    <input type="hidden" name="next" value="{{ lang_switch_urls.en }}">
+    <button type="submit" class="lang-switch__btn{% if current_language == 'en' %} is-active{% endif %}" data-qa="lang-en">EN</button>
+  </form>
+</div>

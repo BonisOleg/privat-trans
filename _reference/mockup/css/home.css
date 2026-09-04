@@ -1,0 +1,95 @@
+/*
+  Стилі, специфічні для головної: hero-відео, міні-форма, калькулятор-тизер.
+*/
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; background: var(--color-bg-dark); }
+.hero__media { position: absolute; inset: 0; z-index: 0; }
+.hero__video, .hero__poster {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.55) 45%, rgba(15, 23, 42, 0.88) 100%);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.hero__content { max-width: 40rem; color: var(--color-text-inverse); }
+.hero__badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: var(--radius-pill); background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.24); font-size: 0.8rem; margin-bottom: 1.1rem; }
+.hero__title { font-size: clamp(2.1rem, 5.4vw, 3.6rem); line-height: 1.08; letter-spacing: -0.01em; }
+.hero__lead { margin-top: 1rem; font-size: 1.1rem; color: var(--color-text-inverse-muted); max-width: 36rem; }
+.hero__actions { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.hero__phone { display: inline-flex; align-items: center; gap: 0.5rem; color: #fff; font-weight: 600; }
+.hero__fact { margin-top: 1.4rem; font-size: 0.9rem; color: var(--color-text-inverse-muted); }
+.hero__fact strong { color: #fff; font-family: var(--ff-display); font-size: 1.1rem; }
+
+.hero__form-card {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  color: var(--color-text);
+  max-width: 26rem;
+}
+.hero__form-title { font-size: 1.05rem; margin-bottom: 1rem; }
+.hero__form .field { margin-bottom: 0.9rem; }
+
+@media (min-width: 1024px) {
+  .hero__inner { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 3rem; }
+  .hero__form-card { margin-bottom: 0.25rem; }
+}
+
+/* ---------- Scenarios ---------- */
+.scenario-card .card__icon { background: var(--color-accent); color: var(--color-on-accent); }
+
+/* ---------- Regions (Europe/Asia) ---------- */
+.regions-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .regions-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- Calculator teaser ---------- */
+.calc-teaser {
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 960px) { .calc-teaser { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+.calc-teaser__list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.calc-teaser__list li { display: flex; gap: 0.5rem; font-size: 0.92rem; color: var(--color-text-muted); }
+.calc-teaser__list li::before { content: "✓"; color: var(--color-accent); font-weight: 700; }
+.calc-teaser__panel { background: var(--color-bg-soft); border-radius: var(--radius-md); padding: 1.4rem; }
+.calc-teaser__route { font-weight: 600; margin-top: 0.4rem; }
+
+/* ---------- Documents checklist ---------- */
+.doc-checklist { display: grid; gap: 0.75rem; grid-template-columns: 1fr; margin-top: 1.5rem; }
+@media (min-width: 640px) { .doc-checklist { grid-template-columns: repeat(2, 1fr); } }
+.doc-checklist li { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.9rem 1rem; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.92rem; }
+.doc-checklist li svg { flex-shrink: 0; color: var(--color-accent); margin-top: 0.1rem; }
+
+/* ---------- Career teaser ---------- */
+.career-teaser {
+  border-radius: var(--radius-lg);
+  padding: clamp(1.6rem, 4vw, 2.4rem);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .career-teaser { flex-direction: row; align-items: center; justify-content: space-between; gap: 2rem; }
+}
+.career-teaser__text { max-width: 34rem; color: rgba(255,255,255,0.9); }

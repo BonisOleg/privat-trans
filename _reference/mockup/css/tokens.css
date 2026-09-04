@@ -1,0 +1,81 @@
+/*
+  Design tokens — ПРИВАТ-ТРАНС mockup.
+  Стиль: Corporate Clean (нейтралі + один акцент), без editorial paper/serif.
+*/
+:root {
+  /* Фони */
+  --color-bg: #F5F7FA;
+  --color-surface: #F3F5F8;
+  --color-bg-alt: #F3F5F8;
+  --color-bg-soft: #EEF1F6;
+  --color-bg-dark: #0F172A;
+  --color-bg-dark-2: #16213B;
+  --color-header-bg: rgba(243, 245, 248, 0.92);
+  --color-surface-glass: rgba(243, 245, 248, 0.94);
+
+  /* Текст */
+  --color-text: #101828;
+  --color-text-muted: #56606E;
+  --color-text-dim: #8A93A1;
+  --color-text-inverse: #F5F7FA;
+  --color-text-inverse-muted: rgba(245, 247, 250, 0.7);
+
+  /* Межі */
+  --color-border: #E2E8F0;
+  --color-border-dark: rgba(255, 255, 255, 0.14);
+
+  /* Акцент — лише один */
+  --color-accent: #1D4ED8;
+  --color-accent-hover: #1E40AF;
+  --color-accent-soft: rgba(29, 78, 216, 0.08);
+  --color-on-accent: #FFFFFF;
+
+  --color-success: #15803D;
+  --color-success-soft: rgba(21, 128, 61, 0.1);
+  --color-danger: #B42318;
+  --color-danger-soft: rgba(180, 35, 24, 0.08);
+
+  /* Типографіка */
+  --ff-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  --ff-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --container-max: 1320px;
+  --container-pad: 1.25rem;
+  --header-h: 68px;
+  --mobile-bar-h: 60px;
+
+  /* Радіуси / тіні */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-md: 0 8px 24px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 20px 48px rgba(16, 24, 40, 0.16);
+
+  /* Час переходів */
+  --t-fast: 150ms ease;
+  --t-base: 250ms ease;
+  --t-slow: 400ms ease;
+
+  /* Z-index */
+  --z-header: 200;
+  --z-drawer: 300;
+  --z-mobile-bar: 250;
+  --z-skip-link: 400;
+
+  /* Viewport / safe-area (iOS) */
+  --vh: 100dvh;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (min-width: 768px) {
+  :root { --container-pad: 2rem; --header-h: 76px; }
+}
+
+@media (min-width: 1280px) {
+  :root { --container-pad: 3rem; }
+}

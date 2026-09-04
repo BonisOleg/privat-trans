@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ПРИВАТ-ТРАНС — міжнародні перевезення Європа та Азія, 10 кг–23 т під ключ</title>
+<meta name="description" content="Транспортно-експедиційна компанія ПРИВАТ-ТРАНС: міжнародні перевезення від 10 кг до 23 т, власні склади, митне оформлення, страхування вантажу й авто. Європа та Азія.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти до змісту</a>
+
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">ПТ</span>
+      ПРИВАТ-ТРАНС
+    </a>
+    <nav class="nav" aria-label="Основна навігація">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="services.html">Послуги</a></li>
+        <li><a class="nav__link" href="about.html">Про нас</a></li>
+        <li><a class="nav__link" href="faq.html">FAQ</a></li>
+        <li><a class="nav__link" href="calculator.html">Калькулятор</a></li>
+        <li><a class="nav__link" href="contacts.html">Контакти</a></li>
+      </ul>
+    </nav>
+    <div class="header__actions">
+      <div class="lang-switch" role="group" aria-label="Мова сайту">
+        <button type="button" class="lang-switch__btn is-active" data-lang-btn="uk">UK</button>
+        <button type="button" class="lang-switch__btn" data-lang-btn="en">EN</button>
+      </div>
+      <a class="btn btn--primary btn--sm" href="#lead-form">Залишити заявку</a>
+      <button type="button" class="menu-toggle" data-drawer-toggle aria-expanded="false" aria-controls="mobile-drawer" aria-label="Відкрити меню">
+        <span class="menu-toggle__box"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" data-drawer id="mobile-drawer" data-open="false">
+  <div class="drawer__backdrop"></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Меню">
+    <div class="drawer__head">
+      <span class="brand">ПРИВАТ-ТРАНС</span>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="Закрити меню">✕</button>
+    </div>
+    <nav class="drawer__nav" aria-label="Мобільна навігація">
+      <a class="drawer__link" href="services.html">Послуги</a>
+      <a class="drawer__link" href="about.html">Про нас</a>
+      <a class="drawer__link" href="faq.html">FAQ</a>
+      <a class="drawer__link" href="calculator.html">Калькулятор</a>
+      <a class="drawer__link" href="contacts.html">Контакти</a>
+    </nav>
+    <div class="drawer__foot">
+      <a class="btn btn--primary btn--block" href="#lead-form">Залишити заявку</a>
+      <a class="btn btn--secondary btn--block" href="tel:+380000000000">Зателефонувати</a>
+    </div>
+  </div>
+</div>
+
+<main class="main has-mobile-bar" id="main">
+
+  <section class="hero">
+    <div class="hero__media">
+      <video class="hero__video" data-hero-video autoplay muted loop playsinline poster="media/hero-poster.jpg" aria-hidden="true">
+        <source src="media/hero-video.mp4" type="video/mp4">
+      </video>
+      <div class="hero__scrim"></div>
+    </div>
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <span class="hero__badge">Міжнародні перевезення · Європа та Азія</span>
+        <h1 class="hero__title">Довеземо вантаж від 10&nbsp;кг до 23&nbsp;т — під ключ</h1>
+        <p class="hero__lead">Транспортно-експедиційна логістична компанія. Власні склади, митне оформлення, страхування вантажу й авто.</p>
+        <div class="hero__actions">
+          <a class="btn btn--glass" href="tel:+380000000000">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2C10.5 19 5 13.5 5 7a2 2 0 0 1 1-2Z"/></svg>
+            Зателефонувати
+          </a>
+          <a class="btn btn--glass" href="https://t.me/privattrans" target="_blank" rel="noopener">Написати в Telegram</a>
+        </div>
+        <p class="hero__fact"><strong>~20 років</strong> на ринку міжнародних перевезень</p>
+      </div>
+
+      <form class="hero__form-card hero__form" data-hero-form novalidate>
+        <h2 class="hero__form-title">Розрахуємо маршрут за 15 хвилин</h2>
+        <div class="field">
+          <label class="field__label" for="hero-from">Звідки</label>
+          <input class="field__input" id="hero-from" name="from" list="pt-cities-hero" placeholder="Місто, країна" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="hero-to">Куди</label>
+          <input class="field__input" id="hero-to" name="to" list="pt-cities-hero" placeholder="Місто, країна" required>
+        </div>
+        <datalist id="pt-cities-hero" data-cities></datalist>
+        <div class="field">
+          <label class="field__label" for="hero-cargo">Тип вантажу</label>
+          <select class="field__select" id="hero-cargo" name="cargo">
+            <option value="Збірний від 10 кг">Збірний від 10 кг</option>
+            <option value="Повне авто (FTL) до 23 тонн">Повне авто (FTL) до 23 тонн</option>
+            <option value="Під ключ (склад + митниця)">Під ключ (склад + митниця)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="hero-phone">Телефон</label>
+          <input class="field__input" id="hero-phone" type="tel" name="phone" placeholder="+380" required>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Отримати розрахунок</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Як ми можемо допомогти</span>
+        <h2 class="section__title">Три сценарії перевезення</h2>
+        <p class="section__lead">Обираєте формат — решту бере на себе команда ПРИВАТ-ТРАНС.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card scenario-card">
+          <div class="card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="14" height="10" rx="1.5"/><path d="M17 10h2.5L21 13v4h-4"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+          </div>
+          <h3 class="card__title">Збірний вантаж від 10 кг</h3>
+          <p class="card__text">Не чекаєте на повну фуру — консолідуємо ваш вантаж з іншими відправленнями.</p>
+          <div class="card__footer"><a class="card-link" href="services.html">Детальніше <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </article>
+        <article class="card scenario-card">
+          <div class="card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="8" width="13" height="9" rx="1.2"/><path d="M15 11h3.5L21 14v3h-6"/><circle cx="6" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg>
+          </div>
+          <h3 class="card__title">Повне авто (FTL) до 23 тонн</h3>
+          <p class="card__text">FTL-перевезення власним автопарком: тенти, рефрижератори, негабарит.</p>
+          <div class="card__footer"><a class="card-link" href="services.html">Детальніше <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </article>
+        <article class="card scenario-card">
+          <div class="card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg>
+          </div>
+          <h3 class="card__title">Під ключ</h3>
+          <p class="card__text">Відповідальне зберігання, перетарка, маркування, палетування та пакування ваших товарів на європейських складах.</p>
+          <div class="card__footer"><a class="card-link" href="services.html">Детальніше <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="regions">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Географія</span>
+        <h2 class="section__title">Два напрямки — Європа та Азія</h2>
+        <p class="section__lead">Регулярні маршрути в обох напрямках із власним автопарком і партнерською мережею.</p>
+      </div>
+      <div class="regions-grid">
+        <article class="region-card">
+          <h3 class="region-card__title">Європа</h3>
+          <p class="region-card__text">Регулярні рейси між Україною та країнами ЄС — тенти, повні авто та збірні вантажі.</p>
+          <ul class="region-card__list">
+            <li>Тенти й повні авто до 23 т</li>
+            <li>Збірні вантажі від 10 кг</li>
+            <li>Митне оформлення на кордоні ЄС</li>
+          </ul>
+        </article>
+        <article class="region-card">
+          <h3 class="region-card__title">Азія</h3>
+          <p class="region-card__text">Автомобільні та мультимодальні маршрути через Туреччину, Кавказ і Центральну Азію.</p>
+          <ul class="region-card__list">
+            <li>Мультимодал: море + авто</li>
+            <li>Контейнерні перевезення</li>
+            <li>Небезпечні (ADR) та негабаритні вантажі</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="routes">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Маршрути</span>
+        <h2 class="section__title">Де вже були наші рейси</h2>
+        <p class="section__lead">Приклад фінального вигляду: політична карта з демо-маршрутами (без анімації й інтерактиву).</p>
+      </div>
+      <div class="routes-map" role="img" aria-label="Політична карта Європа–Азія з демо-маршрутами: Київ–Варшава, Львів–Берлін, Одеса–Стамбул, Одеса–Тбілісі, Київ–Алмати, Дніпро–Ташкент">
+        <img class="routes-map__base" src="media/routes-map-base.jpg" alt="" width="1600" height="820" loading="lazy" decoding="async">
+        <img class="routes-map__overlay" src="media/routes-map-overlay.svg" alt="" width="1600" height="820" loading="lazy" decoding="async">
+      </div>
+      <p class="routes-map__note">Політична карта (Natural Earth, public domain). Демо-маршрути накладені зверху. Крим — частина України. Росія та Білорусь на карті відсутні.</p>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="services">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Що ми перевозимо</span>
+        <h2 class="section__title">Вісім послуг під ваш вантаж</h2>
+      </div>
+      <div class="grid-8">
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h13v10H3zM16 9h3l2 3v2h-5zM6 17a2 2 0 1 0 0-.01M18 17a2 2 0 1 0 0-.01"/></svg></div>
+          <h3 class="card__title">Міжнародні перевезення</h3>
+          <p class="card__text">Експорт/імпорт, 10 кг–23 т, Європа та Азія.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/></svg></div>
+          <h3 class="card__title">Збірні від 10 кг</h3>
+          <p class="card__text">Дрібна партія — не чекаєте повну фуру.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="8" width="13" height="9" rx="1.2"/><path d="M15 11h3.5L21 14v3h-6"/></svg></div>
+          <h3 class="card__title">Повні авто / тенти</h3>
+          <p class="card__text">FTL до 23 т, власний автопарк.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M9 6h6M4 12h16M6 12l1 8h10l1-8"/></svg></div>
+          <h3 class="card__title">Спецвантажі</h3>
+          <p class="card__text">Температурний режим, ADR, негабарит.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="11" rx="1"/><path d="M3 11h18M8 11v7M13 11v7M18 11v7"/></svg></div>
+          <h3 class="card__title">Контейнери</h3>
+          <p class="card__text">Мультимодал: море + авто.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg></div>
+          <h3 class="card__title">Власні склади</h3>
+          <p class="card__text">Консолідація і зберігання «під ключ».</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v5H4zM8 10v9M16 10v9M4 19h16"/></svg></div>
+          <h3 class="card__title">Митне оформлення</h3>
+          <p class="card__text">Власна послуга, без сторонніх посередників.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6z"/></svg></div>
+          <h3 class="card__title">Страхування</h3>
+          <p class="card__text">Вантаж і авто — окремо від перевезення.</p>
+        </article>
+      </div>
+      <p class="section__foot"><a class="btn btn--secondary" href="services.html">Усі послуги</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Процес</span>
+        <h2 class="section__title">Як це відбувається</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3 class="step__title">Заявка</h3><p class="step__text">Залишаєте маршрут і вантаж — передзвонюємо протягом робочого дня.</p></div>
+        <div class="step"><h3 class="step__title">Розрахунок</h3><p class="step__text">Готуємо орієнтовну вартість і терміни під ваш маршрут.</p></div>
+        <div class="step"><h3 class="step__title">Документи</h3><p class="step__text">Допомагаємо зібрати пакет документів для митниці.</p></div>
+        <div class="step"><h3 class="step__title">Рейс</h3><p class="step__text">Супроводжуємо вантаж до отримання адресатом.</p></div>
+      </div>
+      <h3 class="section__title section__title--sm">Що потрібно від вас</h3>
+      <ul class="doc-checklist">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Рахунок або інвойс на вантаж</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Пакувальний лист</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Сертифікати за потреби (ADR, температурний режим)</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Контакти відправника й отримувача</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="calculator-teaser">
+    <div class="container calc-teaser">
+      <div>
+        <span class="section__eyebrow">Орієнтовна вартість</span>
+        <h2 class="section__title">Скільки коштуватиме перевезення</h2>
+        <p class="section__lead">Простими словами: вкажіть звідки, куди і скільки важить вантаж — покажемо орієнтовний діапазон вартості.</p>
+        <ul class="calc-teaser__list">
+          <li>Без реєстрації та особистого кабінету</li>
+          <li>Діапазон ціни за 1 хвилину</li>
+          <li>Далі менеджер уточнює точну вартість</li>
+        </ul>
+        <p class="section__foot section__foot--left"><a class="btn btn--primary" href="calculator.html">Розрахувати вартість</a></p>
+      </div>
+      <div class="calc-teaser__panel">
+        <p class="form-note">Приклад розрахунку</p>
+        <p class="calc-teaser__route">Одеса → Стамбул, 400 кг, тент</p>
+        <p class="calc-result__range">€180–260</p>
+        <p class="calc-result__disclaimer">Орієнтовно, без урахування митних платежів. Точну вартість підтверджує менеджер.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Питання</span>
+        <h2 class="section__title">Часті запитання</h2>
+      </div>
+      <div data-faq>
+        <div class="faq-item" data-open="true">
+          <button class="faq-item__q" type="button" aria-expanded="true">
+            Від якої ваги приймаєте вантаж?
+            <svg class="faq-item__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__wrap"><div class="faq-item__answer">Від 10 кг: формуємо збірні відправлення, тож не потрібно чекати повну фуру.</div></div>
+        </div>
+        <div class="faq-item" data-open="false">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            Які напрямки перевезень?
+            <svg class="faq-item__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__wrap"><div class="faq-item__answer">Європа та Азія: автомобільні, контейнерні та мультимодальні маршрути.</div></div>
+        </div>
+        <div class="faq-item" data-open="false">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            Скільки триває доставка?
+            <svg class="faq-item__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__wrap"><div class="faq-item__answer">Залежить від маршруту й типу вантажу — точні терміни узгоджуємо під час розрахунку заявки.</div></div>
+        </div>
+        <div class="faq-item" data-open="false">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            Що входить у послугу «під ключ»?
+            <svg class="faq-item__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__wrap"><div class="faq-item__answer">Перевезення, власний склад, митне оформлення та страхування вантажу і авто.</div></div>
+        </div>
+        <div class="faq-item" data-open="false">
+          <button class="faq-item__q" type="button" aria-expanded="false">
+            Які документи потрібні для оформлення?
+            <svg class="faq-item__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-item__wrap"><div class="faq-item__answer">Рахунок або інвойс, пакувальний лист і контакти відправника й отримувача. Повний перелік — під час розрахунку заявки.</div></div>
+        </div>
+      </div>
+      <p class="section__foot section__foot--left"><a class="card-link" href="faq.html">Усі запитання <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="reviews">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Відгуки</span>
+        <h2 class="section__title">Що кажуть клієнти</h2>
+        <p class="section__lead">Приклади відгуків для макету — розділ оновиться реальними відгуками клієнтів.</p>
+      </div>
+      <div class="grid-auto">
+        <article class="card review-card">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__quote">«Швидко розрахували маршрут і чітко тримали строки постачання по всій Європі.»</p>
+          <p class="review-card__author">Компанія «Приклад Логістик»</p>
+          <p class="review-card__flag">Приклад для макету</p>
+        </article>
+        <article class="card review-card">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__quote">«Оформили митницю і склад під ключ — не довелося шукати окремих підрядників.»</p>
+          <p class="review-card__author">Компанія «Приклад Імпорт»</p>
+          <p class="review-card__flag">Приклад для макету</p>
+        </article>
+        <article class="card review-card">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__quote">«Возимо збірні партії щомісяця — зручно, що не треба чекати повну фуру.»</p>
+          <p class="review-card__author">Компанія «Приклад Трейд»</p>
+          <p class="review-card__flag">Приклад для макету</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Партнери</span>
+        <h2 class="section__title">Партнери й асоціації</h2>
+        <p class="section__lead">Логотипи-плейсхолдери — замінюються реальними після узгодження з клієнтом.</p>
+      </div>
+      <div class="grid-auto grid-auto--partners">
+        <div class="partner-tile">Партнер 1</div>
+        <div class="partner-tile">Партнер 2</div>
+        <div class="partner-tile">Партнер 3</div>
+        <div class="partner-tile">Партнер 4</div>
+        <div class="partner-tile">Партнер 5</div>
+        <div class="partner-tile">Партнер 6</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="career-teaser">
+        <div>
+          <h2 class="section__title">Приєднуйтесь до команди</h2>
+          <p class="career-teaser__text">Шукаємо водіїв-міжнародників, менеджерів логістики та спеціалістів митного оформлення.</p>
+        </div>
+        <a class="btn btn--glass" href="about.html#career">Відкриті вакансії</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="lead-form">
+    <div class="container">
+      <div class="section__head">
+        <span class="section__eyebrow">Заявка</span>
+        <h2 class="section__title">Залишити заявку на перевезення</h2>
+        <p class="section__lead">Заповніть форму — менеджер зв'яжеться протягом робочого дня.</p>
+      </div>
+      <form class="calculator-card lead-form" data-lead-form novalidate>
+        <div class="form-success" data-form-success role="status" aria-live="polite">Дякуємо за заявку! Ми зв'яжемося найближчим часом.</div>
+        <input type="hidden" name="from" id="lead-from">
+        <input type="hidden" name="to" id="lead-to">
+        <input type="hidden" name="cargo" id="lead-cargo">
+        <input type="hidden" name="service" id="lead-service">
+        <div class="field-row field-row--2">
+          <div class="field">
+            <label class="field__label" for="lead-name">Ім'я</label>
+            <input class="field__input" id="lead-name" name="name" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="lead-phone">Телефон</label>
+            <input class="field__input" id="lead-phone" name="phone" type="tel" required>
+          </div>
+        </div>
+        <div class="field field--mt">
+          <label class="field__label" for="lead-email">Email</label>
+          <input class="field__input" id="lead-email" name="email" type="email">
+        </div>
+        <div class="field field--mt">
+          <label class="field__label" for="lead-message">Коментар</label>
+          <textarea class="field__textarea" id="lead-message" name="message" placeholder="Маршрут, вага, тип вантажу"></textarea>
+        </div>
+        <label class="checkbox field--mt">
+          <input type="checkbox" name="gdpr" required>
+          Погоджуюсь з <a href="privacy.html">політикою конфіденційності</a> та обробкою персональних даних
+        </label>
+        <button type="submit" class="btn btn--primary btn--block mt-md">Надіслати заявку</button>
+        <p class="form-note mt-sm">Демо-форма макету: дані нікуди не відправляються.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand"><span class="brand__mark" aria-hidden="true">ПТ</span>ПРИВАТ-ТРАНС</div>
+      <p class="footer__lead">Транспортно-експедиційна логістична компанія. Майже 20 років міжнародних перевезень: Європа та Азія, від 10 кг до 23 т під ключ.</p>
+    </div>
+    <div>
+      <div class="footer__heading">Компанія</div>
+      <ul class="footer__list">
+        <li><a href="about.html">Про нас</a></li>
+        <li><a href="about.html#career">Кар'єра</a></li>
+        <li><a href="index.html#partners">Партнери</a></li>
+        <li><a href="index.html#reviews">Відгуки</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__heading">Послуги</div>
+      <ul class="footer__list">
+        <li><a href="service-detail.html?service=Міжнародні%20перевезення">Міжнародні перевезення</a></li>
+        <li><a href="service-detail.html?service=Збірні%20від%2010%20кг">Збірні від 10 кг</a></li>
+        <li><a href="service-detail.html?service=Повні%20авто%20%2F%20тенти">Повні авто / тенти</a></li>
+        <li><a href="service-detail.html?service=Спецвантажі">Спецвантажі</a></li>
+        <li><a href="service-detail.html?service=Контейнери">Контейнери</a></li>
+        <li><a href="service-detail.html?service=Власні%20склади">Власні склади</a></li>
+        <li><a href="service-detail.html?service=Митне%20оформлення">Митне оформлення</a></li>
+        <li><a href="service-detail.html?service=Страхування">Страхування</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__heading">Інформація</div>
+      <ul class="footer__list">
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="calculator.html">Калькулятор вартості</a></li>
+        <li><a href="contacts.html">Контакти</a></li>
+        <li><a href="privacy.html">Політика конфіденційності</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© 2026 ПП «ПРИВАТ-ТРАНС». Усі права захищено.</span>
+    <span>+380 00 000 00 00 · info@privattrans.example</span>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a class="btn btn--secondary" href="tel:+380000000000">Зателефонувати</a>
+  <a class="btn btn--primary" href="#lead-form">Заявка</a>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/quote-bridge.js"></script>
+</body>
+</html>
