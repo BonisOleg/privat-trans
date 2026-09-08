@@ -1,67 +1,249 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: PrivatTrans\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-07 14:09+0300\n"
 "Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "Перейти до змісту"
-msgstr "Skip to content"
-
-msgid "Послуги"
-msgstr "Services"
-
-msgid "Про нас"
-msgstr "About"
-
-msgid "Калькулятор"
-msgstr "Calculator"
-
-msgid "Контакти"
-msgstr "Contacts"
-
-msgid "Залишити заявку"
-msgstr "Request a quote"
-
-msgid "Зателефонувати"
-msgstr "Call us"
-
-msgid "Надіслати заявку"
-msgstr "Send request"
-
-msgid "Дякуємо за заявку"
-msgstr "Thank you for your request"
-
-msgid "Повний логістичний супровід на всіх етапах роботи з вантажем"
-msgstr "Full logistics support at every cargo stage"
-
-msgid "Комплексна доставка вантажів Європа ↔️ Україна ↔️ Азія"
-msgstr "End-to-end freight Europe ↔ Ukraine ↔ Asia"
-
-msgid "З 2007 року"
-msgstr "Since 2007"
-
-msgid "на ринку міжнародних перевезень"
-msgstr "on the international freight market"
-
-msgid "20 р на ринку міжнародних перевезень. Повний логістичний супровід на всіх етапах роботи з вантажем."
-msgstr "20 years in international freight. Full logistics support at every cargo stage."
-
-msgid "Політика конфіденційності"
-msgstr "Privacy policy"
-
+#: src/leads/forms.py:10
 msgid "Погоджуюсь на обробку персональних даних"
 msgstr "I agree to personal data processing"
 
+#: src/leads/forms.py:37
 msgid "Ім’я"
 msgstr "Name"
 
+#: src/leads/forms.py:38 templates/pages/contacts.html:24
+#: templates/pages/home.html:77
 msgid "Телефон"
 msgstr "Phone"
 
+#: src/leads/forms.py:39
+msgid "Email"
+msgstr "Email"
+
+#: src/leads/forms.py:40 templates/calculator/page.html:17
+#: templates/pages/home.html:51
 msgid "Звідки"
 msgstr "From"
 
+#: src/leads/forms.py:41 templates/calculator/page.html:21
+#: templates/pages/home.html:59
 msgid "Куди"
 msgstr "To"
 
+#: src/leads/forms.py:42 templates/pages/home.html:67
 msgid "Тип вантажу"
 msgstr "Cargo type"
+
+#: src/leads/forms.py:43
+msgid "Коментар"
+msgstr "Comment"
+
+#: src/leads/views.py:16
+msgid "Перевірте поля форми."
+msgstr "Please check the form fields."
+
+#: src/leads/views.py:23 templates/leads/_success.html:2
+msgid "Дякуємо за заявку"
+msgstr "Thank you for your request"
+
+#: templates/base.html:43
+msgid "Перейти до змісту"
+msgstr "Skip to content"
+
+#: templates/calculator/page.html:7 templates/faq/list.html:7
+#: templates/pages/about.html:7 templates/pages/contacts.html:7
+#: templates/pages/fleet.html:7 templates/pages/privacy.html:7
+#: templates/services/detail.html:8 templates/services/list.html:7
+msgid "Головна"
+msgstr "Home"
+
+#: templates/calculator/page.html:7 templates/partials/drawer.html:14
+#: templates/partials/footer.html:23 templates/partials/header.html:17
+msgid "Калькулятор"
+msgstr "Calculator"
+
+#: templates/calculator/page.html:8
+msgid "Орієнтовний розрахунок"
+msgstr "Estimated quote"
+
+#: templates/calculator/page.html:26
+msgid "Тип відправлення"
+msgstr "Shipment type"
+
+#: templates/calculator/page.html:28
+msgid "Збірний / LTL"
+msgstr "Groupage / LTL"
+
+#: templates/calculator/page.html:29
+msgid "Повне авто / FTL"
+msgstr "Full truck / FTL"
+
+#: templates/calculator/page.html:30
+msgid "Контейнер"
+msgstr "Container"
+
+#: templates/calculator/page.html:35
+msgid "Вага, кг"
+msgstr "Weight, kg"
+
+#: templates/calculator/page.html:39
+msgid "Об’єм, м³"
+msgstr "Volume, m³"
+
+#: templates/calculator/page.html:44
+msgid "Тип кузова"
+msgstr "Body type"
+
+#: templates/calculator/page.html:46
+msgid "Тент"
+msgstr "Curtain sider"
+
+#: templates/calculator/page.html:47
+msgid "Рефрижератор"
+msgstr "Reefer"
+
+#: templates/calculator/page.html:49
+msgid "Негабарит"
+msgstr "Oversized"
+
+#: templates/leads/_form.html:43
+msgid "Погоджуюсь на обробку персональних даних згідно"
+msgstr "I agree to personal data processing under the"
+
+#: templates/leads/_form.html:43
+msgid "політики конфіденційності"
+msgstr "privacy policy"
+
+#: templates/pages/about.html:7 templates/pages/about.html:8
+#: templates/partials/drawer.html:12 templates/partials/footer.html:20
+#: templates/partials/header.html:15
+msgid "Про нас"
+msgstr "About"
+
+#: templates/pages/contacts.html:7 templates/pages/contacts.html:8
+#: templates/partials/drawer.html:15 templates/partials/footer.html:24
+#: templates/partials/header.html:18
+msgid "Контакти"
+msgstr "Contacts"
+
+#: templates/pages/contacts.html:18
+msgid "Адреса"
+msgstr "Address"
+
+#: templates/pages/contacts.html:36
+msgid "Реквізити"
+msgstr "Company details"
+
+#: templates/pages/contacts.html:42
+msgid "Карта"
+msgstr "Map"
+
+#: templates/pages/fleet.html:7 templates/partials/drawer.html:11
+#: templates/partials/footer.html:21 templates/partials/header.html:14
+msgid "Автопарк"
+msgstr "Fleet"
+
+#: templates/pages/fleet.html:8
+msgid "Наш автопарк"
+msgstr "Our fleet"
+
+#: templates/pages/home.html:54 templates/pages/home.html:62
+msgid "Оберіть місто"
+msgstr "Select a city"
+
+#: templates/pages/home.html:70
+msgid "Збірний від 10 кг"
+msgstr "Groupage from 10 kg"
+
+#: templates/pages/home.html:71
+msgid "Повне авто (FTL) до 23 тонн"
+msgstr "Full truck (FTL) up to 23 tonnes"
+
+#: templates/pages/home.html:72
+msgid "Під ключ (склад + митниця)"
+msgstr "Turnkey (warehouse + customs)"
+
+#: templates/pages/privacy.html:7
+msgid "Політика"
+msgstr "Privacy"
+
+#: templates/pages/privacy.html:8 templates/partials/footer.html:38
+msgid "Політика конфіденційності"
+msgstr "Privacy policy"
+
+#: templates/partials/drawer.html:4
+msgid "Меню"
+msgstr "Menu"
+
+#: templates/partials/drawer.html:7
+msgid "Закрити меню"
+msgstr "Close menu"
+
+#: templates/partials/drawer.html:9
+msgid "Мобільна навігація"
+msgstr "Mobile navigation"
+
+#: templates/partials/drawer.html:10 templates/partials/footer.html:28
+#: templates/partials/header.html:13 templates/services/detail.html:9
+#: templates/services/list.html:7 templates/services/list.html:8
+msgid "Послуги"
+msgstr "Services"
+
+#: templates/partials/footer.html:18
+msgid "Компанія"
+msgstr "Company"
+
+#: templates/partials/footer.html:36
+msgid "Інформація"
+msgstr "Information"
+
+#: templates/partials/footer.html:46
+msgid "Дизайн і розробка"
+msgstr "Design & development"
+
+#: templates/partials/header.html:11
+msgid "Основна навігація"
+msgstr "Primary navigation"
+
+#: templates/partials/header.html:35
+msgid "Відкрити меню"
+msgstr "Open menu"
+
+#: templates/partials/lang_switch.html:2
+msgid "Мова сайту"
+msgstr "Site language"
+
+#: templates/partials/routes_map.html:3
+msgid "Супутникова карта коридорів Європа — Азія"
+msgstr "Satellite map of Europe — Asia corridors"
+
+#~ msgid "Залишити заявку"
+#~ msgstr "Request a quote"
+
+#~ msgid "Зателефонувати"
+#~ msgstr "Call us"
+
+#~ msgid "Надіслати заявку"
+#~ msgstr "Send request"
+
+#~ msgid "Повний логістичний супровід на всіх етапах роботи з вантажем"
+#~ msgstr "Full logistics support at every cargo stage"
+
+#~ msgid "Комплексна доставка вантажів Європа ↔️ Україна ↔️ Азія"
+#~ msgstr "End-to-end freight Europe ↔ Ukraine ↔ Asia"
+
+#~ msgid "З 2007 року"
+#~ msgstr "Since 2007"
+
+#~ msgid "на ринку міжнародних перевезень"
+#~ msgstr "on the international freight market"
+
+#~ msgid ""
+#~ "20 р на ринку міжнародних перевезень. Повний логістичний супровід на всіх "
+#~ "етапах роботи з вантажем."
+#~ msgstr ""
+#~ "20 years in international freight. Full logistics support at every cargo "
+#~ "stage."

@@ -5,7 +5,8 @@ from src.core.utils import localized
 
 
 class SiteSettings(models.Model):
-    brand_name = models.CharField(max_length=80, default="ПРИВАТ-ТРАНС")
+    brand_name_uk = models.CharField(max_length=80, default="ПРИВАТ-ТРАНС")
+    brand_name_en = models.CharField(max_length=80, default="PRIVAT-TRANS", blank=True)
     slogan_uk = models.CharField(max_length=160, default="Ваш надійний партнер")
     slogan_en = models.CharField(max_length=160, default="your reliable partner")
     phone = models.CharField(max_length=40, default="(0362) 64-24-34")
@@ -66,7 +67,7 @@ class SiteSettings(models.Model):
         verbose_name_plural = "Налаштування сайту"
 
     def __str__(self) -> str:
-        return self.brand_name
+        return self.brand_name_uk
 
     @classmethod
     def get_solo(cls) -> "SiteSettings":
@@ -76,6 +77,10 @@ class SiteSettings(models.Model):
     @classmethod
     def load(cls) -> "SiteSettings":
         return cls.get_solo()
+
+    @property
+    def brand_name(self) -> str:
+        return localized(self, "brand_name")
 
     @property
     def slogan(self) -> str:
@@ -131,6 +136,7 @@ class SiteBlock(models.Model):
     class Page(models.TextChoices):
         HOME = "home", "Головна"
         ABOUT = "about", "Про нас"
+        FLEET = "fleet", "Автопарк"
         CONTACTS = "contacts", "Контакти"
         PRIVACY = "privacy", "Політика"
         SERVICES = "services", "Послуги"
@@ -238,3 +244,52 @@ class CalculatorPageSettings(SiteSettings):
         proxy = True
         verbose_name = "Калькулятор"
         verbose_name_plural = "Калькулятор"
+
+
+class FleetPageSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Автопарк"
+        verbose_name_plural = "Автопарк"
+
+
+class HomeGeographySettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Головна — Географія"
+        verbose_name_plural = "Головна — Географія"
+
+
+class HomeRoutesSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Головна — Маршрути"
+        verbose_name_plural = "Головна — Маршрути"
+
+
+class HomeMidSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Головна — Послуги та автопарк"
+        verbose_name_plural = "Головна — Послуги та автопарк"
+
+
+class HomeExperienceSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Головна — Переваги та процес"
+        verbose_name_plural = "Головна — Переваги та процес"
+
+
+class HomeSocialSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Головна — Калькулятор і соцблок"
+        verbose_name_plural = "Головна — Калькулятор і соцблок"
+
+
+class SiteChromeSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Сайт — CTA та форма"
+        verbose_name_plural = "Сайт — CTA та форма"

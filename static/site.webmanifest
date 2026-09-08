@@ -1,0 +1,27 @@
+{
+  "name": "ПРИВАТ-ТРАНС",
+  "short_name": "PrivatTrans",
+  "description": "Комплексна доставка вантажів Європа — Україна — Азія",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1D4ED8",
+  "theme_color": "#1D4ED8",
+  "icons": [
+    {
+      "src": "/static/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/android-chrome-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

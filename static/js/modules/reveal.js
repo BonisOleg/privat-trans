@@ -1,4 +1,30 @@
+const STAGGER_GROUPS = [
+  ".grid-3",
+  ".grid-8",
+  ".grid-auto",
+  ".regions-grid",
+  ".steps",
+  ".corridor-bridge__facts",
+  ".fleet-card__facts",
+];
+const STAGGER_STEP_MS = 70;
+const STAGGER_MAX_INDEX = 5;
+
+function applyStagger(root) {
+  STAGGER_GROUPS.forEach((selector) => {
+    root.querySelectorAll(selector).forEach((group) => {
+      const items = [...group.children].filter((el) => el.classList.contains("reveal"));
+      items.forEach((el, index) => {
+        if (el.style.getPropertyValue("--reveal-delay")) return;
+        const delay = Math.min(index, STAGGER_MAX_INDEX) * STAGGER_STEP_MS;
+        if (delay > 0) el.style.setProperty("--reveal-delay", `${delay}ms`);
+      });
+    });
+  });
+}
+
 export function initReveal(root = document) {
+  applyStagger(root);
   const nodes = root.querySelectorAll(".reveal:not(.is-visible):not([data-reveal-hold])");
   if (!nodes.length) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

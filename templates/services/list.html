@@ -18,7 +18,7 @@
         <h2 class="service-row__title">{{ service.title }}</h2>
         <p class="service-row__text">{{ service.teaser }}</p>
       </div>
-      <a class="btn btn--secondary" href="{{ service.get_absolute_url }}">{% trans "Детальніше" %}</a>
+      <a class="btn btn--secondary" href="{{ service.get_absolute_url }}">{% block_plain 'home' 'services_home_cta' %}</a>
     </article>
     {% endfor %}
   </div>

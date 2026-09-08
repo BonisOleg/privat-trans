@@ -176,9 +176,44 @@ UNFOLD = {
                         "link": reverse_lazy("admin:core_homescenariossettings_changelist"),
                     },
                     {
+                        "title": "Головна — Географія",
+                        "icon": "public",
+                        "link": reverse_lazy("admin:core_homegeographysettings_changelist"),
+                    },
+                    {
+                        "title": "Головна — Маршрути",
+                        "icon": "route",
+                        "link": reverse_lazy("admin:core_homeroutessettings_changelist"),
+                    },
+                    {
+                        "title": "Головна — Послуги/автопарк",
+                        "icon": "inventory_2",
+                        "link": reverse_lazy("admin:core_homemidsettings_changelist"),
+                    },
+                    {
+                        "title": "Головна — Переваги/процес",
+                        "icon": "verified",
+                        "link": reverse_lazy("admin:core_homeexperiencesettings_changelist"),
+                    },
+                    {
+                        "title": "Головна — Соцблок",
+                        "icon": "groups",
+                        "link": reverse_lazy("admin:core_homesocialsettings_changelist"),
+                    },
+                    {
+                        "title": "Сайт — CTA / форма",
+                        "icon": "campaign",
+                        "link": reverse_lazy("admin:core_sitechromesettings_changelist"),
+                    },
+                    {
                         "title": "Про нас",
                         "icon": "info",
                         "link": reverse_lazy("admin:core_aboutpagesettings_changelist"),
+                    },
+                    {
+                        "title": "Автопарк",
+                        "icon": "local_shipping",
+                        "link": reverse_lazy("admin:core_fleetpagesettings_changelist"),
                     },
                     {
                         "title": "Контакти",

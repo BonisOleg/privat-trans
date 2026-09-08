@@ -18,11 +18,18 @@ from src.core.models import (
     CalculatorPageSettings,
     ContactsPageSettings,
     FaqPageSettings,
+    FleetPageSettings,
+    HomeExperienceSettings,
+    HomeGeographySettings,
     HomeHeroSettings,
+    HomeMidSettings,
+    HomeRoutesSettings,
     HomeScenariosSettings,
+    HomeSocialSettings,
     PageSEO,
     PrivacyPageSettings,
     ServicesPageSettings,
+    SiteChromeSettings,
     SiteSettings,
 )
 
@@ -55,7 +62,6 @@ class SiteSettingsAdmin(
             "Основне",
             {
                 "fields": (
-                    "brand_name",
                     "phone",
                     "phone_href",
                     "email",
@@ -83,6 +89,7 @@ class SiteSettingsAdmin(
             {
                 "classes": ["tab"],
                 "fields": (
+                    "brand_name_uk",
                     "slogan_uk",
                     "address_uk",
                     "vat_note_uk",
@@ -96,6 +103,7 @@ class SiteSettingsAdmin(
             {
                 "classes": ["tab"],
                 "fields": (
+                    "brand_name_en",
                     "slogan_en",
                     "address_en",
                     "vat_note_en",
@@ -151,7 +159,14 @@ def _register_cms_section(model, page_slug: str, section_slug: str):
 
 _register_cms_section(HomeHeroSettings, "home", "hero")
 _register_cms_section(HomeScenariosSettings, "home", "scenarios")
+_register_cms_section(HomeGeographySettings, "home", "geography")
+_register_cms_section(HomeRoutesSettings, "home", "routes")
+_register_cms_section(HomeMidSettings, "home", "mid")
+_register_cms_section(HomeExperienceSettings, "home", "experience")
+_register_cms_section(HomeSocialSettings, "home", "social")
+_register_cms_section(SiteChromeSettings, "site", "chrome")
 _register_cms_section(AboutPageSettings, "about", "page")
+_register_cms_section(FleetPageSettings, "fleet", "page")
 _register_cms_section(ContactsPageSettings, "contacts", "page")
 _register_cms_section(PrivacyPageSettings, "privacy", "page")
 _register_cms_section(ServicesPageSettings, "services", "page")

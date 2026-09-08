@@ -1,0 +1,127 @@
+{% load static i18n %}
+<div class="routes-map" data-routes-map data-filter="all" role="img"
+  aria-label="{% trans 'Супутникова карта коридорів Європа — Азія' %}">
+  <picture>
+    <source type="image/webp" srcset="{% static 'media/routes-map-satellite.webp' %}">
+    <img class="routes-map__base" src="{% static 'media/routes-map-satellite.png' %}" alt="" width="1920" height="980"
+      loading="lazy" decoding="async">
+  </picture>
+  <svg class="routes-map__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 980" aria-hidden="true"
+    focusable="false" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="routes-grad-eu" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#7DD3FC"/>
+        <stop offset="100%" stop-color="#F8FAFC"/>
+      </linearGradient>
+      <linearGradient id="routes-grad-as" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#FDE68A"/>
+        <stop offset="100%" stop-color="#FDBA74"/>
+      </linearGradient>
+      <filter id="routes-glow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="2.2" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <marker id="routes-arrow-eu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5"
+        orient="auto-start-reverse">
+        <path d="M0,1.2 L9,5 L0,8.8 Z" fill="#E0F2FE"/>
+      </marker>
+      <marker id="routes-arrow-as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5"
+        orient="auto-start-reverse">
+        <path d="M0,1.2 L9,5 L0,8.8 Z" fill="#FDBA74"/>
+      </marker>
+    </defs>
+
+    <g class="routes-map__routes">
+      {# Europe from Kyiv #}
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q728,438 624,431" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q734,478 635,508" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q732,505 631,542" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q782,520 731,571" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q740,540 649,611" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q716,540 600,611" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q700,529 567,590" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q695,458 558,483" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q686,502 540,536" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q814,508 795,547" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q668,560 505,650" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q520,600 207,697" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q648,432 465,452" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q595,450 357,467" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q602,430 371,431" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q574,484 315,556" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q540,400 247,422" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q515,360 197,324" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q645,390 457,342" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q690,320 549,205" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q628,510 424,552" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q609,468 386,483" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q790,300 750,160" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q772,400 713,360" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q774,380 715,321" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q782,360 731,283" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q478,610 124,716" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q752,569 671,670" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="europe" d="M832,468 Q786,556 741,645" fill="none" stroke="url(#routes-grad-eu)" stroke-linecap="round" marker-end="url(#routes-arrow-eu)" filter="url(#routes-glow)"/>
+
+      {# Asia from Odesa / Kyiv #}
+      <path class="routes-map__route" data-route-region="asia" d="M836,559 Q877,644 918,729" fill="none" stroke="url(#routes-grad-as)" stroke-linecap="round" marker-end="url(#routes-arrow-as)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="asia" d="M836,559 Q953,606 1070,654" fill="none" stroke="url(#routes-grad-as)" stroke-linecap="round" marker-end="url(#routes-arrow-as)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="asia" d="M836,559 Q1146,617 1456,675" fill="none" stroke="url(#routes-grad-as)" stroke-linecap="round" marker-end="url(#routes-arrow-as)" filter="url(#routes-glow)"/>
+      <path class="routes-map__route" data-route-region="asia" d="M832,468 Q1165,496 1498,524" fill="none" stroke="url(#routes-grad-as)" stroke-linecap="round" marker-end="url(#routes-arrow-as)" filter="url(#routes-glow)"/>
+    </g>
+
+    <g class="routes-map__hubs">
+      <g class="routes-map__hub-group" data-route-region="bridge" transform="translate(832,468)">
+        <circle class="routes-map__hub" r="15"/>
+        <circle class="routes-map__hub routes-map__hub--core" r="6.5"/>
+      </g>
+      <g class="routes-map__hub-group" data-route-region="bridge" transform="translate(836,559)">
+        <circle class="routes-map__hub routes-map__hub--warm" r="13"/>
+        <circle class="routes-map__hub routes-map__hub--core routes-map__hub--warm-core" r="5.5"/>
+      </g>
+    </g>
+
+    <g class="routes-map__labels">
+      <g class="routes-map__country" data-region="bridge" data-route-region="bridge" transform="translate(832,446)"><text class="routes-map__label routes-map__label--hub" text-anchor="middle">Kyiv</text></g>
+      <g class="routes-map__country" data-region="bridge" data-route-region="bridge" transform="translate(836,582)"><text class="routes-map__label routes-map__label--hub" text-anchor="middle">Odesa</text></g>
+
+      <g class="routes-map__country" data-region="europe" transform="translate(624,416)"><text class="routes-map__label" text-anchor="middle">Poland</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(635,493)"><text class="routes-map__label" text-anchor="middle">Slovakia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(631,528)"><text class="routes-map__label" text-anchor="middle">Hungary</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(731,556)"><text class="routes-map__label" text-anchor="middle">Romania</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(649,596)"><text class="routes-map__label" text-anchor="middle">Serbia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(600,596)"><text class="routes-map__label" text-anchor="middle">Bosnia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(567,575)"><text class="routes-map__label" text-anchor="middle">Croatia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(558,468)"><text class="routes-map__label" text-anchor="middle">Czechia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(540,521)"><text class="routes-map__label" text-anchor="middle">Austria</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(795,532)"><text class="routes-map__label" text-anchor="middle">Moldova</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(505,634)"><text class="routes-map__label" text-anchor="middle">Italy</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(207,680)"><text class="routes-map__label" text-anchor="middle">Spain</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(465,436)"><text class="routes-map__label" text-anchor="middle">Germany</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(357,452)"><text class="routes-map__label" text-anchor="middle">Belgium</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(371,416)"><text class="routes-map__label" text-anchor="middle">Netherlands</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(315,540)"><text class="routes-map__label" text-anchor="middle">France</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(247,404)"><text class="routes-map__label" text-anchor="middle">UK</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(197,308)"><text class="routes-map__label" text-anchor="middle">Scotland</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(457,328)"><text class="routes-map__label" text-anchor="middle">Denmark</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(549,190)"><text class="routes-map__label" text-anchor="middle">Sweden</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(424,536)"><text class="routes-map__label" text-anchor="middle">Switzerland</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(386,468)"><text class="routes-map__label" text-anchor="middle">Luxembourg</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(750,145)"><text class="routes-map__label" text-anchor="middle">Finland</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(713,348)"><text class="routes-map__label" text-anchor="middle">Lithuania</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(715,308)"><text class="routes-map__label" text-anchor="middle">Latvia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(731,268)"><text class="routes-map__label" text-anchor="middle">Estonia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(124,700)"><text class="routes-map__label" text-anchor="middle">Portugal</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(671,655)"><text class="routes-map__label" text-anchor="middle">N. Macedonia</text></g>
+      <g class="routes-map__country" data-region="europe" transform="translate(741,630)"><text class="routes-map__label" text-anchor="middle">Bulgaria</text></g>
+
+      <g class="routes-map__country" data-region="asia" transform="translate(918,712)"><text class="routes-map__label routes-map__label--asia" text-anchor="middle">Turkey</text></g>
+      <g class="routes-map__country" data-region="asia" transform="translate(1070,638)"><text class="routes-map__label routes-map__label--asia" text-anchor="middle">Georgia</text></g>
+      <g class="routes-map__country" data-region="asia" transform="translate(1456,658)"><text class="routes-map__label routes-map__label--asia" text-anchor="middle">Uzbekistan</text></g>
+      <g class="routes-map__country" data-region="asia" transform="translate(1498,508)"><text class="routes-map__label routes-map__label--asia" text-anchor="middle">Kazakhstan</text></g>
+    </g>
+  </svg>
+</div>

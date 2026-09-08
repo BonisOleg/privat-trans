@@ -13,3 +13,8 @@ media/
 .vscode/
 htmlcov/
 .coverage
+_tmp/
+deploy/dumps/*.json
+deploy/dumps/*.tar
+deploy/dumps/*.tgz
+deploy/dumps/*.gz

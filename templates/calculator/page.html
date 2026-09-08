@@ -49,17 +49,17 @@
           <option value="oversize">{% trans "Негабарит" %}</option>
         </select>
       </div>
-      <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="calc-submit">{% trans "Розрахувати орієнтовно" %}</button>
+      <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="calc-submit">{% block_plain 'calculator' 'calculator_submit' %}</button>
       <datalist id="pt-cities" data-cities></datalist>
     </form>
     <div>
-      <p class="calc-empty" data-calc-empty>{% trans "Заповніть форму — покажемо діапазон у €." %}</p>
+      <p class="calc-empty" data-calc-empty>{% block_plain 'calculator' 'calculator_empty' %}</p>
       <div class="calc-result" data-calc-result>
-        <p>{% trans "Орієнтовно" %}</p>
+        <p>{% block_plain 'calculator' 'calculator_result_label' %}</p>
         <p class="calc-result__range" data-calc-range></p>
         <p data-calc-summary></p>
-        <p class="calc-result__disclaimer">{% trans "Це не фінальна ціна. Менеджер підтвердить тариф." %}</p>
-        <a class="btn btn--secondary mt-md" data-calc-to-lead href="{% url 'pages:home' %}#lead-form">{% trans "Залишити заявку" %}</a>
+        <p class="calc-result__disclaimer">{% block_plain 'calculator' 'calculator_disclaimer' %}</p>
+        <a class="btn btn--secondary mt-md" data-calc-to-lead href="{% url 'pages:home' %}#lead-form">{% block_plain 'calculator' 'calculator_cta_lead' %}</a>
       </div>
     </div>
   </div>

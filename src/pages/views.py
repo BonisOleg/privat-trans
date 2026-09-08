@@ -76,3 +76,21 @@ def privacy(request):
             "page_h1": h1,
         },
     )
+
+
+def fleet(request):
+    title, desc, h1 = _seo(
+        "fleet",
+        "Автопарк — ПРИВАТ-ТРАНС",
+        "Власний автопарк і партнерський флот: тенти, рефрижератори, ізотерми, 10 кг–23 т.",
+    )
+    return render(
+        request,
+        "pages/fleet.html",
+        {
+            "page_title": title,
+            "meta_description": desc,
+            "page_h1": h1,
+            "lead_form": LeadForm(),
+        },
+    )

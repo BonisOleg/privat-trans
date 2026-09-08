@@ -1,138 +1,157 @@
 /*
-  Sticky chapters — full-bleed фон закріплюється, контент скролиться поверх.
-  Без background-attachment: fixed (iOS).
-  Glass-панелі БЕЗ .reveal на собі: opacity ламає backdrop-filter.
+  Chapter sections — звичайні секції без sticky і без фонового фото.
 */
 .chapter {
-  display: grid;
   position: relative;
-  min-height: 145vh;
+  isolation: isolate;
 }
-.chapter__bg,
-.chapter__body {
-  grid-area: 1 / 1;
-}
-.chapter__bg {
-  position: sticky;
+.chapter::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
   top: 0;
-  z-index: 0;
-  align-self: start;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
+  height: 1px;
+  z-index: 2;
+  background: linear-gradient(90deg, transparent, var(--color-border) 20%, var(--color-border) 80%, transparent);
   pointer-events: none;
 }
-.chapter__img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center;
-}
-.chapter__scrim {
-  position: absolute;
-  inset: 0;
+.chapter--regions {
   background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.62) 0%, rgba(15, 23, 42, 0.38) 45%, rgba(15, 23, 42, 0.7) 100%);
+    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.05), transparent 55%),
+    radial-gradient(60% 50% at 0% 100%, rgba(245, 158, 11, 0.04), transparent 50%),
+    var(--color-bg);
 }
-.chapter--routes .chapter__scrim {
+.chapter--routes {
   background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.66) 0%, rgba(15, 23, 42, 0.4) 45%, rgba(15, 23, 42, 0.74) 100%);
+    radial-gradient(65% 55% at 0% 0%, rgba(29, 78, 216, 0.06), transparent 55%),
+    var(--color-bg-soft);
 }
-.chapter--fleet .chapter__scrim {
+.chapter--fleet {
   background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.58) 0%, rgba(15, 23, 42, 0.32) 42%, rgba(15, 23, 42, 0.68) 100%);
+    radial-gradient(70% 60% at 100% 100%, rgba(29, 78, 216, 0.05), transparent 55%),
+    var(--color-bg-alt);
 }
 
 .chapter__body {
   position: relative;
   z-index: 1;
-  min-height: 145vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
   padding-block: clamp(3.25rem, 8vw, 6.25rem);
 }
 
-.chapter .section__eyebrow { color: #93C5FD; }
-.chapter .section__title { color: #fff; }
-.chapter .section__lead { color: rgba(245, 247, 250, 0.78); }
+.chapter .section__eyebrow { color: var(--color-accent); }
+.chapter .section__title { color: var(--color-text); }
+.chapter .section__lead { color: var(--color-text-muted); }
 .chapter .section__head { margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem); }
 
 .chapter__surface {
-  background: rgba(243, 245, 248, 0.58);
-  backdrop-filter: blur(22px) saturate(1.2);
-  -webkit-backdrop-filter: blur(22px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.15rem, 3vw, 1.75rem);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   color: var(--color-text);
 }
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .chapter__surface { background: rgba(243, 245, 248, 0.94); }
-}
-
-.chapter__surface .section__eyebrow { color: var(--color-accent); }
-.chapter__surface .section__title { color: var(--color-text); }
-.chapter__surface .section__lead { color: var(--color-text-muted); }
 
 .chapter.chapter--fleet .fleet-card {
-  background: rgba(243, 245, 248, 0.55);
-  backdrop-filter: blur(22px) saturate(1.2);
-  -webkit-backdrop-filter: blur(22px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .chapter.chapter--fleet .fleet-card { background: rgba(243, 245, 248, 0.94); }
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm, 0 8px 24px rgba(15, 23, 42, 0.06));
+  padding: clamp(1.15rem, 3vw, 1.75rem);
 }
 .chapter.chapter--fleet .fleet-card .section__eyebrow { color: var(--color-accent); }
 .chapter.chapter--fleet .fleet-card .section__title { color: var(--color-text); }
 .chapter.chapter--fleet .fleet-card .section__lead { color: var(--color-text-muted); }
 .chapter.chapter--fleet .fleet-fact {
-  background: rgba(245, 247, 250, 0.88);
-  border-color: rgba(226, 232, 240, 0.85);
+  background: var(--color-bg-soft);
+  border-color: var(--color-border);
 }
 
-.chapter .routes-toolbar { margin-bottom: 1rem; }
-.chapter .routes-countries li {
-  background: rgba(245, 247, 250, 0.82);
+.chapter--routes .chapter__body > .container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+  align-self: stretch;
+  box-sizing: border-box;
 }
-.chapter .routes-map {
-  background: rgba(215, 230, 244, 0.88);
+.chapter--routes .chapter__surface--routes-head {
+  margin-bottom: 1.15rem;
+  margin-inline: 0;
+  padding: 0;
+  width: 100%;
+  max-width: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--color-text);
+  text-align: left;
+}
+.chapter--routes .chapter__surface--routes-head .section__eyebrow {
+  color: var(--color-accent);
+}
+.chapter--routes .chapter__surface--routes-head .section__title {
+  color: var(--color-text);
+  text-shadow: none;
+}
+.chapter--routes .chapter__surface--routes-head .section__lead {
+  color: var(--color-text-muted);
+  max-width: 42rem;
+}
+.chapter--routes .chapter__surface--routes-head .section__head {
+  margin-bottom: 1rem;
+  margin-inline: 0;
+  text-align: left;
+}
+.chapter--routes .routes-toolbar {
+  justify-content: flex-start;
+  margin-inline: 0;
+}
+.chapter--routes .routes-stage {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0.75rem;
+  padding-inline: var(--container-pad);
+  overflow: visible;
+  box-sizing: border-box;
+}
+.chapter--routes .routes-stage__inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  overflow: visible;
+}
+.chapter--routes .routes-map {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  background: transparent;
+}
+.chapter--routes .routes-map__base {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+.chapter--routes .routes-toolbar__btn {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+.chapter--routes .routes-toolbar__btn.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.18);
 }
 
 @media (max-width: 767px) {
-  .chapter,
-  .chapter__body {
-    min-height: 125vh;
-  }
-  .chapter__bg {
-    height: 100vh;
-    height: 100dvh;
-  }
   .chapter__body {
     padding-block: clamp(2.5rem, 7vw, 3.5rem);
-  }
-  .chapter__surface,
-  .chapter.chapter--fleet .fleet-card {
-    background: rgba(243, 245, 248, 0.72);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .chapter,
-  .chapter__body {
-    min-height: 0;
-  }
-  .chapter__bg {
-    position: absolute;
-    inset: 0;
-    height: auto;
-  }
-  .chapter__body {
-    justify-content: flex-start;
   }
 }

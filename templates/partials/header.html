@@ -1,17 +1,8 @@
-{% load i18n %}
+{% load i18n site_content %}
 <header class="header" data-header>
   <div class="container header__inner">
     <a class="brand" href="{% url 'pages:home' %}" data-qa="brand">
-      <span class="brand__mark brand__mark--route" aria-hidden="true">
-        <svg class="brand__route" viewBox="0 0 40 40" width="34" height="34" focusable="false">
-          <circle class="brand__route-dot" cx="7" cy="20" r="3.2" />
-          <circle class="brand__route-dot" cx="33" cy="20" r="3.2" />
-          <path class="brand__route-arc" d="M11 20C16 9 24 9 29 20" fill="none" stroke-width="2.2" stroke-linecap="round" />
-          <path class="brand__route-arc brand__route-arc--soft" d="M11 20C16 31 24 31 29 20" fill="none" stroke-width="1.6" stroke-linecap="round" />
-          <text class="brand__route-label" x="7" y="33" text-anchor="middle">EU</text>
-          <text class="brand__route-label" x="33" y="33" text-anchor="middle">AS</text>
-        </svg>
-      </span>
+      {% include "partials/brand_mark.html" %}
       <span class="brand__text">
         <span>{{ site_settings.brand_name }}</span>
         <span class="brand__slogan">{{ site_settings.slogan }}</span>
@@ -20,6 +11,7 @@
     <nav class="nav" aria-label="{% trans 'Основна навігація' %}">
       <ul class="nav__list">
         <li><a class="nav__link" href="{% url 'services:list' %}" data-qa="nav-services">{% trans "Послуги" %}</a></li>
+        <li><a class="nav__link" href="{% url 'pages:fleet' %}" data-qa="nav-fleet">{% trans "Автопарк" %}</a></li>
         <li><a class="nav__link" href="{% url 'pages:about' %}" data-qa="nav-about">{% trans "Про нас" %}</a></li>
         <li><a class="nav__link" href="{% url 'faq:list' %}" data-qa="nav-faq">FAQ</a></li>
         <li><a class="nav__link" href="{% url 'calculator:page' %}" data-qa="nav-calculator">{% trans "Калькулятор" %}</a></li>
@@ -39,7 +31,7 @@
       </a>
       {% endif %}
       {% include "partials/lang_switch.html" %}
-      <a class="btn btn--primary btn--sm" href="{% url 'pages:home' %}#lead-form" data-qa="cta-lead">{% trans "Залишити заявку" %}</a>
+      <a class="btn btn--primary btn--sm" href="{% url 'pages:home' %}#lead-form" data-qa="cta-lead">{% block_plain 'site' 'cta_lead' %}</a>
       <button type="button" class="menu-toggle" data-drawer-toggle aria-expanded="false" aria-controls="mobile-drawer" aria-label="{% trans 'Відкрити меню' %}" data-qa="menu-toggle">
         <span class="menu-toggle__box"><span></span><span></span><span></span></span>
       </button>

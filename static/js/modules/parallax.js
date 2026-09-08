@@ -15,7 +15,7 @@ export function initParallax() {
     });
   });
 
-  document.querySelectorAll(".section--alt, .section--soft").forEach((section) => {
+  document.querySelectorAll(".section--alt, .section--soft, .section--pattern").forEach((section) => {
     if (section.querySelector("[data-parallax-layer]")) return;
     const layer = document.createElement("div");
     layer.className = "section__parallax-layer";

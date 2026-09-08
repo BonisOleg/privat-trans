@@ -3,7 +3,9 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import include, path
+from django.views.generic.base import RedirectView
 
 from src.core.sitemaps import sitemaps
 from src.core.views import healthz
@@ -14,6 +16,14 @@ urlpatterns = [
     path("tinymce/", include("tinymce.urls")),
     path("healthz/", healthz, name="healthz"),
     path("i18n/setlang/", set_language, name="set_language"),
+    path(
+        "favicon.ico",
+        RedirectView.as_view(
+            url=staticfiles_storage.url("favicon.ico"),
+            permanent=False,
+        ),
+        name="favicon",
+    ),
     path(
         "sitemap.xml",
         sitemap,

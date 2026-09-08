@@ -5,27 +5,18 @@ export function initHeaderScroll() {
   const hero = document.querySelector("[data-hero]");
 
   const update = () => {
-    const y = window.scrollY;
-    header.classList.toggle("is-scrolled", y > 8);
-
-    if (!hero) {
-      header.classList.remove("is-over-hero");
-      return;
-    }
-
-    const headerH = header.offsetHeight || 76;
-    const heroH = hero.offsetHeight || 0;
-    const leaveAt = Math.max(heroH - headerH - 48, 64);
-    header.classList.toggle("is-over-hero", y < leaveAt);
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
   };
+
+  if (hero) {
+    header.classList.add("is-over-hero", "header--ready");
+  } else {
+    header.classList.remove("is-over-hero");
+  }
 
   update();
   window.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update, { passive: true });
-
-  if (hero) {
-    header.classList.add("header--ready");
-  }
 }
 
 export function initDrawer() {
@@ -62,20 +53,40 @@ export function initDrawer() {
   });
 }
 
-export function initFaqAccordion() {
-  document.querySelectorAll("[data-faq]").forEach((group) => {
-    const items = group.querySelectorAll(".faq-item");
+export function initFaqAccordion(root = document) {
+  const scope = root instanceof Element ? root : document;
+  const groups = [];
+  if (scope.matches?.("[data-faq]")) {
+    groups.push(scope);
+  }
+  scope.querySelectorAll?.("[data-faq]").forEach((group) => groups.push(group));
+
+  groups.forEach((group) => {
+    if (group.dataset.faqReady === "true") return;
+    group.dataset.faqReady = "true";
+    group.classList.add("faq-list");
+
+    const items = [...group.querySelectorAll(".faq-item")];
+    if (!items.length) return;
+
+    const setOpen = (item, open) => {
+      item.setAttribute("data-open", open ? "true" : "false");
+      item.querySelector(".faq-item__q")?.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+
+    const hasOpen = items.some((item) => item.getAttribute("data-open") === "true");
+    if (!hasOpen) {
+      setOpen(items[0], true);
+    }
+
     items.forEach((item) => {
       const btn = item.querySelector(".faq-item__q");
-      btn?.addEventListener("click", () => {
-        const isOpen = item.getAttribute("data-open") === "true";
-        items.forEach((other) => {
-          other.setAttribute("data-open", "false");
-          other.querySelector(".faq-item__q")?.setAttribute("aria-expanded", "false");
-        });
-        if (!isOpen) {
-          item.setAttribute("data-open", "true");
-          btn.setAttribute("aria-expanded", "true");
+      if (!btn) return;
+      btn.addEventListener("click", () => {
+        const willClose = item.getAttribute("data-open") === "true";
+        items.forEach((other) => setOpen(other, false));
+        if (!willClose) {
+          setOpen(item, true);
         }
       });
     });
@@ -118,25 +129,23 @@ export function initHeroVideo() {
 export function initRoutesFilter() {
   const map = document.querySelector("[data-routes-map]");
   const buttons = document.querySelectorAll("[data-routes-filter]");
-  const countries = document.querySelectorAll("[data-routes-countries] [data-region]");
   if (!map || !buttons.length) return;
 
   const applyFilter = (region) => {
-    map.classList.remove("is-europe", "is-asia");
-    if (region === "europe") map.classList.add("is-europe");
-    if (region === "asia") map.classList.add("is-asia");
+    const safeRegion = region === "europe" || region === "asia" ? region : "all";
+    map.dataset.filter = safeRegion;
+    map.classList.remove("is-europe", "is-asia", "is-all");
+    map.classList.add(safeRegion === "all" ? "is-all" : `is-${safeRegion}`);
 
-    countries.forEach((chip) => {
-      const match = region === "all" || chip.getAttribute("data-region") === region;
-      chip.classList.toggle("is-active", match && region !== "all");
-      chip.classList.toggle("is-dim", region !== "all" && !match);
+    buttons.forEach((btn) => {
+      const active = (btn.getAttribute("data-routes-filter") || "all") === safeRegion;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
   };
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((other) => other.classList.remove("is-active"));
-      btn.classList.add("is-active");
       applyFilter(btn.getAttribute("data-routes-filter") || "all");
     });
   });

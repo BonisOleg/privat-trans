@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n site_content %}
 <form class="lead-form" method="post" action="{% url 'leads:create' %}" data-lead-form data-qa="lead-form"
       hx-post="{% url 'leads:create' %}" hx-target="#lead-form-slot" hx-swap="innerHTML">
   {% csrf_token %}
@@ -43,6 +43,6 @@
     <span>{% trans "Погоджуюсь на обробку персональних даних згідно" %} <a href="{% url 'pages:privacy' %}">{% trans "політики конфіденційності" %}</a>.</span>
   </label>
   {% if lead_form.consent.errors %}<p class="field__error is-shown">{{ lead_form.consent.errors.0 }}</p>{% endif %}
-  <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="lead-submit">{% trans "Надіслати заявку" %}</button>
+  <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="lead-submit">{% block_plain 'site' 'lead_submit' %}</button>
   <datalist id="pt-cities" data-cities></datalist>
 </form>

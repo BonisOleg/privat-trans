@@ -12,12 +12,12 @@ from src.core.block_defaults import (
     BLOCK_DEFAULTS,
     INLINE_KEYS,
     MULTILINE_KEYS,
-    TINYMCE_KEYS,
     is_visibility_key,
+    uses_tinymce,
 )
 from src.core.site_blocks import (
     invalidate_site_blocks_cache,
-    load_section_blocks,
+    load_section_pairs,
     normalize_cms_plain,
     normalize_cms_text,
 )
@@ -29,12 +29,14 @@ def _field_name(page: str, key: str, suffix: str) -> str:
 
 
 def _widget_for_key(key: str):
-    if key in TINYMCE_KEYS:
-        height = 220 if key in {"about_infra_body", "about_geo_body", "privacy_body"} else 140
+    if uses_tinymce(key):
+        height = 220 if key.endswith("_body") or key in {"privacy_body"} else 140
         return TinyMCE(attrs={"cols": 80, "rows": 4}, mce_attrs={"height": height})
-    if key in MULTILINE_KEYS:
-        return CmsAdminTextareaWidget(attrs={"rows": 4})
-    if key in INLINE_KEYS:
+    if key in MULTILINE_KEYS or key.startswith("hero_"):
+        if key in INLINE_KEYS:
+            return CmsAdminTextInputWidget()
+        return CmsAdminTextareaWidget(attrs={"rows": 4 if key in MULTILINE_KEYS else 2})
+    if key in INLINE_KEYS or key.endswith("_slug"):
         return CmsAdminTextInputWidget()
     return CmsAdminTextareaWidget(attrs={"rows": 2})
 
@@ -67,7 +69,7 @@ class SitePageContentForm(forms.Form):
 
             uk_name = _field_name(page, key, "text_uk")
             en_name = _field_name(page, key, "text_en")
-            allow_html = key in TINYMCE_KEYS
+            allow_html = uses_tinymce(key)
             uk_initial = block.text_uk if allow_html else normalize_cms_plain(block.text_uk)
             en_initial = block.text_en if allow_html else normalize_cms_plain(block.text_en)
             self.fields[uk_name] = forms.CharField(
@@ -111,7 +113,7 @@ class SitePageContentForm(forms.Form):
             if is_visibility_key(key):
                 continue
             block = self.blocks[key]
-            normalize = normalize_cms_text if key in TINYMCE_KEYS else normalize_cms_plain
+            normalize = normalize_cms_text if uses_tinymce(key) else normalize_cms_plain
             block.text_uk = normalize(cleaned.get(_field_name(page, key, "text_uk"), ""))
             block.text_en = normalize(cleaned.get(_field_name(page, key, "text_en"), ""))
             block.save(update_fields=["text_uk", "text_en"])
@@ -125,10 +127,10 @@ def site_content_section_view(request, page_slug: str, section_slug: str, *, mod
         messages.error(request, "Секцію не знайдено.")
         return HttpResponseRedirect(reverse("admin:index"))
 
-    keys = [key for _, key in section.blocks]
+    pairs = list(section.blocks)
     if section.visibility_key:
-        keys = [section.visibility_key, *keys]
-    blocks = load_section_blocks(section.page_slug, keys)
+        pairs = [(section.page_slug, section.visibility_key), *pairs]
+    blocks = load_section_pairs(pairs)
 
     if request.method == "POST":
         form = SitePageContentForm(section, blocks, request.POST, request.FILES)

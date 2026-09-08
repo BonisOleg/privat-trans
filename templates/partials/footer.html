@@ -1,9 +1,12 @@
-{% load i18n %}
+{% load i18n site_content %}
 <footer class="footer">
   <div class="container footer__grid">
     <div>
-      <div class="footer__brand"><span class="brand__mark" aria-hidden="true">ПТ</span>{{ site_settings.brand_name }}</div>
-      <p class="footer__lead">{% trans "20 р на ринку міжнародних перевезень. Повний логістичний супровід на всіх етапах роботи з вантажем." %}</p>
+      <div class="footer__brand">
+        {% include "partials/brand_mark.html" with mark_class="brand__mark--on-dark" %}
+        {{ site_settings.brand_name }}
+      </div>
+      <p class="footer__lead">{% block_plain 'site' 'footer_lead' %}</p>
       <div class="footer__legal">
         <p>{{ site_settings.address }}</p>
         <p><a href="tel:{{ site_settings.phone_href }}">{{ site_settings.phone }}</a> · <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
@@ -15,6 +18,7 @@
       <div class="footer__heading">{% trans "Компанія" %}</div>
       <ul class="footer__list">
         <li><a href="{% url 'pages:about' %}">{% trans "Про нас" %}</a></li>
+        <li><a href="{% url 'pages:fleet' %}">{% trans "Автопарк" %}</a></li>
         <li><a href="{% url 'faq:list' %}">FAQ</a></li>
         <li><a href="{% url 'calculator:page' %}">{% trans "Калькулятор" %}</a></li>
         <li><a href="{% url 'pages:contacts' %}">{% trans "Контакти" %}</a></li>
@@ -38,6 +42,19 @@
   </div>
   <div class="container footer__bottom">
     <span>© {% now "Y" %} {{ site_settings.brand_name }}</span>
-    <span>PrometeyLabs</span>
+    <p class="footer-credit">
+      {% trans "Дизайн і розробка" %}
+      {% if request.resolver_match.url_name == "home" %}
+        <a
+          class="footer-credit__link"
+          href="https://www.prometeylabs.com/corporate-website-v2/"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          data-qa="footer-credit"
+        >Prometey<span class="footer-credit__accent">Labs</span></a>
+      {% else %}
+        <span class="footer-credit__name">Prometey<span class="footer-credit__accent">Labs</span></span>
+      {% endif %}
+    </p>
   </div>
 </footer>

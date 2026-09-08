@@ -53,6 +53,7 @@
 .hero__form-card {
   width: 100%;
   max-width: 26rem;
+  min-width: 0;
   padding: 1.5rem;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -257,7 +258,6 @@
 .corridor-bridge {
   position: relative;
   z-index: 2;
-  border-block: 1px solid var(--color-border);
 }
 .corridor-bridge__inner {
   display: grid;
@@ -465,6 +465,13 @@
     radial-gradient(80% 60% at 10% 0%, rgba(29, 78, 216, 0.28), transparent 55%),
     var(--color-bg-dark);
 }
+.lead-section .section__head {
+  margin-inline: auto;
+  text-align: center;
+}
+.lead-section .calculator-card--lead {
+  margin-inline: auto;
+}
 .lead-section .calculator-card--lead .field__label { color: var(--color-text-muted); }
 .lead-section .calculator-card--lead .checkbox { color: var(--color-text-muted); }
 .lead-section .calculator-card--lead .checkbox a { color: var(--color-accent); }
@@ -531,8 +538,8 @@
 @media (hover: hover) and (pointer: fine) {
   .advantage-card:hover {
     border-color: rgba(29, 78, 216, 0.28);
-    box-shadow: var(--shadow-sm);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
   }
 }
 .advantage-card__icon {
@@ -554,7 +561,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 .routes-toolbar__btn {
   padding: 0.45rem 0.9rem;
@@ -563,14 +570,15 @@
   font-weight: 600;
   font-size: 0.85rem;
   color: var(--color-text-muted);
+  min-height: 44px;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
 }
 .routes-toolbar__btn.is-active {
   background: var(--color-accent);
   color: var(--color-on-accent);
   border-color: var(--color-accent);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.22);
 }
-.routes-map.is-europe .routes-map__overlay { filter: saturate(1.15) contrast(1.05); }
-.routes-map.is-asia .routes-map__overlay { filter: hue-rotate(-8deg) saturate(1.2); }
 .routes-countries {
   margin-top: 1rem;
   display: flex;
@@ -580,31 +588,58 @@
   padding: 0;
 }
 .routes-countries li {
-  font-size: 0.75rem;
+  display: contents;
+}
+.routes-countries__chip {
+  font-size: 0.72rem;
   font-weight: 600;
-  padding: 0.28rem 0.6rem;
+  padding: 0.32rem 0.62rem;
   border-radius: var(--radius-pill);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
-  transition: opacity var(--t-fast), background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  min-height: 36px;
+  transition: opacity var(--t-fast), background var(--t-fast), border-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
 }
-.routes-countries li.is-active {
+.routes-countries__chip.is-active {
   background: var(--color-accent-soft);
   border-color: rgba(29, 78, 216, 0.28);
   color: var(--color-accent);
+  transform: translateY(-1px);
 }
-.routes-countries li.is-dim {
-  opacity: 0.35;
+.routes-countries__chip.is-dim {
+  opacity: 0.32;
+}
+.routes-countries__chip[data-region="asia"].is-active {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(217, 119, 6, 0.35);
+  color: #B45309;
 }
 @media (hover: hover) and (pointer: fine) {
-  .routes-map { transform: translateZ(0); transition: transform var(--motion-soft) var(--ease-out); }
-  .routes-map:hover { transform: scale(1.015); }
+  .routes-map__base {
+    transition: filter var(--motion-soft) var(--ease-out);
+  }
+  .routes-map:hover .routes-map__base {
+    filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.42));
+  }
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
   .hero__inner { padding-block: clamp(2.75rem, 7vw, 4.5rem) 2.25rem; gap: 1.75rem; }
-  .hero__form-card { max-width: 28rem; }
+  .hero__form-card {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 0.85rem;
+    align-items: end;
+  }
+  .hero__form-title {
+    grid-column: 1 / -1;
+    margin-bottom: 0.15rem;
+  }
+  .hero__form .field { margin-bottom: 0; }
+  .hero__form .btn--block { grid-column: 1 / -1; }
 }
 
 @media (max-width: 767px) {

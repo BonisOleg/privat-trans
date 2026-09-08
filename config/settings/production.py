@@ -16,9 +16,13 @@ DATABASES = {
     )
 }
 
+USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# TLS terminates in nginx later. Gunicorn stays HTTP so /healthz/ is not 301.
+SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=False, cast=bool)
+SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=False, cast=bool)
+CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=False, cast=bool)
+SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", default=0, cast=int)
 SESSION_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_TRUSTED_ORIGINS = config(

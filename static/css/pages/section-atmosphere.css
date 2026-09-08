@@ -1,0 +1,180 @@
+/*
+  Атмосфера секцій головної: градієнти + SVG-коридори, без фото.
+  Фон дублюється на секцію і на .section__parallax-layer —
+  паралакс робить секцію прозорою, а без JS лишається фон на самій секції.
+*/
+
+#scenarios {
+  --atmosphere:
+    url("../../media/patterns/arcs-light.svg") no-repeat 50% -8% / min(1400px, 165%) auto,
+    radial-gradient(80% 70% at 0% 0%, rgba(29, 78, 216, 0.22), transparent 52%),
+    radial-gradient(70% 60% at 100% 100%, rgba(14, 165, 233, 0.16), transparent 48%),
+    #c5d3e6;
+  background: var(--atmosphere);
+}
+#scenarios .section__parallax-layer { background: var(--atmosphere); }
+
+.chapter--regions {
+  background:
+    url("../../media/patterns/arcs-light.svg") no-repeat 50% 12% / min(1400px, 170%) auto,
+    radial-gradient(70% 80% at 0% 30%, rgba(29, 78, 216, 0.16), transparent 55%),
+    radial-gradient(70% 80% at 100% 70%, rgba(217, 119, 6, 0.12), transparent 52%),
+    #d0dcec;
+}
+
+#corridor-bridge {
+  background:
+    url("../../media/patterns/grid-dark.svg") repeat,
+    radial-gradient(90% 70% at 80% 0%, rgba(29, 78, 216, 0.35), transparent 50%),
+    linear-gradient(165deg, #13233f 0%, #0f172a 55%, #0b1220 100%);
+  color: var(--color-text-inverse);
+  border-block: 0;
+}
+#corridor-bridge .section__eyebrow { color: #93c5fd; }
+#corridor-bridge .section__title { color: var(--color-text-inverse); }
+#corridor-bridge .section__lead { color: var(--color-text-inverse-muted); }
+#corridor-bridge .corridor-bridge__facts li {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+#corridor-bridge .corridor-bridge__facts strong { color: #fff; }
+#corridor-bridge .corridor-bridge__facts span { color: var(--color-text-inverse-muted); }
+
+.chapter--routes {
+  background:
+    url("../../media/patterns/grid-dark.svg") repeat,
+    radial-gradient(80% 60% at 50% 0%, rgba(56, 189, 248, 0.16), transparent 48%),
+    radial-gradient(70% 50% at 100% 100%, rgba(29, 78, 216, 0.22), transparent 46%),
+    #0b1220;
+}
+.chapter--routes::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.14) 80%, transparent);
+}
+.chapter--routes .chapter__surface--routes-head,
+.chapter--routes .chapter__surface--routes-head .section__title,
+.chapter--routes .section__title {
+  color: var(--color-text-inverse);
+  text-shadow: none;
+}
+.chapter--routes .chapter__surface--routes-head .section__eyebrow,
+.chapter--routes .section__eyebrow {
+  color: #93c5fd;
+}
+.chapter--routes .chapter__surface--routes-head .section__lead,
+.chapter--routes .section__lead {
+  color: var(--color-text-inverse-muted);
+}
+.chapter--routes .routes-toolbar__btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: rgba(245, 247, 250, 0.82);
+}
+.chapter--routes .routes-toolbar__btn.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.35);
+}
+@media (hover: hover) and (pointer: fine) {
+  .chapter--routes .routes-toolbar__btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+  .chapter--routes .routes-toolbar__btn.is-active:hover {
+    background: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+}
+
+#services {
+  --atmosphere:
+    url("../../media/patterns/hubs-light.svg") repeat,
+    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.12), transparent 50%),
+    #c8d6e8;
+  background: var(--atmosphere);
+}
+#services .section__parallax-layer { background: var(--atmosphere); }
+
+.chapter--fleet {
+  background:
+    url("../../media/patterns/grid-dark.svg") repeat,
+    radial-gradient(80% 70% at 100% 0%, rgba(29, 78, 216, 0.28), transparent 52%),
+    linear-gradient(160deg, #16213b 0%, #0f172a 100%);
+}
+.chapter--fleet::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12) 20%, rgba(255, 255, 255, 0.12) 80%, transparent);
+}
+.chapter--fleet .fleet-card {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+}
+
+#advantages {
+  --atmosphere:
+    url("../../media/patterns/hubs-light.svg") repeat,
+    radial-gradient(80% 70% at 0% 100%, rgba(14, 165, 233, 0.12), transparent 50%),
+    #cdd9ea;
+  background: var(--atmosphere);
+}
+#advantages .section__parallax-layer { background: var(--atmosphere); }
+
+#process {
+  --atmosphere:
+    url("../../media/patterns/lanes-light.svg") repeat,
+    radial-gradient(90% 80% at 50% 0%, rgba(29, 78, 216, 0.1), transparent 55%),
+    #d0dcea;
+  background: var(--atmosphere);
+}
+#process .section__parallax-layer { background: var(--atmosphere); }
+
+#calculator-teaser {
+  --atmosphere:
+    url("../../media/patterns/arcs-light.svg") no-repeat 110% 120% / min(1100px, 140%) auto,
+    radial-gradient(80% 70% at 0% 0%, rgba(29, 78, 216, 0.16), transparent 50%),
+    #c3d2e6;
+  background: var(--atmosphere);
+}
+#calculator-teaser .section__parallax-layer { background: var(--atmosphere); }
+
+#faq {
+  --atmosphere:
+    url("../../media/patterns/hubs-light.svg") repeat,
+    #d2dcec;
+  background: var(--atmosphere);
+}
+#faq .section__parallax-layer { background: var(--atmosphere); }
+
+#reviews {
+  --atmosphere:
+    url("../../media/patterns/arcs-light.svg") no-repeat 50% 110% / min(1200px, 150%) auto,
+    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.1), transparent 48%),
+    #c6d4e6;
+  background: var(--atmosphere);
+}
+#reviews .section__parallax-layer { background: var(--atmosphere); }
+
+#partners {
+  --atmosphere:
+    url("../../media/patterns/lanes-light.svg") repeat,
+    #d0dbea;
+  background: var(--atmosphere);
+}
+#partners .section__parallax-layer { background: var(--atmosphere); }
+
+#career-teaser {
+  --atmosphere:
+    url("../../media/patterns/hubs-light.svg") repeat,
+    radial-gradient(80% 70% at 100% 50%, rgba(29, 78, 216, 0.14), transparent 50%),
+    #c2d0e4;
+  background: var(--atmosphere);
+}
+#career-teaser .section__parallax-layer { background: var(--atmosphere); }
+
+.lead-section {
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    url("../../media/patterns/grid-dark.svg") repeat,
+    radial-gradient(80% 60% at 10% 0%, rgba(29, 78, 216, 0.32), transparent 55%),
+    var(--color-bg-dark);
+}

@@ -132,6 +132,7 @@ FAQ = [
 SEO = [
     ("home", "ПРИВАТ-ТРАНС — комплексна доставка Європа ↔️ Україна ↔️ Азія", "PRIVAT-TRANS — freight Europe ↔ Ukraine ↔ Asia"),
     ("about", "Про нас — ПРИВАТ-ТРАНС з 2007 року", "About PRIVAT-TRANS — since 2007"),
+    ("fleet", "Автопарк — ПРИВАТ-ТРАНС", "Fleet — PRIVAT-TRANS"),
     ("services", "Послуги міжнародних перевезень", "International freight services"),
     ("faq", "Питання про перевезення — ПРИВАТ-ТРАНС", "Freight FAQ — PRIVAT-TRANS"),
     ("calculator", "Калькулятор орієнтовної вартості", "Indicative freight calculator"),

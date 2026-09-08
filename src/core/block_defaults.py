@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from src.core.block_defaults_fleet import (
+    FLEET_BLOCK_DEFAULTS,
+    FLEET_INLINE_KEYS,
+    FLEET_MULTILINE_KEYS,
+    FLEET_TINYMCE_KEYS,
+)
+from src.core.block_defaults_home_body import HOME_BODY_BLOCK_DEFAULTS
+
 BLOCK_DEFAULTS: dict[tuple[str, str], dict] = {
     # —— Home / Hero ——
     ("home", "hero_section_visible"): {
@@ -261,8 +269,10 @@ BLOCK_DEFAULTS: dict[tuple[str, str], dict] = {
         "text_uk": "Мок-формула для демонстрації. Не є офертою і не тарифною сіткою Замовника.",
         "text_en": "Demo formula only. Not an offer and not the client's tariff grid.",
         "sort_order": 10,
-    },
+    }
 }
+BLOCK_DEFAULTS.update(FLEET_BLOCK_DEFAULTS)
+BLOCK_DEFAULTS.update(HOME_BODY_BLOCK_DEFAULTS)
 
 INLINE_KEYS = frozenset(
     {
@@ -270,6 +280,9 @@ INLINE_KEYS = frozenset(
         "hero_fact_year",
         "hero_fact_rest",
         "hero_form_title",
+        "hero_cta_call",
+        "hero_cta_telegram",
+        "hero_submit",
         "about_infra_title",
         "about_geo_title",
         "about_career_title",
@@ -282,7 +295,7 @@ INLINE_KEYS = frozenset(
         "scenario_3_title",
         "scenario_3_slug",
     }
-)
+) | FLEET_INLINE_KEYS
 
 MULTILINE_KEYS = frozenset(
     {
@@ -300,7 +313,7 @@ MULTILINE_KEYS = frozenset(
         "scenario_2_text",
         "scenario_3_text",
     }
-)
+) | FLEET_MULTILINE_KEYS
 
 TINYMCE_KEYS = frozenset(
     {
@@ -312,8 +325,17 @@ TINYMCE_KEYS = frozenset(
         "scenario_2_text",
         "scenario_3_text",
     }
-)
+) | FLEET_TINYMCE_KEYS
 
 
 def is_visibility_key(key: str) -> bool:
     return key.endswith("_visible")
+
+
+def uses_tinymce(key: str) -> bool:
+    """Усі CMS-поля з редактором, крім Hero, visibility і slug."""
+    if is_visibility_key(key) or key.endswith("_slug"):
+        return False
+    if key.startswith("hero_"):
+        return False
+    return True

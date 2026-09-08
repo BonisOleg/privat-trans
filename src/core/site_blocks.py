@@ -59,8 +59,13 @@ def ensure_block(page: str, key: str) -> SiteBlock:
 
 
 def load_section_blocks(page: str, keys: list[str]) -> dict[str, SiteBlock]:
-    result = {}
-    for key in keys:
+    """Ensure blocks for a single page (legacy helper). Prefer load_section_pairs."""
+    return load_section_pairs([(page, key) for key in keys])
+
+
+def load_section_pairs(pairs: list[tuple[str, str]]) -> dict[str, SiteBlock]:
+    result: dict[str, SiteBlock] = {}
+    for page, key in pairs:
         result[key] = ensure_block(page, key)
     return result
 

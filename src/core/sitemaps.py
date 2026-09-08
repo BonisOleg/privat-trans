@@ -13,6 +13,7 @@ class StaticViewSitemap(Sitemap):
         return [
             "pages:home",
             "pages:about",
+            "pages:fleet",
             "pages:contacts",
             "pages:privacy",
             "services:list",

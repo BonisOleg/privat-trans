@@ -12,11 +12,18 @@
 </header>
 <section class="section">
   <div class="container">
-    <div data-faq>
+    <div class="faq-list" data-faq>
       {% for item in faq_items %}
-      <article class="faq-item" data-open="false">
-        <button type="button" class="faq-item__q" aria-expanded="false">{{ item.question }}<span class="faq-item__chevron">▾</span></button>
-        <div class="faq-item__wrap"><div class="faq-item__answer">{{ item.answer|safe }}</div></div>
+      <article class="faq-item" data-open="{% if forloop.first %}true{% else %}false{% endif %}">
+        <button type="button" class="faq-item__q" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+          <span class="faq-item__question">{{ item.question }}</span>
+          {% include "partials/faq_chevron.html" %}
+        </button>
+        <div class="faq-item__wrap">
+          <div class="faq-item__panel">
+            <div class="faq-item__answer">{{ item.answer|safe }}</div>
+          </div>
+        </div>
       </article>
       {% endfor %}
     </div>
