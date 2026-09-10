@@ -103,13 +103,9 @@
   max-width: 42rem;
 }
 .chapter--routes .chapter__surface--routes-head .section__head {
-  margin-bottom: 1rem;
+  margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
   margin-inline: 0;
   text-align: left;
-}
-.chapter--routes .routes-toolbar {
-  justify-content: flex-start;
-  margin-inline: 0;
 }
 .chapter--routes .routes-stage {
   width: 100%;
@@ -137,17 +133,6 @@
   height: auto;
   object-fit: contain;
   object-position: center;
-}
-.chapter--routes .routes-toolbar__btn {
-  background: var(--color-bg);
-  border-color: var(--color-border);
-  color: var(--color-text-muted);
-}
-.chapter--routes .routes-toolbar__btn.is-active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
-  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.18);
 }
 
 @media (max-width: 767px) {

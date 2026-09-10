@@ -22,33 +22,37 @@
     #d0dcec;
 }
 
+/* Коридор: editorial dark без сітки — шов перед «технічними» маршрутами */
 #corridor-bridge {
   background:
-    url("../../media/patterns/grid-dark.svg") repeat,
-    radial-gradient(90% 70% at 80% 0%, rgba(29, 78, 216, 0.35), transparent 50%),
-    linear-gradient(165deg, #13233f 0%, #0f172a 55%, #0b1220 100%);
+    radial-gradient(65% 70% at 0% 40%, rgba(196, 165, 116, 0.12), transparent 55%),
+    radial-gradient(75% 55% at 100% 0%, rgba(29, 78, 216, 0.22), transparent 52%),
+    linear-gradient(180deg, #152338 0%, #0f172a 100%);
   color: var(--color-text-inverse);
   border-block: 0;
+  border-bottom: 1px solid rgba(196, 165, 116, 0.18);
 }
-#corridor-bridge .section__eyebrow { color: #93c5fd; }
+#corridor-bridge .section__eyebrow { color: #d2c0a0; }
 #corridor-bridge .section__title { color: var(--color-text-inverse); }
 #corridor-bridge .section__lead { color: var(--color-text-inverse-muted); }
 #corridor-bridge .corridor-bridge__facts li {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 165, 116, 0.22);
+  box-shadow: inset 3px 0 0 rgba(196, 165, 116, 0.55);
 }
 #corridor-bridge .corridor-bridge__facts strong { color: #fff; }
 #corridor-bridge .corridor-bridge__facts span { color: var(--color-text-inverse-muted); }
 
+/* Маршрути: ops-сітка + холодні світіння — контраст до editorial-коридору */
 .chapter--routes {
   background:
     url("../../media/patterns/grid-dark.svg") repeat,
-    radial-gradient(80% 60% at 50% 0%, rgba(56, 189, 248, 0.16), transparent 48%),
-    radial-gradient(70% 50% at 100% 100%, rgba(29, 78, 216, 0.22), transparent 46%),
-    #0b1220;
+    radial-gradient(85% 55% at 50% -8%, rgba(56, 189, 248, 0.18), transparent 46%),
+    radial-gradient(70% 50% at 100% 100%, rgba(29, 78, 216, 0.28), transparent 48%),
+    #080e1a;
 }
 .chapter--routes::before {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.14) 80%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(147, 197, 253, 0.22) 20%, rgba(147, 197, 253, 0.22) 80%, transparent);
 }
 .chapter--routes .chapter__surface--routes-head,
 .chapter--routes .chapter__surface--routes-head .section__title,
@@ -63,28 +67,6 @@
 .chapter--routes .chapter__surface--routes-head .section__lead,
 .chapter--routes .section__lead {
   color: var(--color-text-inverse-muted);
-}
-.chapter--routes .routes-toolbar__btn {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.22);
-  color: rgba(245, 247, 250, 0.82);
-}
-.chapter--routes .routes-toolbar__btn.is-active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
-  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.35);
-}
-@media (hover: hover) and (pointer: fine) {
-  .chapter--routes .routes-toolbar__btn:hover {
-    background: rgba(255, 255, 255, 0.14);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.38);
-  }
-  .chapter--routes .routes-toolbar__btn.is-active:hover {
-    background: var(--color-accent-hover);
-    border-color: var(--color-accent-hover);
-  }
 }
 
 #services {

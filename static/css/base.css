@@ -158,10 +158,15 @@ input, select, textarea { font: inherit; color: inherit; }
 }
 body.is-locked { overflow: hidden; }
 
-.btn--primary { background: var(--color-accent); color: var(--color-on-accent); box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06); }
+.btn--primary {
+  background: var(--color-cta);
+  color: var(--color-on-cta);
+  box-shadow: 0 1px 2px rgba(26, 21, 32, 0.08);
+}
 .btn--primary:hover, .btn--primary:focus-visible {
-  background: var(--color-accent-hover);
-  box-shadow: 0 10px 24px rgba(29, 78, 216, 0.28);
+  background: var(--color-cta-hover);
+  color: var(--color-on-cta);
+  box-shadow: 0 10px 24px rgba(176, 143, 92, 0.35);
 }
 
 .btn--secondary { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
@@ -180,7 +185,7 @@ body.is-locked { overflow: hidden; }
 .btn--block { width: 100%; }
 .btn--sm { padding: 0.6rem 1.1rem; font-size: 0.875rem; min-height: 38px; }
 
-/* ---------- Header (Corridor glass over hero → light after scroll) ---------- */
+/* ---------- Header (темний glass на головній зі старту; світлий — на сторінках без hero) ---------- */
 .header {
   position: sticky;
   top: 0;
@@ -203,21 +208,21 @@ body:not(:has([data-hero])) .header.is-scrolled {
 }
 .header.is-over-hero,
 body:has([data-hero]) .header {
-  background: rgba(15, 23, 42, 0.38);
+  background: rgba(15, 23, 42, 0.82);
   backdrop-filter: blur(16px) saturate(1.12);
   -webkit-backdrop-filter: blur(16px) saturate(1.12);
-  border-bottom-color: rgba(255, 255, 255, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
   box-shadow: none;
   color: #fff;
 }
 .header.is-over-hero.is-scrolled,
 body:has([data-hero]) .header.is-scrolled {
-  background: rgba(15, 23, 42, 0.78);
-  border-bottom-color: rgba(255, 255, 255, 0.16);
+  background: rgba(15, 23, 42, 0.88);
+  border-bottom-color: rgba(255, 255, 255, 0.14);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .header.is-over-hero,
-  body:has([data-hero]) .header { background: rgba(15, 23, 42, 0.92); }
+  body:has([data-hero]) .header { background: rgba(15, 23, 42, 0.94); }
 }
 
 .header__inner {

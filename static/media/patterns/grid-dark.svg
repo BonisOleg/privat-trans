@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <g fill="none" stroke="#fff" stroke-width="1">
+    <path opacity=".08" d="M90 0v180M0 90h180"/>
+    <circle opacity=".06" cx="90" cy="90" r="36"/>
+    <circle opacity=".045" cx="90" cy="90" r="72"/>
+    <path opacity=".07" d="M16 16h14M16 16v14M164 16h-14M164 16v14M16 164h14M16 164v-14M164 164h-14M164 164v-14"/>
+  </g>
+</svg>

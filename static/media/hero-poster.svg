@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1B2436"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <g stroke="#7FA3FF" stroke-width="2" stroke-dasharray="10 12" opacity="0.35" fill="none">
+    <path d="M0,560 C400,500 900,620 1600,540"/>
+    <path d="M0,610 C500,660 1000,560 1600,640"/>
+  </g>
+  <rect x="0" y="640" width="1600" height="260" fill="url(#road)"/>
+  <line x1="0" y1="770" x2="1600" y2="770" stroke="#4C5A78" stroke-width="6" stroke-dasharray="40 34"/>
+  <g transform="translate(560,600)" fill="#0B1220">
+    <rect x="0" y="40" width="230" height="90" rx="10"/>
+    <rect x="230" y="60" width="90" height="70" rx="8"/>
+    <rect x="248" y="72" width="46" height="30" fill="#1D4ED8" opacity="0.7"/>
+    <circle cx="60" cy="140" r="26"/>
+    <circle cx="180" cy="140" r="26"/>
+    <circle cx="278" cy="140" r="22"/>
+  </g>
+  <rect width="1600" height="900" fill="#0F172A" opacity="0.18"/>
+</svg>

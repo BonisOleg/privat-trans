@@ -32,6 +32,11 @@ export function initCalculator() {
     const from = data.get("from") || "—";
     const to = data.get("to") || "—";
     const weight = data.get("weight") || "—";
+    const typeSelect = form.querySelector('[name="type"]');
+    const bodySelect = form.querySelector('[name="body"]');
+    const typeLabel = typeSelect?.selectedOptions?.[0]?.textContent?.trim() || "";
+    const bodyLabel = bodySelect?.selectedOptions?.[0]?.textContent?.trim() || "";
+    const cargo = [typeLabel, bodyLabel].filter(Boolean).join(" · ");
     if (rangeEl) rangeEl.textContent = `€${min}–${max}`;
     if (summaryEl) summaryEl.textContent = `${from} → ${to}, ${weight} кг`;
     result.setAttribute("data-visible", "true");
@@ -40,7 +45,8 @@ export function initCalculator() {
       const params = new URLSearchParams({
         from,
         to,
-        note: `Орієнтовний розрахунок: ${from} → ${to}, ${weight} кг, ~€${min}–${max}`,
+        cargo,
+        note: `Орієнтовний розрахунок: ${from} → ${to}, ${weight} кг${cargo ? `, ${cargo}` : ""}, ~€${min}–${max}`,
       });
       leadLink.setAttribute("href", `/?${params.toString()}#lead-form`);
     }

@@ -81,8 +81,8 @@ HOME_BODY_BLOCK_DEFAULTS: dict[tuple[str, str], dict] = {
     ),
     ("home", "region_eu_chips"): _t(
         "Європа — країни (HTML)",
-        "<ul><li>Польща</li><li>Німеччина</li><li>Італія</li><li>Чехія</li></ul>",
-        "<ul><li>Poland</li><li>Germany</li><li>Italy</li><li>Czechia</li></ul>",
+        "<ul><li>Польща</li><li>Німеччина</li><li>Італія</li><li>Чехія</li><li>Англія</li></ul>",
+        "<ul><li>Poland</li><li>Germany</li><li>Italy</li><li>Czechia</li><li>England</li></ul>",
         313,
     ),
     ("home", "region_as_kicker"): _t("Азія — kicker", "AS", "AS", 320),

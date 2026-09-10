@@ -17,10 +17,17 @@
   --color-border: #E2E8F0;
   --color-border-dark: rgba(255, 255, 255, 0.14);
 
+  /* Brand blue — лінки, focus, іконки, світлі секції */
   --color-accent: #1D4ED8;
   --color-accent-hover: #1E40AF;
   --color-accent-soft: rgba(29, 78, 216, 0.08);
   --color-on-accent: #FFFFFF;
+
+  /* CTA sand — усі .btn--primary (dual: тепло на кнопках, синій у системі) */
+  --color-cta: #C4A574;
+  --color-cta-hover: #B08F5C;
+  --color-cta-soft: rgba(196, 165, 116, 0.14);
+  --color-on-cta: #1A1520;
 
   --color-success: #15803D;
   --color-success-soft: rgba(21, 128, 61, 0.1);
