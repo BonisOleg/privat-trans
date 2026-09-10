@@ -655,12 +655,9 @@
 .review-card__author { margin-top: auto; padding-top: 1rem; font-weight: 600; font-size: 0.9rem; color: var(--color-text-muted); }
 .review-card__flag { margin-top: 0.4rem; font-size: 0.75rem; color: var(--color-text-dim); }
 
-/* ---------- Breadcrumbs (shared page chrome) ---------- */
-.page-header { padding-block: 2.4rem 1.4rem; background: var(--color-bg-soft); }
+/* ---------- Breadcrumbs (page-header chrome → pages/inner.css) ---------- */
 .breadcrumbs { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--color-text-dim); margin-bottom: 0.75rem; }
 .breadcrumbs a:hover { color: var(--color-accent); }
-.page-title { font-size: clamp(1.6rem, 3vw, 2.2rem); }
-.page-lead { margin-top: 0.6rem; color: var(--color-text-muted); max-width: 42rem; }
 
 /* ---------- Centered CTA banner (кінець FAQ/сторінок) ---------- */
 .cta-banner { text-align: center; }

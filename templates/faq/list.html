@@ -4,15 +4,20 @@
 {% block content %}
 <header class="page-header">
   <div class="container">
-    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / FAQ</nav>
-    <h1 class="page-title">{{ page_h1|default:"FAQ" }}</h1>
+    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / FAQ</nav>
+    <span class="page-header__eyebrow reveal">FAQ</span>
+    <h1 class="page-title reveal">{{ page_h1|default:"FAQ" }}</h1>
     {% block_plain 'faq' 'faq_lead' as faq_lead %}
-    {% if faq_lead %}<div class="page-lead">{{ faq_lead }}</div>{% endif %}
+    {% if faq_lead %}<div class="page-lead reveal">{{ faq_lead }}</div>{% endif %}
   </div>
 </header>
-<section class="section">
+<section class="section atmosphere--hubs">
   <div class="container">
-    <div class="faq-list" data-faq>
+    <div class="section__head faq-page__head reveal">
+      <span class="section__eyebrow">FAQ</span>
+      <h2 class="section__title">{% trans "Часті запитання" %}</h2>
+    </div>
+    <div class="faq-list reveal" data-faq>
       {% for item in faq_items %}
       <article class="faq-item" data-open="{% if forloop.first %}true{% else %}false{% endif %}">
         <button type="button" class="faq-item__q" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">

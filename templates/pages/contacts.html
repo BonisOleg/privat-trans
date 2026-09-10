@@ -4,34 +4,47 @@
 {% block content %}
 <header class="page-header">
   <div class="container">
-    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Контакти" %}</nav>
-    <h1 class="page-title">{{ page_h1|default:_("Контакти") }}</h1>
+    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Контакти" %}</nav>
+    <span class="page-header__eyebrow reveal">{% trans "Контакти" %}</span>
+    <h1 class="page-title reveal">{{ page_h1|default:_("Контакти") }}</h1>
     {% block_plain 'contacts' 'contacts_lead' as contacts_lead %}
-    {% if contacts_lead %}<div class="page-lead">{{ contacts_lead }}</div>{% endif %}
+    {% if contacts_lead %}<div class="page-lead reveal">{{ contacts_lead }}</div>{% endif %}
   </div>
 </header>
-<section class="section">
+<section class="section atmosphere--arcs">
   <div class="container contacts-grid">
-    <div>
+    <div class="reveal reveal--left">
       <div class="contact-item">
+        <div class="contact-item__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </div>
         <div>
           <div class="contact-item__label">{% trans "Адреса" %}</div>
           <div class="contact-item__value">{{ site_settings.address }}</div>
         </div>
       </div>
       <div class="contact-item">
+        <div class="contact-item__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+        </div>
         <div>
           <div class="contact-item__label">{% trans "Телефон" %}</div>
           <a class="contact-item__value" href="tel:{{ site_settings.phone_href }}">{{ site_settings.phone }}</a>
         </div>
       </div>
       <div class="contact-item">
+        <div class="contact-item__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </div>
         <div>
           <div class="contact-item__label">Email</div>
           <a class="contact-item__value" href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
         </div>
       </div>
       <div class="contact-item">
+        <div class="contact-item__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+        </div>
         <div>
           <div class="contact-item__label">{% trans "Реквізити" %}</div>
           <p class="contact-item__value">ЄДРПОУ {{ site_settings.edrpou }} · ІПН {{ site_settings.ipn }}</p>
@@ -44,7 +57,7 @@
       <div class="map-frame">{{ site_settings.address }}</div>
       {% endif %}
     </div>
-    <div id="lead-form-slot" class="calculator-card">
+    <div id="lead-form-slot" class="calculator-card reveal reveal--right">
       {% include "leads/_form.html" %}
     </div>
   </div>

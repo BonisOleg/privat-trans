@@ -4,23 +4,30 @@
 {% block content %}
 <header class="page-header">
   <div class="container">
-    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Послуги" %}</nav>
-    <h1 class="page-title">{{ page_h1|default:_("Послуги") }}</h1>
+    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Послуги" %}</nav>
+    <span class="page-header__eyebrow reveal">{% trans "Послуги" %}</span>
+    <h1 class="page-title reveal">{{ page_h1|default:_("Послуги") }}</h1>
     {% block_plain 'services' 'services_lead' as services_lead %}
-    {% if services_lead %}<div class="page-lead">{{ services_lead }}</div>{% endif %}
+    {% if services_lead %}<div class="page-lead reveal">{{ services_lead }}</div>{% endif %}
   </div>
 </header>
-<section class="section">
+<section class="section atmosphere--hubs">
   <div class="container">
-    {% for service in services %}
-    <article class="service-row">
-      <div>
-        <h2 class="service-row__title">{{ service.title }}</h2>
-        <p class="service-row__text">{{ service.teaser }}</p>
-      </div>
-      <a class="btn btn--secondary" href="{{ service.get_absolute_url }}">{% block_plain 'home' 'services_home_cta' %}</a>
-    </article>
-    {% endfor %}
+    <div class="grid-8">
+      {% for service in services %}
+      <article class="card card--frame card--service reveal">
+        <span class="card__index" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+        <h3 class="card__title">{{ service.title }}</h3>
+        <p class="card__text">{{ service.teaser }}</p>
+        <div class="card__footer">
+          <a class="card-link" href="{{ service.get_absolute_url }}" data-qa="service-card-link">
+            {% block_plain 'home' 'services_home_cta' %}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}

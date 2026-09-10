@@ -4,12 +4,13 @@
 {% block content %}
 <header class="page-header">
   <div class="container">
-    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Політика" %}</nav>
-    <h1 class="page-title">{{ page_h1|default:_("Політика конфіденційності") }}</h1>
+    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Політика" %}</nav>
+    <span class="page-header__eyebrow reveal">{% trans "Документи" %}</span>
+    <h1 class="page-title reveal">{{ page_h1|default:_("Політика конфіденційності") }}</h1>
   </div>
 </header>
 <section class="section">
-  <div class="container prose">
+  <div class="container prose reveal">
     {% block_html 'privacy' 'privacy_body' %}
     <p>{{ site_settings.email }} · {{ site_settings.address }} · ЄДРПОУ {{ site_settings.edrpou }}</p>
   </div>

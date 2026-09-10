@@ -1,5 +1,6 @@
 /*
-  Chapter sections — звичайні секції без sticky і без фонового фото.
+  Chapter sections — layout/spacing only.
+  Фони й dark/light atmosphere: section-atmosphere.css
 */
 .chapter {
   position: relative;
@@ -14,22 +15,6 @@
   z-index: 2;
   background: linear-gradient(90deg, transparent, var(--color-border) 20%, var(--color-border) 80%, transparent);
   pointer-events: none;
-}
-.chapter--regions {
-  background:
-    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.05), transparent 55%),
-    radial-gradient(60% 50% at 0% 100%, rgba(245, 158, 11, 0.04), transparent 50%),
-    var(--color-bg);
-}
-.chapter--routes {
-  background:
-    radial-gradient(65% 55% at 0% 0%, rgba(29, 78, 216, 0.06), transparent 55%),
-    var(--color-bg-soft);
-}
-.chapter--fleet {
-  background:
-    radial-gradient(70% 60% at 100% 100%, rgba(29, 78, 216, 0.05), transparent 55%),
-    var(--color-bg-alt);
 }
 
 .chapter__body {
@@ -88,18 +73,10 @@
   background: transparent;
   border: 0;
   box-shadow: none;
-  color: var(--color-text);
   text-align: left;
 }
-.chapter--routes .chapter__surface--routes-head .section__eyebrow {
-  color: var(--color-accent);
-}
-.chapter--routes .chapter__surface--routes-head .section__title {
-  color: var(--color-text);
-  text-shadow: none;
-}
+/* Кольори typography для routes — section-atmosphere.css (dark) */
 .chapter--routes .chapter__surface--routes-head .section__lead {
-  color: var(--color-text-muted);
   max-width: 42rem;
 }
 .chapter--routes .chapter__surface--routes-head .section__head {

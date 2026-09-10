@@ -1,9 +1,12 @@
 /*
-  Атмосфера секцій головної: градієнти + SVG-коридори, без фото.
+  Атмосфера секцій: градієнти + SVG-коридори, без фото.
+  Reusable .atmosphere--* — ті самі значення, що й #id на home (comma-group).
   Фон дублюється на секцію і на .section__parallax-layer —
   паралакс робить секцію прозорою, а без JS лишається фон на самій секції.
 */
 
+/* ---------- Reusable light atmospheres ---------- */
+.atmosphere--arcs,
 #scenarios {
   --atmosphere:
     url("../../media/patterns/arcs-light.svg") no-repeat 50% -8% / min(1400px, 165%) auto,
@@ -12,8 +15,32 @@
     #c5d3e6;
   background: var(--atmosphere);
 }
+.atmosphere--arcs .section__parallax-layer,
 #scenarios .section__parallax-layer { background: var(--atmosphere); }
 
+.atmosphere--hubs,
+#services {
+  --atmosphere:
+    url("../../media/patterns/hubs-light.svg") repeat,
+    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.12), transparent 50%),
+    #c8d6e8;
+  background: var(--atmosphere);
+}
+.atmosphere--hubs .section__parallax-layer,
+#services .section__parallax-layer { background: var(--atmosphere); }
+
+.atmosphere--lanes,
+#process {
+  --atmosphere:
+    url("../../media/patterns/lanes-light.svg") repeat,
+    radial-gradient(90% 80% at 50% 0%, rgba(29, 78, 216, 0.1), transparent 55%),
+    #d0dcea;
+  background: var(--atmosphere);
+}
+.atmosphere--lanes .section__parallax-layer,
+#process .section__parallax-layer { background: var(--atmosphere); }
+
+/* ---------- Chapters (канон фонів — тільки тут) ---------- */
 .chapter--regions {
   background:
     url("../../media/patterns/arcs-light.svg") no-repeat 50% 12% / min(1400px, 170%) auto,
@@ -69,15 +96,6 @@
   color: var(--color-text-inverse-muted);
 }
 
-#services {
-  --atmosphere:
-    url("../../media/patterns/hubs-light.svg") repeat,
-    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.12), transparent 50%),
-    #c8d6e8;
-  background: var(--atmosphere);
-}
-#services .section__parallax-layer { background: var(--atmosphere); }
-
 .chapter--fleet {
   background:
     url("../../media/patterns/grid-dark.svg") repeat,
@@ -87,10 +105,8 @@
 .chapter--fleet::before {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12) 20%, rgba(255, 255, 255, 0.12) 80%, transparent);
 }
-.chapter--fleet .fleet-card {
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
-}
 
+/* ---------- Home section ids (унікальні рецепти) ---------- */
 #advantages {
   --atmosphere:
     url("../../media/patterns/hubs-light.svg") repeat,
@@ -99,15 +115,6 @@
   background: var(--atmosphere);
 }
 #advantages .section__parallax-layer { background: var(--atmosphere); }
-
-#process {
-  --atmosphere:
-    url("../../media/patterns/lanes-light.svg") repeat,
-    radial-gradient(90% 80% at 50% 0%, rgba(29, 78, 216, 0.1), transparent 55%),
-    #d0dcea;
-  background: var(--atmosphere);
-}
-#process .section__parallax-layer { background: var(--atmosphere); }
 
 #calculator-teaser {
   --atmosphere:
@@ -152,6 +159,8 @@
 }
 #career-teaser .section__parallax-layer { background: var(--atmosphere); }
 
+/* Dark grid — lead CTA (канон фону; layout форми лишається в home.css) */
+.atmosphere--dark-grid,
 .lead-section {
   overflow: hidden;
   isolation: isolate;

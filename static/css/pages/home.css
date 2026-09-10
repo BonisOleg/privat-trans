@@ -541,12 +541,7 @@
 .career-teaser__text { max-width: 34rem; color: rgba(255, 255, 255, 0.9); }
 .career-teaser .section__title { color: #fff; }
 
-/* Lead section atmosphere on dark */
-.lead-section {
-  background:
-    radial-gradient(80% 60% at 10% 0%, rgba(29, 78, 216, 0.28), transparent 55%),
-    var(--color-bg-dark);
-}
+/* Lead section layout (фон — section-atmosphere.css) */
 .lead-section .section__head {
   margin-inline: auto;
   text-align: center;

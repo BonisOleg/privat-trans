@@ -4,21 +4,22 @@
 {% block content %}
 <header class="page-header">
   <div class="container">
-    <nav class="breadcrumbs">
+    <nav class="breadcrumbs reveal">
       <a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> /
       <a href="{% url 'services:list' %}">{% trans "Послуги" %}</a> /
       {{ service.title }}
     </nav>
-    <h1 class="page-title">{{ service.title }}</h1>
-    <p class="page-lead">{{ service.teaser }}</p>
+    <span class="page-header__eyebrow reveal">{% trans "Послуга" %}</span>
+    <h1 class="page-title reveal">{{ service.title }}</h1>
+    <p class="page-lead reveal">{{ service.teaser }}</p>
   </div>
 </header>
-<section class="section">
+<section class="section atmosphere--arcs">
   <div class="container service-hero">
-    <div>
-      <p>{{ service.body|safe }}</p>
+    <div class="service-hero__body reveal">
+      {{ service.body|safe }}
     </div>
-    <div class="service-hero__card" id="lead-form-slot">
+    <div class="service-hero__card reveal reveal--right" id="lead-form-slot">
       {% include "leads/_form.html" %}
     </div>
   </div>

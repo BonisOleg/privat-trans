@@ -4,50 +4,53 @@
 {% block content %}
 <header class="page-header">
   <div class="container">
-    <nav class="breadcrumbs"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Автопарк" %}</nav>
-    <h1 class="page-title">{{ page_h1|default:_("Наш автопарк") }}</h1>
-    <div class="page-lead">{% block_plain 'fleet' 'fleet_lead' %}</div>
+    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Автопарк" %}</nav>
+    <span class="page-header__eyebrow reveal">{% trans "Автопарк" %}</span>
+    <h1 class="page-title reveal">{{ page_h1|default:_("Наш автопарк") }}</h1>
+    <div class="page-lead reveal">{% block_plain 'fleet' 'fleet_lead' %}</div>
   </div>
 </header>
 
-<section class="section">
-  <div class="container">
-    <ul class="fleet-page__facts">
-      <li class="fleet-page__fact">
-        <strong>{% block_plain 'fleet' 'fleet_fact_1_value' %}</strong>
-        <span>{% block_plain 'fleet' 'fleet_fact_1_label' %}</span>
-      </li>
-      <li class="fleet-page__fact">
-        <strong>{% block_plain 'fleet' 'fleet_fact_2_value' %}</strong>
-        <span>{% block_plain 'fleet' 'fleet_fact_2_label' %}</span>
-      </li>
-      <li class="fleet-page__fact">
-        <strong>{% block_plain 'fleet' 'fleet_fact_3_value' %}</strong>
-        <span>{% block_plain 'fleet' 'fleet_fact_3_label' %}</span>
-      </li>
-    </ul>
+<section class="chapter chapter--fleet" id="fleet-page-facts">
+  <div class="chapter__body">
+    <div class="container">
+      <ul class="fleet-card__facts fleet-card__facts--row">
+        <li class="fleet-fact reveal">
+          <span class="fleet-fact__value">{% block_plain 'fleet' 'fleet_fact_1_value' %}</span>
+          <span class="fleet-fact__label">{% block_plain 'fleet' 'fleet_fact_1_label' %}</span>
+        </li>
+        <li class="fleet-fact reveal">
+          <span class="fleet-fact__value">{% block_plain 'fleet' 'fleet_fact_2_value' %}</span>
+          <span class="fleet-fact__label">{% block_plain 'fleet' 'fleet_fact_2_label' %}</span>
+        </li>
+        <li class="fleet-fact reveal">
+          <span class="fleet-fact__value">{% block_plain 'fleet' 'fleet_fact_3_value' %}</span>
+          <span class="fleet-fact__label">{% block_plain 'fleet' 'fleet_fact_3_label' %}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="section section--soft" id="fleet-bodies">
+<section class="section atmosphere--hubs" id="fleet-bodies">
   <div class="container">
-    <div class="section__head">
+    <div class="section__head reveal">
       <span class="section__eyebrow">{% block_plain 'fleet' 'fleet_bodies_eyebrow' %}</span>
       <h2 class="section__title">{% block_plain 'fleet' 'fleet_bodies_title' %}</h2>
       <p class="section__lead">{% block_plain 'fleet' 'fleet_bodies_lead' %}</p>
     </div>
     <div class="grid-3">
-      <article class="card">
+      <article class="card card--frame reveal">
         <span class="card__index" aria-hidden="true">01</span>
         <h3 class="card__title">{% block_plain 'fleet' 'fleet_body_1_title' %}</h3>
         <p class="card__text">{% block_plain 'fleet' 'fleet_body_1_text' %}</p>
       </article>
-      <article class="card">
+      <article class="card card--frame reveal">
         <span class="card__index" aria-hidden="true">02</span>
         <h3 class="card__title">{% block_plain 'fleet' 'fleet_body_2_title' %}</h3>
         <p class="card__text">{% block_plain 'fleet' 'fleet_body_2_text' %}</p>
       </article>
-      <article class="card">
+      <article class="card card--frame reveal">
         <span class="card__index" aria-hidden="true">03</span>
         <h3 class="card__title">{% block_plain 'fleet' 'fleet_body_3_title' %}</h3>
         <p class="card__text">{% block_plain 'fleet' 'fleet_body_3_text' %}</p>
@@ -59,11 +62,11 @@
 <section class="section" id="fleet-capabilities">
   <div class="container">
     <div class="fleet-page__split">
-      <div>
+      <div class="reveal reveal--left">
         <h2 class="section__title">{% block_plain 'fleet' 'fleet_capabilities_title' %}</h2>
         <div class="about-block__list fleet-page__prose">{% block_html 'fleet' 'fleet_capabilities_body' %}</div>
       </div>
-      <div>
+      <div class="reveal reveal--right">
         <h2 class="section__title">{% block_plain 'fleet' 'fleet_partners_title' %}</h2>
         <div class="page-lead fleet-page__prose">{% block_html 'fleet' 'fleet_partners_body' %}</div>
       </div>
@@ -71,12 +74,12 @@
   </div>
 </section>
 
-<section class="section section--alt" id="fleet-faq">
+<section class="section atmosphere--lanes" id="fleet-faq">
   <div class="container">
-    <div class="section__head">
+    <div class="section__head reveal">
       <h2 class="section__title">{% block_plain 'fleet' 'fleet_faq_title' %}</h2>
     </div>
-    <div class="faq-list" data-faq>
+    <div class="faq-list reveal" data-faq>
       <article class="faq-item" data-open="true">
         <button type="button" class="faq-item__q" aria-expanded="true">
           <span class="faq-item__question">{% block_plain 'fleet' 'fleet_faq_1_q' %}</span>
