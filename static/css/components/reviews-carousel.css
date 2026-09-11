@@ -1,0 +1,211 @@
+/* Відгуки: горизонтальний snap-карусель, без бібліотек. */
+
+.section__head--reviews {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  max-width: none;
+}
+
+.reviews-carousel {
+  --reviews-gap: 1rem;
+  --reviews-visible: 1;
+  min-width: 0;
+}
+
+.reviews-carousel__row {
+  display: block;
+  min-width: 0;
+}
+
+.reviews-carousel__nav {
+  display: none;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(210, 192, 160, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d2c0a0;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), opacity var(--t-fast), color var(--t-fast);
+}
+
+.reviews-carousel__nav:hover,
+.reviews-carousel__nav:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(210, 192, 160, 0.7);
+  color: #fff;
+}
+
+.reviews-carousel__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.reviews-carousel__frame {
+  position: relative;
+  min-width: 0;
+}
+
+.reviews-carousel__frame::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: 2.5rem;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(15, 23, 42, 0.92));
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+
+.reviews-carousel[data-reviews-scrollable="true"]:not([data-reviews-at-end]) .reviews-carousel__frame::after {
+  opacity: 1;
+}
+
+.reviews-carousel__viewport {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 0;
+  padding-block: 4px;
+  margin-block: -4px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.reviews-carousel__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.reviews-carousel__slide {
+  box-sizing: border-box;
+  flex: 0 0 calc((100% - (var(--reviews-visible) - 1) * var(--reviews-gap)) / var(--reviews-visible));
+  width: calc((100% - (var(--reviews-visible) - 1) * var(--reviews-gap)) / var(--reviews-visible));
+  max-width: calc((100% - (var(--reviews-visible) - 1) * var(--reviews-gap)) / var(--reviews-visible));
+  min-width: 0;
+  height: auto;
+  margin-right: var(--reviews-gap);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.reviews-carousel__slide:last-child {
+  margin-right: 0;
+}
+
+.reviews-carousel__dots {
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 0.85rem;
+}
+
+.reviews-carousel[data-reviews-scrollable="true"] .reviews-carousel__dots {
+  display: flex;
+}
+
+.reviews-carousel__dot {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.reviews-carousel__dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(210, 192, 160, 0.38);
+  transition: width var(--t-fast), background var(--t-fast);
+}
+
+.reviews-carousel__dot[aria-current="true"]::after {
+  width: 1.35rem;
+  background: #d2c0a0;
+}
+
+.reviews-carousel__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(210, 192, 160, 0.82);
+  letter-spacing: 0.04em;
+}
+
+.reviews-carousel:not(.is-ready) .reviews-carousel__nav,
+.reviews-carousel:not(.is-ready) .reviews-carousel__dots,
+.reviews-carousel:not(.is-ready) .reviews-carousel__hint {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reviews-carousel__slide:hover {
+    transform: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .reviews-carousel {
+    --reviews-gap: 1.15rem;
+    --reviews-visible: 2;
+  }
+
+  .reviews-carousel__hint,
+  .reviews-carousel__frame::after {
+    display: none;
+  }
+
+  .reviews-carousel__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .reviews-carousel[data-reviews-scrollable="true"] .reviews-carousel__row {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+  }
+
+  .reviews-carousel[data-reviews-scrollable="true"] .reviews-carousel__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviews-carousel {
+    --reviews-gap: 1.25rem;
+    --reviews-visible: 3;
+  }
+
+  .reviews-carousel__row {
+    gap: 1rem;
+  }
+}
+
+.reviews-carousel[data-reviews-visible="1"] { --reviews-visible: 1; }
+.reviews-carousel[data-reviews-visible="2"] { --reviews-visible: 2; }
+.reviews-carousel[data-reviews-visible="3"] { --reviews-visible: 3; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-carousel__nav,
+  .reviews-carousel__dot::after,
+  .reviews-carousel__frame::after {
+    transition: none;
+  }
+}

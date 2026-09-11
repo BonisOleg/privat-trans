@@ -1,22 +1,6 @@
-{% if site_settings.gtm_id %}
-<script src="https://www.googletagmanager.com/gtm.js?id={{ site_settings.gtm_id }}" defer></script>
+{% if site_settings.gtm_id or site_settings.ga4_id %}
+<div id="pt-analytics" hidden
+     {% if site_settings.gtm_id %}data-gtm="{{ site_settings.gtm_id }}"{% endif %}
+     {% if site_settings.ga4_id %}data-ga4="{{ site_settings.ga4_id }}"{% endif %}></div>
 {% endif %}
-{% if site_settings.ga4_id %}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site_settings.ga4_id }}"></script>
-{% endif %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "{{ site_settings.brand_name }}",
-  "telephone": "{{ site_settings.phone }}",
-  "email": "{{ site_settings.email }}",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "{{ site_settings.address }}",
-    "addressLocality": "Rivne",
-    "addressCountry": "UA"
-  },
-  "vatID": "{{ site_settings.edrpou }}"
-}
-</script>
+<script type="application/ld+json">{{ organization_schema|safe }}</script>

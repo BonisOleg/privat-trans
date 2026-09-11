@@ -130,14 +130,62 @@ FAQ = [
 ]
 
 SEO = [
-    ("home", "ПРИВАТ-ТРАНС — комплексна доставка Європа ↔️ Україна ↔️ Азія", "PRIVAT-TRANS — freight Europe ↔ Ukraine ↔ Asia"),
-    ("about", "Про нас — ПРИВАТ-ТРАНС з 2007 року", "About PRIVAT-TRANS — since 2007"),
-    ("fleet", "Автопарк — ПРИВАТ-ТРАНС", "Fleet — PRIVAT-TRANS"),
-    ("services", "Послуги міжнародних перевезень", "International freight services"),
-    ("faq", "Питання про перевезення — ПРИВАТ-ТРАНС", "Freight FAQ — PRIVAT-TRANS"),
-    ("calculator", "Калькулятор орієнтовної вартості", "Indicative freight calculator"),
-    ("contacts", "Контакти ПП ПРИВАТ-ТРАНС, Рівне", "Contact PE PRIVAT-TRANS, Rivne"),
-    ("privacy", "Політика конфіденційності", "Privacy policy"),
+    (
+        "home",
+        "ПРИВАТ-ТРАНС — комплексна доставка Європа ↔️ Україна ↔️ Азія",
+        "PRIVAT-TRANS — freight Europe ↔ Ukraine ↔ Asia",
+        "Міжнародні перевезення 10 кг–23 т: Європа, Україна, Азія. Склади в ЄС, митниця, страхування. Залиште заявку онлайн.",
+        "International freight 10 kg–23 t across Europe, Ukraine and Asia. EU warehouses, customs and insurance. Request a quote.",
+    ),
+    (
+        "about",
+        "Про нас — ПРИВАТ-ТРАНС з 2007 року",
+        "About PRIVAT-TRANS — since 2007",
+        "ПП ПРИВАТ-ТРАНС: експедиція та виконання рейсів з 2007 року. Власний автопарк, склади в Європі, митниця і страхування вантажу.",
+        "PE PRIVAT-TRANS: freight forwarding and haulage since 2007. Own fleet, EU warehouses, customs and cargo insurance.",
+    ),
+    (
+        "fleet",
+        "Автопарк — ПРИВАТ-ТРАНС",
+        "Fleet — PRIVAT-TRANS",
+        "Тенти 86–120 м², рефрижератори, ізотерми, ADR і негабарит. 10 кг–23 т на рейсах Європа — Україна — Азія.",
+        "Tautliners 86–120 m², reefers, isotherms, ADR and oversized cargo. 10 kg–23 t on Europe–Ukraine–Asia lanes.",
+    ),
+    (
+        "services",
+        "Послуги міжнародних перевезень",
+        "International freight services",
+        "Збірні від 10 кг, FTL до 23 т, контейнери, склади, митне оформлення та страхування. Вісім послуг під ключ.",
+        "Groupage from 10 kg, FTL up to 23 t, containers, warehousing, customs and insurance. Eight turnkey services.",
+    ),
+    (
+        "faq",
+        "Питання про перевезення — ПРИВАТ-ТРАНС",
+        "Freight FAQ — PRIVAT-TRANS",
+        "Мінімальна вага, частота рейсів, документи, страхування та що входить у доставку під ключ. Відповіді експедитора.",
+        "Minimum weight, departure frequency, documents, insurance and what turnkey delivery includes.",
+    ),
+    (
+        "calculator",
+        "Калькулятор орієнтовної вартості",
+        "Indicative freight calculator",
+        "Орієнтовний діапазон вартості перевезення за вагою, об’ємом і типом кузова. Не оферта — менеджер підтвердить тариф.",
+        "Indicative freight range by weight, volume and body type. Not an offer — a manager confirms the rate.",
+    ),
+    (
+        "contacts",
+        "Контакти ПП ПРИВАТ-ТРАНС, Рівне",
+        "Contact PE PRIVAT-TRANS, Rivne",
+        "Рівне, вул. Відінська, 10. Телефон, email і форма заявки на міжнародне перевезення. ПП ПРИВАТ-ТРАНС.",
+        "Rivne, Vidinska St. 10. Phone, email and a quote form for international freight. PE PRIVAT-TRANS.",
+    ),
+    (
+        "privacy",
+        "Політика конфіденційності",
+        "Privacy policy",
+        "Як ПП ПРИВАТ-ТРАНС обробляє персональні дані з форм заявок і комунікації. Підстава — згода та договір.",
+        "How PE PRIVAT-TRANS processes personal data from quote forms and communication. Legal basis: consent and contract.",
+    ),
 ]
 
 
@@ -147,7 +195,14 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         settings = SiteSettings.load()
         settings.slogan_uk = "Ваш надійний партнер"
-        settings.save(update_fields=["slogan_uk"])
+        settings.slogan_en = "Your reliable partner"
+        if not settings.map_embed_url or "openstreetmap.org" in settings.map_embed_url:
+            settings.map_embed_url = (
+                "https://www.google.com/maps"
+                "?q=50.6140963,26.2743911"
+                "&hl=uk&z=16&output=embed"
+            )
+        settings.save(update_fields=["slogan_uk", "slogan_en", "map_embed_url"])
         from src.core.site_blocks import seed_default_blocks
 
         seed_default_blocks()
@@ -195,14 +250,14 @@ class Command(BaseCommand):
         )
         for index, name in enumerate(["Partner A", "Partner B", "Partner C", "Partner D"], start=1):
             Partner.objects.update_or_create(name=name, defaults={"order": index})
-        for slug, title_uk, title_en in SEO:
+        for slug, title_uk, title_en, desc_uk, desc_en in SEO:
             PageSEO.objects.update_or_create(
                 slug=slug,
                 defaults={
                     "title_uk": title_uk,
                     "title_en": title_en,
-                    "description_uk": title_uk,
-                    "description_en": title_en,
+                    "description_uk": desc_uk,
+                    "description_en": desc_en,
                     "h1_uk": "",
                     "h1_en": "",
                 },

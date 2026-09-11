@@ -6,7 +6,6 @@ __pycache__/
 *.sqlite3
 db.sqlite3
 staticfiles/
-/media/
 .DS_Store
 *.mo
 .idea/

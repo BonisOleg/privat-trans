@@ -72,3 +72,30 @@ class HealthAndPagesTests(TestCase):
 
         with translation.override("uk"):
             self.assertEqual(reverse("leads:create"), "/leads/create/")
+
+    def test_canonical_and_hreflang_strip_query(self):
+        response = self.client.get("/about/?utm_source=ad")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'rel="canonical" href="http://testserver/about/"')
+        self.assertNotContains(response, 'rel="canonical" href="http://testserver/about/?utm')
+        self.assertContains(response, 'hreflang="uk" href="http://testserver/about/"')
+        self.assertContains(response, 'hreflang="en" href="http://testserver/en/about/"')
+        self.assertContains(response, 'hreflang="x-default" href="http://testserver/about/"')
+        self.assertContains(response, 'property="og:image"')
+        self.assertContains(response, 'property="og:url" content="http://testserver/about/"')
+        self.assertContains(response, '"@type": "Organization"')
+        self.assertContains(response, '"addressCountry": "UA"')
+        self.assertContains(response, '"vatID"')
+        self.assertContains(response, '"taxID"')
+        self.assertNotContains(response, '"addressLocality": "Rivne"')
+
+    def test_sitemap_lists_uk_and_en(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn("http://testserver/about/", content)
+        self.assertIn("http://testserver/en/about/", content)
+        self.assertIn('hreflang="uk"', content)
+        self.assertIn('hreflang="en"', content)
+        self.assertIn('hreflang="x-default"', content)
+        self.assertIn("<lastmod>", content)

@@ -4,8 +4,8 @@
   "description": "Комплексна доставка вантажів Європа — Україна — Азія",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1D4ED8",
-  "theme_color": "#1D4ED8",
+  "background_color": "#0B2D42",
+  "theme_color": "#0B2D42",
   "icons": [
     {
       "src": "/static/icons/android-chrome-192x192.png",

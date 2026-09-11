@@ -13,10 +13,10 @@
       poster="{{ poster_url }}" aria-hidden="true">
       {% endwith %}
       {% else %}
-      <img class="hero__poster" src="{% static 'media/hero-poster.jpg' %}" alt="" width="1920" height="1080"
+      <img class="hero__poster" src="{% static 'media/hero-poster.jpg' %}?v={{ hero_static_v }}" alt="" width="1920" height="1080"
         aria-hidden="true">
       <video class="hero__video" data-hero-video autoplay muted loop playsinline preload="metadata"
-        poster="{% static 'media/hero-poster.jpg' %}" aria-hidden="true">
+        poster="{% static 'media/hero-poster.jpg' %}?v={{ hero_static_v }}" aria-hidden="true">
         {% endif %}
         {% if site_settings.hero_video or site_settings.hero_video_webm %}
         {% if site_settings.hero_video_webm %}
@@ -26,8 +26,8 @@
         <source src="{{ site_settings.hero_video.url }}" type="video/mp4">
         {% endif %}
         {% else %}
-        <source src="{% static 'media/hero-video.webm' %}" type="video/webm">
-        <source src="{% static 'media/hero-video.mp4' %}" type="video/mp4">
+        <source src="{% static 'media/hero-video.webm' %}?v={{ hero_static_v }}" type="video/webm">
+        <source src="{% static 'media/hero-video.mp4' %}?v={{ hero_static_v }}" type="video/mp4">
         {% endif %}
       </video>
       <div class="hero__scrim"></div>
@@ -45,37 +45,44 @@
       </div>
       <p class="hero__fact reveal"><strong>{% block_plain 'home' 'hero_fact_year' %}</strong> {% block_plain 'home' 'hero_fact_rest' %}</p>
     </div>
-    <form class="hero__form-card hero__form reveal reveal--right" data-hero-form novalidate data-qa="hero-quote">
+    <form class="hero__form-card hero__form reveal reveal--right" data-hero-form data-qa="hero-quote">
       <h2 class="hero__form-title">{% block_plain 'home' 'hero_form_title' %}</h2>
       <div class="field">
         <label class="field__label" for="hero-from">{% trans "Звідки" %}</label>
         <div class="pt-select" data-pt-select>
-          <select class="field__select pt-select__native" id="hero-from" name="from" required data-pt-select-native data-cities-select>
+          <select class="field__select pt-select__native" id="hero-from" name="from" required data-pt-select-native>
             <option value="">{% trans "Оберіть місто" %}</option>
+            {% for city in pt_cities %}
+            <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
           </select>
         </div>
       </div>
       <div class="field">
         <label class="field__label" for="hero-to">{% trans "Куди" %}</label>
         <div class="pt-select" data-pt-select>
-          <select class="field__select pt-select__native" id="hero-to" name="to" required data-pt-select-native data-cities-select>
+          <select class="field__select pt-select__native" id="hero-to" name="to" required data-pt-select-native>
             <option value="">{% trans "Оберіть місто" %}</option>
+            {% for city in pt_cities %}
+            <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
           </select>
         </div>
       </div>
       <div class="field">
         <label class="field__label" for="hero-cargo">{% trans "Тип вантажу" %}</label>
         <div class="pt-select" data-pt-select>
-          <select class="field__select pt-select__native" id="hero-cargo" name="cargo" data-pt-select-native>
-            <option>{% trans "Збірний від 10 кг" %}</option>
-            <option>{% trans "Повне авто (FTL) до 23 тонн" %}</option>
-            <option>{% trans "Під ключ (склад + митниця)" %}</option>
+          <select class="field__select pt-select__native" id="hero-cargo" name="cargo" required data-pt-select-native>
+            <option value="">{% trans "Оберіть тип вантажу" %}</option>
+            <option value="ltl">{% trans "Збірний від 10 кг" %}</option>
+            <option value="ftl">{% trans "Повне авто (FTL) до 23 тонн" %}</option>
+            <option value="turnkey">{% trans "Під ключ (склад + митниця)" %}</option>
           </select>
         </div>
       </div>
       <div class="field">
         <label class="field__label" for="hero-phone">{% trans "Телефон" %}</label>
-        <input class="field__input" id="hero-phone" type="tel" name="phone" required>
+        <input class="field__input" id="hero-phone" type="tel" name="phone" required inputmode="tel" autocomplete="tel">
       </div>
       <button type="submit" class="btn btn--primary btn--block" data-qa="hero-submit">{% block_plain 'home' 'hero_submit' %}</button>
     </form>
@@ -277,7 +284,7 @@
   </div>
 </section>
 
-<section class="section section--pattern" id="process">
+<section class="section section--dark atmosphere--editorial" id="process">
   <div class="container">
     <div class="section__head reveal">
       <span class="section__eyebrow">{% block_plain 'home' 'process_eyebrow' %}</span>
@@ -365,20 +372,42 @@
 {% endif %}
 
 {% if reviews %}
-<section class="section section--alt" id="reviews">
+<section class="section section--dark atmosphere--editorial" id="reviews">
   <div class="container">
-    <div class="section__head reveal">
+    <div class="section__head section__head--reviews reveal">
       <h2 class="section__title">{% block_plain 'home' 'reviews_title' %}</h2>
+      <p class="reviews-carousel__hint" data-reviews-hint hidden>{% trans "Гортайте" %}</p>
     </div>
-    <div class="grid-auto">
-      {% for review in reviews %}
-      <article class="card review-card reveal">
-        <div class="review-card__stars" aria-hidden="true">★★★★★</div>
-        <p class="review-card__quote">{{ review.quote|safe }}</p>
-        <p class="review-card__author">{{ review.author }}</p>
-        <p class="review-card__flag">{{ review.flag }}</p>
-      </article>
-      {% endfor %}
+    <div class="reviews-carousel reveal" data-reviews-carousel data-reviews-count="{{ reviews|length }}">
+      <div class="reviews-carousel__row">
+        <button type="button" class="reviews-carousel__nav reviews-carousel__nav--prev" data-reviews-prev aria-label="{% trans 'Попередній відгук' %}" data-qa="reviews-prev">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div class="reviews-carousel__frame">
+          <div class="reviews-carousel__viewport" id="reviews-track" data-reviews-track tabindex="0" role="region" aria-roledescription="carousel" aria-label="{% trans 'Відгуки клієнтів' %}">
+            {% for review in reviews %}
+            <article class="card review-card reviews-carousel__slide">
+              <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+              <p class="review-card__quote">{{ review.quote|safe }}</p>
+              <p class="review-card__author">{{ review.author }}</p>
+              <p class="review-card__flag">{{ review.flag }}</p>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+        <button type="button" class="reviews-carousel__nav reviews-carousel__nav--next" data-reviews-next aria-label="{% trans 'Наступний відгук' %}" data-qa="reviews-next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+      <div class="reviews-carousel__dots" data-reviews-dots>
+        {% for review in reviews %}
+        <button type="button" class="reviews-carousel__dot" data-reviews-dot="{{ forloop.counter0 }}" aria-label="{% blocktranslate with n=forloop.counter %}Відгук {{ n }}{% endblocktranslate %}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>

@@ -28,7 +28,6 @@ def home(request):
         "partners": Partner.objects.filter(is_published=True),
         "vacancies": Vacancy.objects.filter(is_published=True),
         "lead_form": LeadForm(),
-        "canonical_path": request.path,
     }
     return render(request, "pages/home.html", context)
 

@@ -25,13 +25,24 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-if grep -qE 'DROPLET_IP|CHANGE_ME' .env; then
+if grep -E '^(SECRET_KEY|POSTGRES_PASSWORD|DATABASE_URL|ALLOWED_HOSTS|CSRF_TRUSTED_ORIGINS)=' .env | grep -qE 'DROPLET_IP|CHANGE_ME'; then
   echo "FATAL: у .env лишилися плейсхолдери (DROPLET_IP / CHANGE_ME)"
   exit 1
 fi
 
 if ! grep -qE 'ALLOWED_HOSTS=.*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' .env; then
   echo "FATAL: ALLOWED_HOSTS має містити IPv4 Droplet (не лише localhost)"
+  exit 1
+fi
+
+csrf_ip="$(
+  grep -E '^CSRF_TRUSTED_ORIGINS=' .env \
+    | grep -oE 'http://[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' \
+    | grep -vE 'http://127\.' \
+    | head -1 || true
+)"
+if [ -z "${csrf_ip}" ]; then
+  echo "FATAL: CSRF_TRUSTED_ORIGINS має містити http://<публічний IPv4>"
   exit 1
 fi
 

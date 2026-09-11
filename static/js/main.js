@@ -2,10 +2,12 @@ import { initDrawer, initFaqAccordion, initHeaderScroll, initHeroVideo, initRout
 import { initReveal } from "./modules/reveal.js";
 import { initParallax } from "./modules/parallax.js";
 import { initCountUp } from "./modules/count-up.js";
-import { initQuoteBridge } from "./pages/home.js";
-import { initCustomSelects } from "./modules/custom-select.js";
+import { initQuoteBridge } from "./pages/home.js?v=2";
+import { initCustomSelects } from "./modules/custom-select.js?v=2";
 import { initCalculator } from "./pages/calculator.js";
 import { initPartnersMarquee } from "./modules/partners-marquee.js";
+import { initReviewsCarousel } from "./modules/reviews-carousel.js";
+import { initAnalytics } from "./modules/analytics.js";
 
 const PT_CITIES = [
   "Київ", "Одеса", "Львів", "Дніпро", "Харків",
@@ -39,6 +41,7 @@ function initCitySelects() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initAnalytics();
   initCityDatalists();
   initCitySelects();
   initHeaderScroll();
@@ -53,11 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
   initQuoteBridge();
   initCalculator();
   initPartnersMarquee();
+  initReviewsCarousel();
 });
 
 document.body.addEventListener("htmx:afterSwap", (event) => {
-  initReveal(event.detail.target);
-  initCountUp(event.detail.target);
-  initFaqAccordion(event.detail.target);
-  initPartnersMarquee(event.detail.target);
+  const target = event.detail.target;
+  initCitySelects();
+  initCustomSelects(target);
+  initReveal(target);
+  initCountUp(target);
+  initFaqAccordion(target);
+  initPartnersMarquee(target);
+  initReviewsCarousel(target);
 });

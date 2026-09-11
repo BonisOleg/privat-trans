@@ -41,13 +41,21 @@ msgstr "Cargo type"
 msgid "Коментар"
 msgstr "Comment"
 
-#: src/leads/views.py:16
+#: src/leads/views.py
 msgid "Перевірте поля форми."
 msgstr "Please check the form fields."
 
-#: src/leads/views.py:23 templates/leads/_success.html:2
+#: src/leads/views.py templates/leads/_success.html:2
 msgid "Дякуємо за заявку"
 msgstr "Thank you for your request"
+
+#: src/leads/views.py
+msgid "Забагато заявок з вашої мережі. Спробуйте пізніше."
+msgstr "Too many requests from your network. Please try again later."
+
+#: templates/leads/_form.html
+msgid "Сайт"
+msgstr "Website"
 
 #: templates/base.html:43
 msgid "Перейти до змісту"
@@ -150,11 +158,19 @@ msgstr "Fleet"
 msgid "Наш автопарк"
 msgstr "Our fleet"
 
-#: templates/pages/home.html:54 templates/pages/home.html:62
+#: src/leads/forms.py templates/pages/home.html
 msgid "Оберіть місто"
 msgstr "Select a city"
 
-#: templates/pages/home.html:70
+#: src/leads/forms.py templates/pages/home.html
+msgid "Оберіть тип вантажу"
+msgstr "Select cargo type"
+
+#: src/leads/forms.py
+msgid "Введіть коректний номер телефону"
+msgstr "Enter a valid phone number"
+
+#: templates/pages/home.html
 msgid "Збірний від 10 кг"
 msgstr "Groupage from 10 kg"
 
@@ -203,6 +219,26 @@ msgstr "Information"
 #: templates/partials/footer.html:46
 msgid "Дизайн і розробка"
 msgstr "Design & development"
+
+#: templates/pages/home.html
+msgid "Гортайте"
+msgstr "Swipe"
+
+#: templates/pages/home.html
+msgid "Попередній відгук"
+msgstr "Previous review"
+
+#: templates/pages/home.html
+msgid "Наступний відгук"
+msgstr "Next review"
+
+#: templates/pages/home.html
+msgid "Відгуки клієнтів"
+msgstr "Client reviews"
+
+#: templates/pages/home.html
+msgid "Відгук %(n)s"
+msgstr "Review %(n)s"
 
 #: templates/partials/header.html:11
 msgid "Основна навігація"

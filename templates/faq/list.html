@@ -5,18 +5,13 @@
 <header class="page-header">
   <div class="container">
     <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / FAQ</nav>
-    <span class="page-header__eyebrow reveal">FAQ</span>
-    <h1 class="page-title reveal">{{ page_h1|default:"FAQ" }}</h1>
+    <h1 class="page-title reveal">{% trans "Часті запитання" %}</h1>
     {% block_plain 'faq' 'faq_lead' as faq_lead %}
     {% if faq_lead %}<div class="page-lead reveal">{{ faq_lead }}</div>{% endif %}
   </div>
 </header>
 <section class="section atmosphere--hubs">
   <div class="container">
-    <div class="section__head faq-page__head reveal">
-      <span class="section__eyebrow">FAQ</span>
-      <h2 class="section__title">{% trans "Часті запитання" %}</h2>
-    </div>
     <div class="faq-list reveal" data-faq>
       {% for item in faq_items %}
       <article class="faq-item" data-open="{% if forloop.first %}true{% else %}false{% endif %}">

@@ -44,7 +44,6 @@ export function initCustomSelects(root = document) {
     wrap.dataset.ready = "true";
     wrap.classList.add("is-ready");
     native.tabIndex = -1;
-    native.setAttribute("aria-hidden", "true");
 
     const syncFromNative = () => {
       const selected = native.selectedOptions[0] || options[0];
@@ -85,10 +84,39 @@ export function initCustomSelects(root = document) {
       if (!item) return;
       native.value = item.dataset.value;
       native.dispatchEvent(new Event("change", { bubbles: true }));
-      syncFromNative();
       close();
       trigger.focus();
     };
+
+    native.addEventListener("change", () => {
+      if (native.value) field?.classList.remove("is-invalid");
+      syncFromNative();
+    });
+    native.addEventListener("invalid", (event) => {
+      event.preventDefault();
+      field?.classList.add("is-invalid");
+      requestAnimationFrame(() => trigger.focus());
+    });
+
+    const form = wrap.closest("form");
+    if (form && form.dataset.ptSelectValidate !== "true") {
+      form.dataset.ptSelectValidate = "true";
+      form.addEventListener(
+        "submit",
+        (event) => {
+          if (form.checkValidity()) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          const firstInvalid = form.querySelector(":invalid");
+          if (firstInvalid instanceof HTMLSelectElement && firstInvalid.hasAttribute("data-pt-select-native")) {
+            firstInvalid.closest("[data-pt-select]")?.querySelector(".pt-select__trigger")?.focus();
+          } else {
+            firstInvalid?.focus();
+          }
+        },
+        true,
+      );
+    }
 
     trigger.addEventListener("click", (event) => {
       event.preventDefault();

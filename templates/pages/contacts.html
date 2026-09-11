@@ -52,9 +52,9 @@
         </div>
       </div>
       {% if site_settings.map_embed_url %}
-      <iframe class="map-frame" src="{{ site_settings.map_embed_url }}" title="{% trans 'Карта' %}" loading="lazy"></iframe>
+      <iframe class="map-frame" src="{{ site_settings.map_embed_url }}" title="{% trans 'Карта' %}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       {% else %}
-      <div class="map-frame">{{ site_settings.address }}</div>
+      <div class="map-frame map-frame--placeholder">{{ site_settings.address }}</div>
       {% endif %}
     </div>
     <div id="lead-form-slot" class="calculator-card reveal reveal--right">

@@ -3,11 +3,41 @@ import logging
 import urllib.request
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.mail import send_mail
 
 from src.leads.models import Lead
 
 logger = logging.getLogger(__name__)
+
+LEAD_RATE_MAX = 5
+LEAD_RATE_WINDOW = 600
+LEAD_RATE_KEY = "lead-rate:{ip}"
+
+
+def request_ip(request) -> str:
+    real_ip = (request.META.get("HTTP_X_REAL_IP") or "").strip()
+    if real_ip:
+        return real_ip.split(",")[0].strip()
+    return (request.META.get("REMOTE_ADDR") or "").strip()
+
+
+def is_lead_rate_limited(ip: str) -> bool:
+    if not ip:
+        return False
+    return int(cache.get(LEAD_RATE_KEY.format(ip=ip), 0) or 0) >= LEAD_RATE_MAX
+
+
+def record_lead_submission(ip: str) -> None:
+    if not ip:
+        return
+    key = LEAD_RATE_KEY.format(ip=ip)
+    if cache.add(key, 1, LEAD_RATE_WINDOW):
+        return
+    try:
+        cache.incr(key)
+    except ValueError:
+        cache.set(key, 1, LEAD_RATE_WINDOW)
 
 
 def notify_lead(lead: Lead) -> None:

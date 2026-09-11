@@ -16,6 +16,7 @@ class Service(models.Model):
     icon_key = models.CharField(max_length=40, default="truck")
     order = models.PositiveIntegerField(default=0)
     is_published = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["order", "id"]

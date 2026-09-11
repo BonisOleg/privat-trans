@@ -85,6 +85,10 @@ class SiteSettingsAdmin(
             },
         ),
         (
+            "SEO / соцмережі",
+            {"fields": ("og_image",)},
+        ),
+        (
             "Українська",
             {
                 "classes": ["tab"],

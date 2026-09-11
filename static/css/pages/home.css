@@ -155,25 +155,6 @@
 
 /* Custom select (frost) — відкривається вниз */
 .hero__form-card { overflow: visible; }
-.hero__form .field.has-select-open { z-index: 4; position: relative; }
-.hero__form .pt-select {
-  position: relative;
-  z-index: 1;
-}
-.hero__form .pt-select.is-open { z-index: 5; }
-.hero__form .pt-select.is-ready .pt-select__native {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-  opacity: 0;
-  pointer-events: none;
-}
 .hero__form .pt-select__trigger {
   display: flex;
   align-items: center;
@@ -315,19 +296,58 @@
 }
 
 /* ---------- Scenarios ---------- */
+#scenarios .scenario-card {
+  color: var(--color-text-inverse);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 165, 116, 0.22);
+  box-shadow: inset 3px 0 0 rgba(196, 165, 116, 0.55);
+}
+@media (hover: hover) and (pointer: fine) {
+  #scenarios .scenario-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(196, 165, 116, 0.35);
+    box-shadow: inset 3px 0 0 rgba(196, 165, 116, 0.7);
+  }
+}
 .scenario-card .card__icon {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: rgba(196, 165, 116, 0.16);
+  color: #d2c0a0;
   margin-inline: auto;
 }
 .scenario-card .card__title {
   text-align: center;
   white-space: pre-line;
+  color: #fff;
 }
 .scenario-card .card__text {
   text-align: center;
   hyphens: auto;
   -webkit-hyphens: auto;
+  color: var(--color-text-inverse-muted);
+}
+#scenarios .scenario-card .card-link {
+  color: #d2c0a0;
+}
+#scenarios .scenario-card .card-link:hover,
+#scenarios .scenario-card .card-link:focus-visible {
+  color: #e8d4b0;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  #scenarios {
+    padding-block: clamp(2.75rem, 5vw, 4rem);
+  }
+}
+
+@media (max-width: 767px) {
+  #scenarios {
+    padding-block: clamp(2.5rem, 8vw, 3.5rem);
+    padding-bottom: calc(clamp(2.5rem, 8vw, 3.5rem) + env(safe-area-inset-bottom, 0px));
+  }
+  #scenarios .card-link {
+    min-height: 44px;
+    padding-block: 0.55rem;
+  }
 }
 
 /* ---------- Regions (Europe/Asia) ---------- */

@@ -22,7 +22,7 @@ def service_list(request):
 
 def service_detail(request, slug: str):
     service = get_object_or_404(Service, slug=slug, is_published=True)
-    form = LeadForm(initial={"service": service.title, "cargo": service.title})
+    form = LeadForm(initial={"service": service.title})
     return render(
         request,
         "services/detail.html",

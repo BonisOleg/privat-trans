@@ -2,18 +2,11 @@ export function initHeaderScroll() {
   const header = document.querySelector("[data-header]");
   if (!header) return;
 
-  const hero = document.querySelector("[data-hero]");
-
   const update = () => {
     header.classList.toggle("is-scrolled", window.scrollY > 8);
   };
 
-  if (hero) {
-    header.classList.add("is-over-hero", "header--ready");
-  } else {
-    header.classList.remove("is-over-hero");
-  }
-
+  header.classList.add("header--ready");
   update();
   window.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update, { passive: true });

@@ -2,7 +2,14 @@
 <form class="lead-form" method="post" action="{% url 'leads:create' %}" data-lead-form data-qa="lead-form"
       hx-post="{% url 'leads:create' %}" hx-target="#lead-form-slot" hx-swap="innerHTML">
   {% csrf_token %}
-  {% if form_error %}<p class="field__error is-shown">{{ form_error }}</p>{% endif %}
+  <div class="lead-form__honeypot" aria-hidden="true">
+    <label for="id_honeypot">{% trans "Сайт" %}</label>
+    <input type="text" name="honeypot" id="id_honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+  </div>
+  {% if form_error %}<p class="field__error is-shown" role="alert">{{ form_error }}</p>{% endif %}
+  {% if lead_form.non_field_errors %}
+  <p class="field__error is-shown" role="alert">{{ lead_form.non_field_errors.0 }}</p>
+  {% endif %}
   {{ lead_form.service }}
   <div class="field-row field-row--2">
     <div class="field{% if lead_form.name.errors %} is-invalid{% endif %}">
@@ -19,20 +26,24 @@
   <div class="field field--mt{% if lead_form.email.errors %} is-invalid{% endif %}">
     <label class="field__label" for="{{ lead_form.email.id_for_label }}">{{ lead_form.email.label }}</label>
     {{ lead_form.email }}
+    {% if lead_form.email.errors %}<p class="field__error is-shown">{{ lead_form.email.errors.0 }}</p>{% endif %}
   </div>
   <div class="field-row field-row--2 field--mt">
-    <div class="field">
+    <div class="field{% if lead_form.from_city.errors %} is-invalid{% endif %}">
       <label class="field__label" for="{{ lead_form.from_city.id_for_label }}">{{ lead_form.from_city.label }}</label>
-      {{ lead_form.from_city }}
+      <div class="pt-select" data-pt-select>{{ lead_form.from_city }}</div>
+      {% if lead_form.from_city.errors %}<p class="field__error is-shown">{{ lead_form.from_city.errors.0 }}</p>{% endif %}
     </div>
-    <div class="field">
+    <div class="field{% if lead_form.to_city.errors %} is-invalid{% endif %}">
       <label class="field__label" for="{{ lead_form.to_city.id_for_label }}">{{ lead_form.to_city.label }}</label>
-      {{ lead_form.to_city }}
+      <div class="pt-select" data-pt-select>{{ lead_form.to_city }}</div>
+      {% if lead_form.to_city.errors %}<p class="field__error is-shown">{{ lead_form.to_city.errors.0 }}</p>{% endif %}
     </div>
   </div>
-  <div class="field field--mt">
+  <div class="field field--mt{% if lead_form.cargo.errors %} is-invalid{% endif %}">
     <label class="field__label" for="{{ lead_form.cargo.id_for_label }}">{{ lead_form.cargo.label }}</label>
-    {{ lead_form.cargo }}
+    <div class="pt-select" data-pt-select>{{ lead_form.cargo }}</div>
+    {% if lead_form.cargo.errors %}<p class="field__error is-shown">{{ lead_form.cargo.errors.0 }}</p>{% endif %}
   </div>
   <div class="field field--mt">
     <label class="field__label" for="{{ lead_form.message.id_for_label }}">{{ lead_form.message.label }}</label>
@@ -44,5 +55,4 @@
   </label>
   {% if lead_form.consent.errors %}<p class="field__error is-shown">{{ lead_form.consent.errors.0 }}</p>{% endif %}
   <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="lead-submit">{% block_plain 'site' 'lead_submit' %}</button>
-  <datalist id="pt-cities" data-cities></datalist>
 </form>

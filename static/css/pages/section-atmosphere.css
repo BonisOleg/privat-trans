@@ -6,8 +6,7 @@
 */
 
 /* ---------- Reusable light atmospheres ---------- */
-.atmosphere--arcs,
-#scenarios {
+.atmosphere--arcs {
   --atmosphere:
     url("../../media/patterns/arcs-light.svg") no-repeat 50% -8% / min(1400px, 165%) auto,
     radial-gradient(80% 70% at 0% 0%, rgba(29, 78, 216, 0.22), transparent 52%),
@@ -15,8 +14,7 @@
     #c5d3e6;
   background: var(--atmosphere);
 }
-.atmosphere--arcs .section__parallax-layer,
-#scenarios .section__parallax-layer { background: var(--atmosphere); }
+.atmosphere--arcs .section__parallax-layer { background: var(--atmosphere); }
 
 .atmosphere--hubs,
 #services {
@@ -29,16 +27,14 @@
 .atmosphere--hubs .section__parallax-layer,
 #services .section__parallax-layer { background: var(--atmosphere); }
 
-.atmosphere--lanes,
-#process {
+.atmosphere--lanes {
   --atmosphere:
     url("../../media/patterns/lanes-light.svg") repeat,
     radial-gradient(90% 80% at 50% 0%, rgba(29, 78, 216, 0.1), transparent 55%),
     #d0dcea;
   background: var(--atmosphere);
 }
-.atmosphere--lanes .section__parallax-layer,
-#process .section__parallax-layer { background: var(--atmosphere); }
+.atmosphere--lanes .section__parallax-layer { background: var(--atmosphere); }
 
 /* ---------- Chapters (канон фонів — тільки тут) ---------- */
 .chapter--regions {
@@ -48,6 +44,25 @@
     radial-gradient(70% 80% at 100% 70%, rgba(217, 119, 6, 0.12), transparent 52%),
     #d0dcec;
 }
+
+/* Сценарії: editorial dark без сітки — продовження hero */
+.atmosphere--editorial,
+#scenarios {
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(70% 80% at 0% 0%, rgba(196, 165, 116, 0.14), transparent 55%),
+    radial-gradient(70% 55% at 100% 100%, rgba(29, 78, 216, 0.26), transparent 52%),
+    linear-gradient(180deg, #152338 0%, #0f172a 100%);
+  color: var(--color-text-inverse);
+  border-bottom: 1px solid rgba(196, 165, 116, 0.18);
+}
+.atmosphere--editorial .section__eyebrow,
+#scenarios .section__eyebrow { color: #d2c0a0; }
+.atmosphere--editorial .section__title,
+#scenarios .section__title { color: var(--color-text-inverse); }
+.atmosphere--editorial .section__lead,
+#scenarios .section__lead { color: var(--color-text-inverse-muted); }
 
 /* Коридор: editorial dark без сітки — шов перед «технічними» маршрутами */
 #corridor-bridge {
@@ -69,6 +84,73 @@
 }
 #corridor-bridge .corridor-bridge__facts strong { color: #fff; }
 #corridor-bridge .corridor-bridge__facts span { color: var(--color-text-inverse-muted); }
+
+/* Процес: editorial dark — удар у світлому прогоні */
+#process {
+  background:
+    radial-gradient(70% 70% at 100% 0%, rgba(196, 165, 116, 0.12), transparent 55%),
+    radial-gradient(70% 55% at 0% 100%, rgba(29, 78, 216, 0.24), transparent 52%),
+    linear-gradient(180deg, #152338 0%, #0f172a 100%);
+}
+#process .step__title { color: #fff; }
+#process .step__text { color: var(--color-text-inverse-muted); }
+#process .step__station {
+  background: #d2c0a0;
+  color: #0f172a;
+  box-shadow: 0 0 0 4px rgba(196, 165, 116, 0.22);
+}
+#process .step:not(:last-child)::after {
+  background: linear-gradient(180deg, #d2c0a0 0%, rgba(196, 165, 116, 0.12) 100%);
+}
+@media (min-width: 768px) {
+  #process .steps::before {
+    background: linear-gradient(90deg, #d2c0a0 0%, rgba(196, 165, 116, 0.18) 100%);
+  }
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+  #process { padding-block: clamp(2.75rem, 5vw, 4rem); }
+}
+@media (max-width: 767px) {
+  #process {
+    padding-block: clamp(2.5rem, 8vw, 3.5rem);
+    padding-bottom: calc(clamp(2.5rem, 8vw, 3.5rem) + env(safe-area-inset-bottom, 0px));
+  }
+  #process .step { min-height: 44px; }
+}
+
+/* Відгуки: editorial dark — цитатна смуга */
+#reviews {
+  background:
+    radial-gradient(65% 70% at 0% 0%, rgba(196, 165, 116, 0.14), transparent 55%),
+    radial-gradient(75% 55% at 100% 100%, rgba(29, 78, 216, 0.22), transparent 52%),
+    linear-gradient(180deg, #152338 0%, #0f172a 100%);
+}
+#reviews .review-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 165, 116, 0.22);
+  box-shadow: inset 3px 0 0 rgba(196, 165, 116, 0.55);
+  color: var(--color-text-inverse);
+}
+#reviews .review-card__stars { color: #d2c0a0; }
+#reviews .review-card__quote { color: var(--color-text-inverse-muted); }
+#reviews .review-card__author { color: #fff; }
+#reviews .review-card__flag { color: rgba(210, 192, 160, 0.72); }
+@media (hover: hover) and (pointer: fine) {
+  #reviews .review-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(196, 165, 116, 0.35);
+    box-shadow: inset 3px 0 0 rgba(196, 165, 116, 0.7);
+  }
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+  #reviews { padding-block: clamp(2.75rem, 5vw, 4rem); }
+}
+@media (max-width: 767px) {
+  #reviews {
+    padding-block: clamp(2.5rem, 8vw, 3.5rem);
+    padding-bottom: calc(clamp(2.5rem, 8vw, 3.5rem) + env(safe-area-inset-bottom, 0px));
+  }
+}
 
 /* Маршрути: ops-сітка + холодні світіння — контраст до editorial-коридору */
 .chapter--routes {
@@ -132,15 +214,6 @@
   background: var(--atmosphere);
 }
 #faq .section__parallax-layer { background: var(--atmosphere); }
-
-#reviews {
-  --atmosphere:
-    url("../../media/patterns/arcs-light.svg") no-repeat 50% 110% / min(1200px, 150%) auto,
-    radial-gradient(70% 60% at 100% 0%, rgba(29, 78, 216, 0.1), transparent 48%),
-    #c6d4e6;
-  background: var(--atmosphere);
-}
-#reviews .section__parallax-layer { background: var(--atmosphere); }
 
 #partners {
   --atmosphere:

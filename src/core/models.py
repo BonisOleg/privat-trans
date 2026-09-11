@@ -8,7 +8,7 @@ class SiteSettings(models.Model):
     brand_name_uk = models.CharField(max_length=80, default="ПРИВАТ-ТРАНС")
     brand_name_en = models.CharField(max_length=80, default="PRIVAT-TRANS", blank=True)
     slogan_uk = models.CharField(max_length=160, default="Ваш надійний партнер")
-    slogan_en = models.CharField(max_length=160, default="your reliable partner")
+    slogan_en = models.CharField(max_length=160, default="Your reliable partner")
     phone = models.CharField(max_length=40, default="(0362) 64-24-34")
     phone_href = models.CharField(max_length=40, default="+380362642434")
     email = models.EmailField(default="privat_trans@ukr.net")
@@ -45,6 +45,12 @@ class SiteSettings(models.Model):
         blank=True,
         validators=[FileExtensionValidator(["jpg", "jpeg", "webp", "png"])],
         help_text="Кадр-заставка (JPG/WEBP). Fallback: static/media/hero-poster.jpg",
+    )
+    og_image = models.ImageField(
+        upload_to="seo/",
+        blank=True,
+        validators=[FileExtensionValidator(["jpg", "jpeg", "webp", "png"])],
+        help_text="OG-прев’ю 1200×630. Якщо порожньо — hero poster або static/media/hero-poster.jpg",
     )
     default_title_uk = models.CharField(
         max_length=180,
