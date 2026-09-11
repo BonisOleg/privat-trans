@@ -77,7 +77,20 @@ function bindCarousel(root) {
   function refresh() {
     metrics();
     syncFromScroll();
+    const left = state.index * state.step;
+    if (state.step > 0 && Math.abs(track.scrollLeft - left) > 1) {
+      track.scrollTo({ left, behavior: "auto" });
+    }
     render();
+  }
+
+  let frame = 0;
+  function refreshSoon() {
+    if (frame) return;
+    frame = window.requestAnimationFrame(() => {
+      frame = 0;
+      refresh();
+    });
   }
 
   if (root.dataset.reviewsReady === "true") {
@@ -112,9 +125,12 @@ function bindCarousel(root) {
     }
   });
 
-  window.addEventListener("resize", refresh);
+  window.addEventListener("resize", refreshSoon);
+  ["(min-width: 768px)", "(min-width: 1024px)"].forEach((query) => {
+    window.matchMedia(query).addEventListener("change", refreshSoon);
+  });
   if (typeof ResizeObserver === "function") {
-    new ResizeObserver(refresh).observe(track);
+    new ResizeObserver(refreshSoon).observe(track);
   }
 
   root.classList.add("is-ready");

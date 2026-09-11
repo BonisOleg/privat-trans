@@ -164,6 +164,10 @@
     --reviews-visible: 2;
   }
 
+  .reviews-carousel[data-reviews-visible="1"] {
+    --reviews-visible: 1;
+  }
+
   .reviews-carousel__hint,
   .reviews-carousel__frame::after {
     display: none;
@@ -193,14 +197,18 @@
     --reviews-visible: 3;
   }
 
+  .reviews-carousel[data-reviews-visible="1"] {
+    --reviews-visible: 1;
+  }
+
+  .reviews-carousel[data-reviews-visible="2"] {
+    --reviews-visible: 2;
+  }
+
   .reviews-carousel__row {
     gap: 1rem;
   }
 }
-
-.reviews-carousel[data-reviews-visible="1"] { --reviews-visible: 1; }
-.reviews-carousel[data-reviews-visible="2"] { --reviews-visible: 2; }
-.reviews-carousel[data-reviews-visible="3"] { --reviews-visible: 3; }
 
 @media (prefers-reduced-motion: reduce) {
   .reviews-carousel__nav,

@@ -13,7 +13,7 @@
 </header>
 <section class="section atmosphere--arcs">
   <div class="container contacts-grid">
-    <div class="reveal reveal--left">
+    <div class="contacts-grid__info reveal reveal--left">
       <div class="contact-item">
         <div class="contact-item__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -52,7 +52,9 @@
         </div>
       </div>
       {% if site_settings.map_embed_url %}
-      <iframe class="map-frame" src="{{ site_settings.map_embed_url }}" title="{% trans 'Карта' %}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="map-frame">
+        <iframe src="{{ site_settings.map_embed_url }}" title="{% trans 'Карта' %}" loading="eager" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
       {% else %}
       <div class="map-frame map-frame--placeholder">{{ site_settings.address }}</div>
       {% endif %}

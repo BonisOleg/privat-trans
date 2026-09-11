@@ -653,6 +653,8 @@
 }
 .review-card__stars { color: var(--color-accent); margin-bottom: 0.75rem; letter-spacing: 0.15em; }
 .review-card__quote { flex: 1; font-size: 0.98rem; }
+.review-card__quote p { margin: 0; }
+.review-card__quote p + p { margin-top: 0.55rem; }
 .review-card__author { margin-top: auto; padding-top: 1rem; font-weight: 600; font-size: 0.9rem; color: var(--color-text-muted); }
 .review-card__flag { margin-top: 0.4rem; font-size: 0.75rem; color: var(--color-text-dim); }
 
