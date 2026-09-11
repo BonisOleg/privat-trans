@@ -15,7 +15,7 @@ def _lead_success(request):
     return render(
         request,
         "leads/_success.html",
-        {"message": _("Дякуємо за заявку")},
+        {"message": _("Заявка відправлена")},
     )
 
 

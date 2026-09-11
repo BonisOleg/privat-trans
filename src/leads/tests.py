@@ -32,7 +32,7 @@ class LeadFormTests(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Lead.objects.count(), 1)
-        self.assertContains(response, "Дякуємо")
+        self.assertContains(response, "Заявка відправлена")
 
     def test_invalid_lead(self):
         response = self.client.post(reverse("leads:create"), {"name": ""})
@@ -47,7 +47,7 @@ class LeadFormTests(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Lead.objects.count(), 0)
-        self.assertContains(response, "Дякуємо")
+        self.assertContains(response, "Заявка відправлена")
 
     def test_rate_limit_blocks_extra_submissions(self):
         for index in range(LEAD_RATE_MAX):

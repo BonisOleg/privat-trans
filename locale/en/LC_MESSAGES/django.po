@@ -45,9 +45,9 @@ msgstr "Comment"
 msgid "Перевірте поля форми."
 msgstr "Please check the form fields."
 
-#: src/leads/views.py templates/leads/_success.html:2
-msgid "Дякуємо за заявку"
-msgstr "Thank you for your request"
+#: src/leads/views.py templates/leads/_success.html:3
+msgid "Заявка відправлена"
+msgstr "Request sent"
 
 #: src/leads/views.py
 msgid "Забагато заявок з вашої мережі. Спробуйте пізніше."
