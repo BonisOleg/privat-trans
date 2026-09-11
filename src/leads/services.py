@@ -4,7 +4,6 @@ import urllib.request
 
 from django.conf import settings
 from django.core.cache import cache
-from django.core.mail import send_mail
 
 from src.leads.models import Lead
 
@@ -58,21 +57,6 @@ def _notify_telegram(body: str) -> None:
         logger.exception("Lead telegram notify failed")
 
 
-def _notify_email(body: str, lead_pk: int) -> None:
-    if not settings.LEAD_NOTIFY_EMAIL:
-        return
-    try:
-        send_mail(
-            subject=f"Заявка ПРИВАТ-ТРАНС #{lead_pk}",
-            message=body,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[settings.LEAD_NOTIFY_EMAIL],
-            fail_silently=False,
-        )
-    except Exception:
-        logger.exception("Lead email notify failed")
-
-
 def _notify_crm(lead: Lead) -> None:
     webhook = settings.CRM_WEBHOOK_URL
     if not webhook:
@@ -110,7 +94,5 @@ def notify_lead(lead: Lead) -> None:
         f"{lead.cargo} / {lead.service}\n"
         f"{lead.message}"
     )
-    # Telegram першим (короткий timeout): не блокуємо worker на завислому SMTP.
     _notify_telegram(body)
-    _notify_email(body, lead.pk)
     _notify_crm(lead)
