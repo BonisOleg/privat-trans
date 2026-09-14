@@ -40,7 +40,7 @@
       {% for vacancy in vacancies %}
       <article class="card card--frame reveal">
         <h3 class="card__title">{{ vacancy.title }}</h3>
-        <p class="card__text">{{ vacancy.text|safe }}</p>
+        <div class="card__text">{{ vacancy.text|safe }}</div>
         <div class="card__footer"><a class="card-link" href="mailto:{{ site_settings.email }}">{% block_plain 'site' 'about_resume_cta' %}</a></div>
       </article>
       {% endfor %}

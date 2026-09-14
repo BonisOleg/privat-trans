@@ -1,20 +1,21 @@
-import html
-
 from django import template
-from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 
-from src.core.site_blocks import get_block_text, is_section_visible
+from src.core.site_blocks import get_block_text, is_section_visible, plain_with_breaks
 
 register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def block_plain(context, page: str, key: str) -> str:
+def block_plain(context, page: str, key: str):
     site_blocks = context.get("site_blocks")
     text = get_block_text(page, key, site_blocks=site_blocks)
-    # TinyMCE may store &harr; etc.; unescape after strip so arrows render
-    return html.unescape(strip_tags(text or ""))
+    return plain_with_breaks(text)
+
+
+@register.filter(name="cms_lines")
+def cms_lines(value):
+    return plain_with_breaks(value)
 
 
 @register.simple_tag(takes_context=True)

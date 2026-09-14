@@ -195,7 +195,7 @@
       <article class="card card--frame card--service reveal">
         <span class="card__index" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
         <h3 class="card__title">{{ service.title }}</h3>
-        <p class="card__text">{{ service.teaser }}</p>
+        <div class="card__text">{{ service.teaser|safe }}</div>
         <div class="card__footer">
           <a class="card-link" href="{{ service.get_absolute_url }}">
             {% block_plain 'home' 'services_home_cta' %}
@@ -395,7 +395,7 @@
             {% for review in reviews %}
             <article class="card review-card reviews-carousel__slide">
               <div class="review-card__stars" aria-hidden="true">★★★★★</div>
-              <div class="review-card__quote">{{ review.quote|safe }}</div>
+              <div class="review-card__quote">{{ review.quote|cms_lines }}</div>
               <p class="review-card__author">{{ review.author }}</p>
               <p class="review-card__flag">{{ review.flag }}</p>
             </article>

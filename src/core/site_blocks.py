@@ -5,7 +5,8 @@ import re
 from typing import Any
 
 from django.core.cache import cache
-from django.utils.html import strip_tags
+from django.utils.html import escape, strip_tags
+from django.utils.safestring import SafeString, mark_safe
 
 from src.core.block_defaults import BLOCK_DEFAULTS
 from src.core.models import SiteBlock
@@ -15,6 +16,10 @@ SITE_BLOCKS_CACHE_KEY = "privattrans_site_blocks_v1"
 SITE_BLOCKS_CACHE_TTL = 60
 
 _BLANK_HTML_RE = re.compile(r"^(?:\s|&nbsp;|<br\s*/?>|</?p\b[^>]*>)*$", re.I)
+_BLOCK_BREAK_RE = re.compile(
+    r"<br\s*/?>|</p>|</div>|</h[1-6]>|</li>|</tr>",
+    re.IGNORECASE,
+)
 
 
 def is_blank_cms_text(value: str | None) -> bool:
@@ -35,10 +40,30 @@ def normalize_cms_text(value: str | None) -> str:
     return html.unescape(str(value).strip())
 
 
+def html_to_plain(value: str | None) -> str:
+    """TinyMCE Enter (`<p>`/`<br>`) і textarea `\\n` → звичайний текст із переносами."""
+    if value is None:
+        return ""
+    text = _BLOCK_BREAK_RE.sub("\n", str(value))
+    text = html.unescape(strip_tags(text)).replace("\xa0", " ")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    text = re.sub(r"[ \t]+\n", "\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def plain_with_breaks(value: str | None) -> str | SafeString:
+    """Plain CMS-текст для шаблону: escape + `\\n` → `<br>` (валідно всередині `<p>`)."""
+    text = html_to_plain(value)
+    if not text:
+        return ""
+    return mark_safe(escape(text).replace("\n", "<br>"))
+
+
 def normalize_cms_plain(value: str | None) -> str:
     if is_blank_cms_text(value):
         return ""
-    return html.unescape(strip_tags(str(value))).replace("\xa0", " ").strip()
+    return html_to_plain(value)
 
 
 def ensure_block(page: str, key: str) -> SiteBlock:
