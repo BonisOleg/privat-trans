@@ -8,6 +8,12 @@ class HtmlToPlainTests(SimpleTestCase):
     def test_tinymce_paragraphs_become_newlines(self):
         self.assertEqual(html_to_plain("<p>рядок 1</p><p>рядок 2</p>"), "рядок 1\nрядок 2")
 
+    def test_tinymce_paragraphs_with_source_newline_stay_single_break(self):
+        self.assertEqual(html_to_plain("<p>рядок 1</p>\n<p>рядок 2</p>"), "рядок 1\nрядок 2")
+
+    def test_double_enter_empty_paragraph_is_blank_line(self):
+        self.assertEqual(html_to_plain("<p>a</p><p>&nbsp;</p><p>b</p>"), "a\n\nb")
+
     def test_br_becomes_newline(self):
         self.assertEqual(html_to_plain("a<br>b<br />c"), "a\nb\nc")
 
@@ -18,7 +24,7 @@ class HtmlToPlainTests(SimpleTestCase):
         self.assertEqual(html_to_plain('<p>ok<script>x</script></p>'), "okx")
 
     def test_plain_with_breaks_escapes_and_br(self):
-        html_out = plain_with_breaks("<p>A & B</p><p>C</p>")
+        html_out = plain_with_breaks("<p>A & B</p>\n<p>C</p>")
         self.assertIsInstance(html_out, SafeString)
         self.assertEqual(html_out, "A &amp; B<br>C")
 

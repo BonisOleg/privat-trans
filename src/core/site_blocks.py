@@ -16,10 +16,16 @@ SITE_BLOCKS_CACHE_KEY = "privattrans_site_blocks_v1"
 SITE_BLOCKS_CACHE_TTL = 60
 
 _BLANK_HTML_RE = re.compile(r"^(?:\s|&nbsp;|<br\s*/?>|</?p\b[^>]*>)*$", re.I)
+_EMPTY_P_RE = re.compile(
+    r"<p\b[^>]*>\s*(?:&nbsp;|\xa0|<br\s*/?>|\s)*</p>",
+    re.IGNORECASE,
+)
+_ADJACENT_P_RE = re.compile(r"</p>\s*<p\b[^>]*>", re.IGNORECASE)
 _BLOCK_BREAK_RE = re.compile(
     r"<br\s*/?>|</p>|</div>|</h[1-6]>|</li>|</tr>",
     re.IGNORECASE,
 )
+_PARA_MARK = "[[[PTPARA]]]"
 
 
 def is_blank_cms_text(value: str | None) -> bool:
@@ -41,11 +47,14 @@ def normalize_cms_text(value: str | None) -> str:
 
 
 def html_to_plain(value: str | None) -> str:
-    """TinyMCE Enter (`<p>`/`<br>`) і textarea `\\n` → звичайний текст із переносами."""
+    """Enter = один рядок; два Enter (порожній `<p>`) = порожній рядок. Без extra margin."""
     if value is None:
         return ""
-    text = _BLOCK_BREAK_RE.sub("\n", str(value))
+    text = _EMPTY_P_RE.sub(_PARA_MARK, str(value))
+    text = _ADJACENT_P_RE.sub("\n", text)
+    text = _BLOCK_BREAK_RE.sub("\n", text)
     text = html.unescape(strip_tags(text)).replace("\xa0", " ")
+    text = text.replace(_PARA_MARK, "\n\n")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = re.sub(r"[ \t]+\n", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
