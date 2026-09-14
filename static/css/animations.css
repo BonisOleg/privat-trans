@@ -70,13 +70,24 @@
 #routes,
 #services,
 #faq {
-  scroll-margin-top: calc(var(--header-h) + 12px);
+  scroll-margin-top: calc(var(--header-h) + var(--safe-top, 0px) + 16px);
 }
 
 .hero__title.reveal { --reveal-delay: 70ms; }
 .hero__lead.reveal { --reveal-delay: 140ms; }
 .hero__actions.reveal { --reveal-delay: 210ms; }
 .hero__fact.reveal { --reveal-delay: 280ms; }
+
+@media (max-width: 767px) {
+  .reveal { --motion-reveal: 420ms; }
+  .reveal--left { transform: translate3d(-12px, 0, 0); }
+  .reveal--right { transform: translate3d(12px, 0, 0); }
+  .page-header .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,

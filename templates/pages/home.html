@@ -34,19 +34,23 @@
   </div>
   <div class="container hero__inner">
     <div class="hero__content">
-      <span class="hero__badge reveal">{% block_plain 'home' 'hero_badge' %}</span>
+      <span class="hero__badge reveal"><span class="hero__badge-lead">{% block_plain 'home' 'hero_badge' %}</span> <span class="hero__badge-rest">{% block_plain 'home' 'hero_badge_rest' %}</span></span>
       <h1 class="hero__title reveal">{% block_plain 'home' 'hero_title' %}</h1>
       <p class="hero__lead reveal">{% block_plain 'home' 'hero_lead' %}</p>
       <div class="hero__actions reveal">
+        <a class="btn btn--primary hero__quote-open" href="#lead-form" data-qa="hero-quote-open">
+          {% block_plain 'home' 'hero_submit' %}
+        </a>
         <a class="btn btn--glass" href="tel:{{ site_settings.phone_href }}" data-qa="hero-call">{% block_plain 'home' 'hero_cta_call' %}</a>
         {% if site_settings.telegram %}
         <a class="btn btn--glass" href="{{ site_settings.telegram }}" target="_blank" rel="noopener">{% block_plain 'home' 'hero_cta_telegram' %}</a>
         {% endif %}
       </div>
-      <p class="hero__fact reveal"><strong>{% block_plain 'home' 'hero_fact_year' %}</strong> {% block_plain 'home' 'hero_fact_rest' %}</p>
+      <p class="hero__fact reveal"><strong class="hero__fact-year">{% block_plain 'home' 'hero_fact_year' %}</strong> <span class="hero__fact-rest">{% block_plain 'home' 'hero_fact_rest' %}</span></p>
     </div>
-    <form class="hero__form-card hero__form reveal reveal--right" data-hero-form data-qa="hero-quote">
-      <h2 class="hero__form-title">{% block_plain 'home' 'hero_form_title' %}</h2>
+    <div class="hero-sheet">
+      <form class="hero__form-card hero__form reveal reveal--right" data-hero-form data-qa="hero-quote">
+      <h2 class="hero__form-title" id="hero-form-title">{% block_plain 'home' 'hero_form_title' %}</h2>
       <div class="field">
         <label class="field__label" for="hero-from">{% trans "Звідки" %}</label>
         <div class="pt-select" data-pt-select>
@@ -85,7 +89,8 @@
         <input class="field__input" id="hero-phone" type="tel" name="phone" required inputmode="tel" autocomplete="tel">
       </div>
       <button type="submit" class="btn btn--primary btn--block" data-qa="hero-submit">{% block_plain 'home' 'hero_submit' %}</button>
-    </form>
+      </form>
+    </div>
   </div>
 </section>
 {% endif %}

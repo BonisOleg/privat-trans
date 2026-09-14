@@ -233,9 +233,16 @@
 #career-teaser .section__parallax-layer { background: var(--atmosphere); }
 
 /* Dark grid — lead CTA (канон фону; layout форми лишається в home.css) */
-.atmosphere--dark-grid,
-.lead-section {
+.atmosphere--dark-grid {
   overflow: hidden;
+  isolation: isolate;
+  background:
+    url("../../media/patterns/grid-dark.svg") repeat,
+    radial-gradient(80% 60% at 10% 0%, rgba(29, 78, 216, 0.32), transparent 55%),
+    var(--color-bg-dark);
+}
+/* overflow:hidden ламає scroll-margin для #lead-form — лишаємо лише isolation */
+.lead-section {
   isolation: isolate;
   background:
     url("../../media/patterns/grid-dark.svg") repeat,

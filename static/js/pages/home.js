@@ -30,6 +30,11 @@ function fillLeadFromParams(params) {
   if (note && message) message.value = note;
 }
 
+function focusLeadName() {
+  const leadForm = document.querySelector("[data-lead-form]");
+  window.setTimeout(() => leadForm?.querySelector("[name='name']")?.focus(), 450);
+}
+
 export function initQuoteBridge() {
   const heroForm = document.querySelector("[data-hero-form]");
   const leadForm = document.querySelector("[data-lead-form]");
@@ -44,8 +49,16 @@ export function initQuoteBridge() {
       const phone = leadForm.querySelector("[name='phone']");
       if (phone && !phone.value) phone.value = data.get("phone") || "";
       document.querySelector("#lead-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.setTimeout(() => leadForm.querySelector("[name='name']")?.focus(), 450);
+      focusLeadName();
     });
   }
+
+  document.querySelectorAll('a[href="#lead-form"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.matchMedia("(max-width: 767px)").matches) focusLeadName();
+    });
+  });
+
   fillLeadFromParams(new URLSearchParams(window.location.search));
+  if (window.location.hash === "#lead-form") focusLeadName();
 }

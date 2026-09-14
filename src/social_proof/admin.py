@@ -1,15 +1,16 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 
-from src.core.admin_mixins import ReadableUnfoldFieldsMixin, TinyMCEAdminMixin
+from src.core.admin_mixins import ReadableUnfoldFieldsMixin
 from src.social_proof.models import Partner, Review
 
 
 @admin.register(Review)
-class ReviewAdmin(ReadableUnfoldFieldsMixin, TinyMCEAdminMixin, ModelAdmin):
-    tinymce_fields = ("quote_uk", "quote_en")
-    list_display = ("author", "order", "is_published")
+class ReviewAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+    list_display = ("author", "flag", "order", "is_published")
     list_editable = ("order", "is_published")
+    list_filter = ("is_published",)
+    search_fields = ("author", "flag", "quote_uk", "quote_en")
     fieldsets = (
         (None, {"fields": ("author", "flag", "order", "is_published")}),
         ("Українська", {"classes": ["tab"], "fields": ("quote_uk",)}),

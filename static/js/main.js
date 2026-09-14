@@ -2,7 +2,7 @@ import { initDrawer, initFaqAccordion, initHeaderScroll, initHeroVideo, initRout
 import { initReveal } from "./modules/reveal.js";
 import { initParallax } from "./modules/parallax.js";
 import { initCountUp } from "./modules/count-up.js";
-import { initQuoteBridge } from "./pages/home.js?v=2";
+import { initQuoteBridge } from "./pages/home.js?v=5";
 import { initCustomSelects } from "./modules/custom-select.js?v=2";
 import { initCalculator } from "./pages/calculator.js";
 import { initPartnersMarquee } from "./modules/partners-marquee.js";

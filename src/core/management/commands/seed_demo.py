@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from src.careers.models import Vacancy
-from src.core.models import PageSEO, SiteSettings
+from src.core.models import PageSEO, SiteBlock, SiteSettings
 from src.faq.models import FaqItem
 from src.services.models import Service
 from src.social_proof.models import Partner, Review
@@ -129,6 +129,75 @@ FAQ = [
     ("Які документи потрібні?", "Which documents are needed?", "Інвойс, пакувальний лист, коди УКТЗЕД і довіреність — менеджер надішле чекліст.", "Invoice, packing list, HS codes and a power of attorney."),
 ]
 
+REVIEWS = [
+    {
+        "author": "ТОВ «Галицький імпорт»",
+        "flag": "Збірні · Польща → Львів",
+        "quote_uk": (
+            "Щотижневі збірні з Польщі йдуть за графіком. Менеджер тримає слот і документи, "
+            "на кордоні без сюрпризів."
+        ),
+        "quote_en": (
+            "Weekly groupage from Poland stays on schedule. The manager holds the slot "
+            "and papers — no surprises at the border."
+        ),
+        "order": 1,
+    },
+    {
+        "author": "ПП «Карпати Фуд»",
+        "flag": "Рефрижератор · Німеччина",
+        "quote_uk": (
+            "FTL рефрижератор з Німеччини: температура в нормі весь шлях, розвантаження "
+            "в заявлений день."
+        ),
+        "quote_en": (
+            "Reefer FTL from Germany: temperature held the whole way, unloaded on the "
+            "promised day."
+        ),
+        "order": 2,
+    },
+    {
+        "author": "ТОВ «Автокомплект Україна»",
+        "flag": "Митниця · T1 / EX1",
+        "quote_uk": (
+            "Транзит і митницю закрили під ключ. Один супровід від складу до складу — "
+            "без окремих брокерів."
+        ),
+        "quote_en": (
+            "Transit and customs handled turnkey. One team from warehouse to warehouse — "
+            "no extra brokers."
+        ),
+        "order": 3,
+    },
+    {
+        "author": "ТОВ «Текстиль Плюс»",
+        "flag": "Склад · консолідація в ЄС",
+        "quote_uk": (
+            "Перетарка й палетування на європейському складі зекономили нам фуру. Зручно "
+            "збирати партії під рейс."
+        ),
+        "quote_en": (
+            "Re-packing and palletising at the EU warehouse saved us a full truck. Easy "
+            "to consolidate lots for a departure."
+        ),
+        "order": 4,
+    },
+    {
+        "author": "ПрАТ «ВерстатІмпорт»",
+        "flag": "Негабарит · Туреччина",
+        "quote_uk": (
+            "Негабарит з Туреччини провели з дозволами й страховкою. Про обмеження на "
+            "маршруті попередили заздалегідь."
+        ),
+        "quote_en": (
+            "Oversized cargo from Turkey came with permits and insurance. Route limits "
+            "were flagged well in advance."
+        ),
+        "order": 5,
+    },
+]
+
+
 SEO = [
     (
         "home",
@@ -203,9 +272,18 @@ class Command(BaseCommand):
                 "&hl=uk&z=16&output=embed"
             )
         settings.save(update_fields=["slogan_uk", "slogan_en", "map_embed_url"])
-        from src.core.site_blocks import seed_default_blocks
+        from src.core.block_defaults import BLOCK_DEFAULTS
+        from src.core.site_blocks import invalidate_site_blocks_cache, seed_default_blocks
 
         seed_default_blocks()
+        wrap_keys = ("hero_badge", "hero_badge_rest", "hero_fact_rest", "hero_form_title")
+        for key in wrap_keys:
+            meta = BLOCK_DEFAULTS[("home", key)]
+            SiteBlock.objects.filter(page="home", key=key).update(
+                text_uk=meta["text_uk"],
+                text_en=meta["text_en"],
+            )
+        invalidate_site_blocks_cache()
         for item in SERVICES:
             Service.objects.update_or_create(slug=item["slug"], defaults=item)
         for index, (q_uk, q_en, a_uk, a_en) in enumerate(FAQ, start=1):
@@ -239,15 +317,19 @@ class Command(BaseCommand):
                 "order": 2,
             },
         )
-        Review.objects.update_or_create(
-            author="ТОВ «Приклад»",
-            defaults={
-                "quote_uk": "Стабільні щотижневі збірні, без сюрпризів на кордоні.",
-                "quote_en": "Reliable weekly groupage, no border surprises.",
-                "flag": "Приклад відгуку",
-                "order": 1,
-            },
-        )
+        keep_authors = [item["author"] for item in REVIEWS]
+        Review.objects.exclude(author__in=keep_authors).delete()
+        for item in REVIEWS:
+            Review.objects.update_or_create(
+                author=item["author"],
+                defaults={
+                    "quote_uk": item["quote_uk"],
+                    "quote_en": item["quote_en"],
+                    "flag": item["flag"],
+                    "order": item["order"],
+                    "is_published": True,
+                },
+            )
         for index, name in enumerate(["Partner A", "Partner B", "Partner C", "Partner D"], start=1):
             Partner.objects.update_or_create(name=name, defaults={"order": index})
         for slug, title_uk, title_en, desc_uk, desc_en in SEO:

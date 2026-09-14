@@ -30,6 +30,7 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
         admin_model_name="homeherosettings",
         blocks=(
             ("home", "hero_badge"),
+            ("home", "hero_badge_rest"),
             ("home", "hero_title"),
             ("home", "hero_lead"),
             ("home", "hero_fact_year"),

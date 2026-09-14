@@ -9,10 +9,10 @@
   overflow: hidden;
   padding-block: clamp(2.5rem, 6vw, 3.75rem) clamp(1.5rem, 3.5vw, 2.15rem);
   background:
-    url("../../media/patterns/arcs-light.svg") no-repeat 100% -20% / min(1100px, 140%) auto,
-    radial-gradient(70% 80% at 0% 0%, rgba(29, 78, 216, 0.14), transparent 55%),
-    radial-gradient(60% 50% at 100% 100%, rgba(14, 165, 233, 0.1), transparent 50%),
-    #d0dcea;
+    url("../../media/patterns/arcs-light.svg") no-repeat 50% -8% / min(1400px, 165%) auto,
+    radial-gradient(80% 70% at 0% 0%, rgba(29, 78, 216, 0.18), transparent 52%),
+    radial-gradient(70% 60% at 100% 100%, rgba(14, 165, 233, 0.12), transparent 48%),
+    #c5d3e6;
 }
 .page-header::after {
   content: "";

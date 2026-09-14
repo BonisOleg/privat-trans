@@ -40,7 +40,15 @@ export function initReveal(root = document) {
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -48px 0px" },
+    { threshold: 0.01, rootMargin: "24px 0px 0px 0px" },
   );
-  nodes.forEach((el) => observer.observe(el));
+  const viewportBottom = window.innerHeight || 0;
+  nodes.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < viewportBottom) {
+      el.classList.add("is-visible");
+      return;
+    }
+    observer.observe(el);
+  });
 }

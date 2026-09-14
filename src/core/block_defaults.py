@@ -20,11 +20,18 @@ BLOCK_DEFAULTS: dict[tuple[str, str], dict] = {
         "sort_order": 0,
     },
     ("home", "hero_badge"): {
-        "label": "Badge",
+        "label": "Badge — перший рядок",
         "content_type": "text",
-        "text_uk": "Комплексна доставка вантажів Європа ↔️ Україна ↔️ Азія",
-        "text_en": "End-to-end freight Europe ↔ Ukraine ↔ Asia",
+        "text_uk": "Комплексна доставка вантажів",
+        "text_en": "End-to-end freight",
         "sort_order": 10,
+    },
+    ("home", "hero_badge_rest"): {
+        "label": "Badge — з «Європа»",
+        "content_type": "text",
+        "text_uk": "Європа ↔️ Україна ↔️ Азія",
+        "text_en": "Europe ↔ Ukraine ↔ Asia",
+        "sort_order": 11,
     },
     ("home", "hero_title"): {
         "label": "Заголовок",
@@ -277,6 +284,7 @@ BLOCK_DEFAULTS.update(HOME_BODY_BLOCK_DEFAULTS)
 INLINE_KEYS = frozenset(
     {
         "hero_badge",
+        "hero_badge_rest",
         "hero_fact_year",
         "hero_fact_rest",
         "hero_form_title",

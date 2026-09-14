@@ -5,10 +5,17 @@
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--safe-top, 0px) + 16px);
+}
 html, body { min-height: 100dvh; }
 @media (max-width: 959px) {
   html, body { min-height: -webkit-fill-available; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 body {
   margin: 0;
@@ -156,7 +163,10 @@ input, select, textarea { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast); }
 }
-body.is-locked { overflow: hidden; }
+body.is-locked {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
 
 .btn--primary {
   background: var(--color-cta);
@@ -293,6 +303,7 @@ body.is-locked { overflow: hidden; }
 }
 @media (max-width: 370px) {
   .header .lang-switch { display: none; }
+  .brand__slogan { font-size: 0.72rem; }
 }
 
 .header__phone {
@@ -430,7 +441,14 @@ body.is-locked { overflow: hidden; }
 .drawer[data-open="true"] .drawer__panel { transform: translateX(0); }
 
 .drawer__head { display: flex; align-items: center; justify-content: space-between; }
-.drawer__close { width: 40px; height: 40px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; }
+.drawer__close {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .drawer__close:hover { background: var(--color-bg-soft); }
 
 .drawer__nav { display: flex; flex-direction: column; gap: 0.25rem; }
@@ -438,6 +456,10 @@ body.is-locked { overflow: hidden; }
 
 .drawer__foot { margin-top: auto; display: flex; flex-direction: column; gap: 0.75rem; }
 .drawer__foot .lang-switch { align-self: flex-start; }
+.drawer__foot .lang-switch__btn {
+  min-width: 44px;
+  min-height: 44px;
+}
 
 @media (min-width: 960px) {
   .drawer { display: none; }
