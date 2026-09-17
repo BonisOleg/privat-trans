@@ -53,25 +53,15 @@
       <h2 class="hero__form-title" id="hero-form-title">{% block_plain 'home' 'hero_form_title' %}</h2>
       <div class="field">
         <label class="field__label" for="hero-from">{% trans "Звідки" %}</label>
-        <div class="pt-select" data-pt-select>
-          <select class="field__select pt-select__native" id="hero-from" name="from" required data-pt-select-native>
-            <option value="">{% trans "Оберіть місто" %}</option>
-            {% for city in pt_cities %}
-            <option value="{{ city }}">{{ city }}</option>
-            {% endfor %}
-          </select>
-        </div>
+        <input class="field__input" id="hero-from" name="from" required maxlength="120"
+               autocomplete="address-level2" autocapitalize="words" spellcheck="false"
+               enterkeyhint="next" placeholder="{% trans 'Місто' %}">
       </div>
       <div class="field">
         <label class="field__label" for="hero-to">{% trans "Куди" %}</label>
-        <div class="pt-select" data-pt-select>
-          <select class="field__select pt-select__native" id="hero-to" name="to" required data-pt-select-native>
-            <option value="">{% trans "Оберіть місто" %}</option>
-            {% for city in pt_cities %}
-            <option value="{{ city }}">{{ city }}</option>
-            {% endfor %}
-          </select>
-        </div>
+        <input class="field__input" id="hero-to" name="to" required maxlength="120"
+               autocomplete="address-level2" autocapitalize="words" spellcheck="false"
+               enterkeyhint="next" placeholder="{% trans 'Місто' %}">
       </div>
       <div class="field">
         <label class="field__label" for="hero-cargo">{% trans "Тип вантажу" %}</label>
@@ -330,7 +320,7 @@
           <li>{% block_plain 'home' 'calc_teaser_item_1' %}</li>
           <li>{% block_plain 'home' 'calc_teaser_item_2' %}</li>
         </ul>
-        <p class="mt-md"><a class="btn btn--primary" href="{% url 'calculator:page' %}">{% block_plain 'home' 'calc_teaser_cta' %}</a></p>
+        <p class="mt-md"><a class="btn btn--primary" href="#lead-form" data-qa="calc-teaser-cta">{% block_plain 'home' 'hero_submit' %}</a></p>
       </div>
       {% block_plain 'home' 'calc_teaser_from' as calc_from %}
       {% block_plain 'home' 'calc_teaser_to' as calc_to %}
@@ -380,7 +370,10 @@
 <section class="section section--dark atmosphere--editorial" id="reviews">
   <div class="container">
     <div class="section__head section__head--reviews reveal">
-      <h2 class="section__title">{% block_plain 'home' 'reviews_title' %}</h2>
+      <div class="section__head-copy">
+        <h2 class="section__title">{% block_plain 'home' 'reviews_title' %}</h2>
+        <p class="reviews-source">{% trans "Реальні відгуки з" %} <a class="reviews-source__link" href="https://lardi-trans.com/log/user/15009884246/responses/?scopeType=POSITIVE" target="_blank" rel="noopener noreferrer">Lardi-Trans</a></p>
+      </div>
       <p class="reviews-carousel__hint" data-reviews-hint hidden>{% trans "Гортайте" %}</p>
     </div>
     <div class="reviews-carousel reveal" data-reviews-carousel data-reviews-count="{{ reviews|length }}">
@@ -397,7 +390,21 @@
               <div class="review-card__stars" aria-hidden="true">★★★★★</div>
               <div class="review-card__quote">{{ review.quote|cms_lines }}</div>
               <p class="review-card__author">{{ review.author }}</p>
+              {% if review.flag %}
               <p class="review-card__flag">{{ review.flag }}</p>
+              {% endif %}
+              {% if review.source or review.reviewed_on %}
+              <p class="review-card__source">
+                {% if review.source_url %}
+                <a class="review-card__source-link" href="{{ review.source_url }}" target="_blank" rel="noopener noreferrer">{{ review.source|default:"Lardi-Trans" }}</a>
+                {% elif review.source %}
+                <span>{{ review.source }}</span>
+                {% endif %}
+                {% if review.reviewed_on %}
+                <time class="review-card__source-date" datetime="{{ review.reviewed_on|date:'Y-m-d' }}">{{ review.reviewed_on|date:"d.m.Y" }}</time>
+                {% endif %}
+              </p>
+              {% endif %}
             </article>
             {% endfor %}
           </div>

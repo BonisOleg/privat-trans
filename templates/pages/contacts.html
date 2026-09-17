@@ -2,17 +2,15 @@
 {% load i18n site_content %}
 
 {% block content %}
-<header class="page-header">
+<section class="section section--page atmosphere--arcs">
   <div class="container">
-    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Контакти" %}</nav>
-    <span class="page-header__eyebrow reveal">{% trans "Контакти" %}</span>
-    <h1 class="page-title reveal">{{ page_h1|default:_("Контакти") }}</h1>
-    {% block_plain 'contacts' 'contacts_lead' as contacts_lead %}
-    {% if contacts_lead %}<div class="page-lead reveal">{{ contacts_lead }}</div>{% endif %}
-  </div>
-</header>
-<section class="section atmosphere--arcs">
-  <div class="container contacts-grid">
+    <header class="page-intro">
+      <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Контакти" %}</nav>
+      <h1 class="page-title reveal">{{ page_h1|default:_("Контакти") }}</h1>
+      {% block_plain 'contacts' 'contacts_lead' as contacts_lead %}
+      {% if contacts_lead %}<div class="page-lead reveal">{{ contacts_lead }}</div>{% endif %}
+    </header>
+    <div class="contacts-grid">
     <div class="contacts-grid__info reveal reveal--left">
       <div class="contact-item">
         <div class="contact-item__icon" aria-hidden="true">
@@ -61,6 +59,7 @@
     </div>
     <div id="lead-form-slot" class="calculator-card reveal reveal--right">
       {% include "leads/_form.html" %}
+    </div>
     </div>
   </div>
 </section>

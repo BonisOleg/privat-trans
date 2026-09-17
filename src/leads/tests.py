@@ -12,7 +12,9 @@ def _lead_payload(**overrides):
         "phone": "+380670000000",
         "email": "test@example.com",
         "from_city": "Київ",
+        "from_country": "Україна",
         "to_city": "Warsaw",
+        "to_country": "Poland",
         "cargo": "ltl",
         "consent": "on",
     }
@@ -71,7 +73,9 @@ class LeadFormTests(TestCase):
         self.assertContains(response, 'value="ftl"')
         self.assertContains(response, 'value="turnkey"')
         self.assertContains(response, "id_from_city")
+        self.assertContains(response, "id_from_country")
         self.assertContains(response, "id_to_city")
+        self.assertContains(response, "id_to_country")
 
     def test_invalid_phone_rejected(self):
         response = self.client.post(reverse("leads:create"), _lead_payload(phone="abc"))
@@ -83,6 +87,33 @@ class LeadFormTests(TestCase):
         response = self.client.post(reverse("leads:create"), _lead_payload(from_city="", to_city=""))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Lead.objects.count(), 0)
+
+    def test_missing_country_rejected(self):
+        response = self.client.post(
+            reverse("leads:create"),
+            _lead_payload(from_country="", to_country=""),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Lead.objects.count(), 0)
+
+    def test_free_city_accepted(self):
+        response = self.client.post(
+            reverse("leads:create"),
+            _lead_payload(
+                from_city="Рівне",
+                from_country="Україна",
+                to_city="Відень",
+                to_country="Австрія",
+            ),
+            HTTP_HX_REQUEST="true",
+        )
+        self.assertEqual(response.status_code, 200)
+        lead = Lead.objects.get()
+        self.assertEqual(lead.from_city, "Рівне")
+        self.assertEqual(lead.from_country, "Україна")
+        self.assertEqual(lead.to_city, "Відень")
+        self.assertEqual(lead.to_country, "Австрія")
+        self.assertContains(response, "Заявка відправлена")
 
     def test_unknown_cargo_rejected(self):
         response = self.client.post(reverse("leads:create"), _lead_payload(cargo="LTL"))

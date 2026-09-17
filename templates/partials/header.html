@@ -14,16 +14,25 @@
         <li><a class="nav__link" href="{% url 'pages:fleet' %}" data-qa="nav-fleet">{% trans "Автопарк" %}</a></li>
         <li><a class="nav__link" href="{% url 'pages:about' %}" data-qa="nav-about">{% trans "Про нас" %}</a></li>
         <li><a class="nav__link" href="{% url 'faq:list' %}" data-qa="nav-faq">FAQ</a></li>
-        <li><a class="nav__link" href="{% url 'calculator:page' %}" data-qa="nav-calculator">{% trans "Калькулятор" %}</a></li>
         <li><a class="nav__link" href="{% url 'pages:contacts' %}" data-qa="nav-contacts">{% trans "Контакти" %}</a></li>
       </ul>
     </nav>
     <div class="header__actions">
-      {% if site_settings.phone_href %}
-      <a class="header__phone" href="tel:{{ site_settings.phone_href }}" data-qa="header-phone">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3.5 5.7 2 2 0 0 1 5.5 3.5z" stroke-linejoin="round"/></svg>
-        <span class="header__phone-text">{{ site_settings.phone }}</span>
-      </a>
+      {% if site_settings.phone_href or site_settings.email %}
+      <div class="header__contacts">
+        {% if site_settings.phone_href %}
+        <a class="header__phone" href="tel:{{ site_settings.phone_href }}" data-qa="header-phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3.5 5.7 2 2 0 0 1 5.5 3.5z" stroke-linejoin="round"/></svg>
+          <span class="header__phone-text">{{ site_settings.phone }}</span>
+        </a>
+        {% endif %}
+        {% if site_settings.email %}
+        <a class="header__email" href="mailto:{{ site_settings.email }}" data-qa="header-email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span class="header__email-text">{{ site_settings.email }}</span>
+        </a>
+        {% endif %}
+      </div>
       {% endif %}
       {% if site_settings.telegram %}
       <a class="header__icon-link" href="{{ site_settings.telegram }}" target="_blank" rel="noopener" aria-label="Telegram" data-qa="header-telegram">

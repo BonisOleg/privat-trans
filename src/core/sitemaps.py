@@ -11,7 +11,6 @@ STATIC_PRIORITIES = {
     "pages:fleet": 0.7,
     "pages:contacts": 0.7,
     "faq:list": 0.6,
-    "calculator:page": 0.6,
     "pages:privacy": 0.3,
 }
 

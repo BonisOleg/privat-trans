@@ -9,6 +9,39 @@
   max-width: none;
 }
 
+.section__head-copy {
+  min-width: 0;
+}
+
+.reviews-source {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(210, 192, 160, 0.82);
+}
+
+.reviews-source__link {
+  color: #d2c0a0;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.reviews-source__link:hover,
+.reviews-source__link:focus-visible {
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .reviews-source {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .reviews-source__link {
+    display: inline-block;
+    padding-block: 0.35rem;
+  }
+}
+
 .reviews-carousel {
   --reviews-gap: 1rem;
   --reviews-visible: 1;

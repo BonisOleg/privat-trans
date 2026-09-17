@@ -65,12 +65,15 @@
   to { transform: translate3d(-50%, 0, 0); }
 }
 
-#lead-form,
+/* Один offset: html без scroll-padding-top, інакше з margin сумуються і якір не докручує */
 #career,
 #routes,
 #services,
 #faq {
   scroll-margin-top: calc(var(--header-h) + var(--safe-top, 0px) + 16px);
+}
+#lead-form {
+  scroll-margin-top: calc(var(--header-h) + var(--safe-top, 0px) + 16px - 50px);
 }
 
 .hero__title.reveal { --reveal-delay: 70ms; }
@@ -82,7 +85,8 @@
   .reveal { --motion-reveal: 420ms; }
   .reveal--left { transform: translate3d(-12px, 0, 0); }
   .reveal--right { transform: translate3d(12px, 0, 0); }
-  .page-header .reveal {
+  .page-header .reveal,
+  .page-intro .reveal {
     opacity: 1;
     transform: none;
     transition: none;

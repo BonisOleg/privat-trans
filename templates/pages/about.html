@@ -2,16 +2,14 @@
 {% load i18n site_content %}
 
 {% block content %}
-<header class="page-header">
+<section class="section section--page atmosphere--arcs">
   <div class="container">
-    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Про нас" %}</nav>
-    <span class="page-header__eyebrow reveal">{% trans "Компанія" %}</span>
-    <h1 class="page-title reveal">{{ page_h1|default:_("Про нас") }}</h1>
-    <div class="page-lead reveal">{% block_html 'about' 'about_lead' %}</div>
-  </div>
-</header>
-<section class="section atmosphere--arcs">
-  <div class="container">
+    <header class="page-intro">
+      <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Про нас" %}</nav>
+      <span class="page-header__eyebrow reveal">{% trans "Компанія" %}</span>
+      <h1 class="page-title reveal">{{ page_h1|default:_("Про нас") }}</h1>
+      <div class="page-lead reveal">{% block_html 'about' 'about_lead' %}</div>
+    </header>
     <div class="about-stats">
       <div class="stat reveal"><div class="stat__value">{% block_plain 'about' 'about_stat_1_value' %}</div><p class="stat__label">{% block_plain 'about' 'about_stat_1_label' %}</p></div>
       <div class="stat reveal"><div class="stat__value">{% block_plain 'about' 'about_stat_2_value' %}</div><p class="stat__label">{% block_plain 'about' 'about_stat_2_label' %}</p></div>

@@ -225,6 +225,10 @@ msgid "Гортайте"
 msgstr "Swipe"
 
 #: templates/pages/home.html
+msgid "Реальні відгуки з"
+msgstr "Real reviews from"
+
+#: templates/pages/home.html
 msgid "Попередній відгук"
 msgstr "Previous review"
 

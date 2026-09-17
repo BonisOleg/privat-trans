@@ -2,26 +2,28 @@
 {% load i18n site_content %}
 
 {% block content %}
-<header class="page-header">
+<section class="section section--page atmosphere--arcs">
   <div class="container">
-    <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Калькулятор" %}</nav>
-    <span class="page-header__eyebrow reveal">{% trans "Розрахунок" %}</span>
-    <h1 class="page-title reveal">{{ page_h1|default:_("Орієнтовний розрахунок") }}</h1>
-    <div class="page-lead reveal">{% block_html 'calculator' 'calculator_lead' %}</div>
-  </div>
-</header>
-<section class="section atmosphere--arcs">
-  <div class="container">
+    <header class="page-intro">
+      <nav class="breadcrumbs reveal"><a href="{% url 'pages:home' %}">{% trans "Головна" %}</a> / {% trans "Калькулятор" %}</nav>
+      <span class="page-header__eyebrow reveal">{% trans "Розрахунок" %}</span>
+      <h1 class="page-title reveal">{{ page_h1|default:_("Орієнтовний розрахунок") }}</h1>
+      <div class="page-lead reveal">{% block_html 'calculator' 'calculator_lead' %}</div>
+    </header>
     <div class="calculator-layout reveal">
       <form class="calculator-card" data-calculator-form data-qa="calculator-form">
         <div class="field-row field-row--2">
           <div class="field">
             <label class="field__label" for="calc-from">{% trans "Звідки" %}</label>
-            <input class="field__input" id="calc-from" name="from" list="pt-cities" required>
+            <input class="field__input" id="calc-from" name="from" required maxlength="120"
+                   autocomplete="address-level2" autocapitalize="words" spellcheck="false"
+                   enterkeyhint="next" placeholder="{% trans 'Місто' %}">
           </div>
           <div class="field">
             <label class="field__label" for="calc-to">{% trans "Куди" %}</label>
-            <input class="field__input" id="calc-to" name="to" list="pt-cities" required>
+            <input class="field__input" id="calc-to" name="to" required maxlength="120"
+                   autocomplete="address-level2" autocapitalize="words" spellcheck="false"
+                   enterkeyhint="next" placeholder="{% trans 'Місто' %}">
           </div>
         </div>
         <div class="field field--mt">
@@ -52,7 +54,6 @@
           </select>
         </div>
         <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="calc-submit">{% block_plain 'calculator' 'calculator_submit' %}</button>
-        <datalist id="pt-cities" data-cities></datalist>
       </form>
       <div>
         <p class="calc-empty" data-calc-empty>{% block_plain 'calculator' 'calculator_empty' %}</p>

@@ -23,3 +23,8 @@ class ReviewsCarouselTests(TestCase):
         self.assertContains(response, "Цитата 0")
         self.assertContains(response, "Цитата 4")
         self.assertContains(response, 'data-reviews-dot="4"')
+        self.assertContains(response, "Lardi-Trans")
+        self.assertContains(
+            response,
+            "https://lardi-trans.com/log/user/15009884246/responses/?scopeType=POSITIVE",
+        )

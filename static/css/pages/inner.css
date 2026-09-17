@@ -45,6 +45,16 @@
 }
 .page-lead:empty { display: none; }
 
+.section--page {
+  padding-top: clamp(1.25rem, 3.2vw, 1.85rem);
+}
+.page-intro {
+  margin-bottom: clamp(1.35rem, 3vw, 2rem);
+}
+.page-intro .page-title {
+  scroll-margin-top: calc(var(--header-h) + var(--safe-top, 0px) + 12px);
+}
+
 /* ---------- About ---------- */
 .about-stats {
   display: grid;
@@ -330,6 +340,9 @@
 @media (max-width: 767px) {
   .page-header {
     padding-block: clamp(2.15rem, 7vw, 2.75rem) 1.35rem;
+  }
+  .section--page {
+    padding-top: clamp(1.1rem, 4.5vw, 1.5rem);
   }
   .page-title { font-size: clamp(1.65rem, 7vw, 2.1rem); }
   .contacts-grid .calculator-card,

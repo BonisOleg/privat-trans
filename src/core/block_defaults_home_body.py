@@ -190,7 +190,7 @@ HOME_BODY_BLOCK_DEFAULTS: dict[tuple[str, str], dict] = {
     ("home", "calc_teaser_title"): _t("Калькулятор-тизер — заголовок", "Орієнтовний розрахунок", "Estimated quote", 1001),
     ("home", "calc_teaser_item_1"): _t("Калькулятор-тизер — пункт 1", "Звідки / куди, вага, тип кузова", "From / to, weight, body type", 1010),
     ("home", "calc_teaser_item_2"): _t("Калькулятор-тизер — пункт 2", "Результат — діапазон у євро, не оферта", "Result is a euro range, not an offer", 1011),
-    ("home", "calc_teaser_cta"): _t("Калькулятор-тизер — CTA", "Відкрити калькулятор", "Open calculator", 1012),
+    ("home", "calc_teaser_cta"): _t("Калькулятор-тизер — CTA", "Отримати розрахунок", "Get a quote", 1012),
     ("home", "calc_teaser_panel_label"): _t("Калькулятор-тизер — підпис панелі", "Приклад", "Example", 1020),
     ("home", "calc_teaser_route"): _t("Калькулятор-тизер — маршрут", "Київ → Warsaw", "Kyiv → Warsaw", 1021),
     ("home", "calc_teaser_meta"): _t("Калькулятор-тизер — параметри", "Збірний · ~1.2 т · тент", "Groupage · ~1.2 t · curtain", 1022),

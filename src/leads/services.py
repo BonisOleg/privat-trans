@@ -68,7 +68,9 @@ def _notify_crm(lead: Lead) -> None:
             "phone": lead.phone,
             "email": lead.email,
             "from": lead.from_city,
+            "from_country": lead.from_country,
             "to": lead.to_city,
+            "to_country": lead.to_country,
             "cargo": lead.cargo,
             "service": lead.service,
             "message": lead.message,
@@ -90,7 +92,7 @@ def notify_lead(lead: Lead) -> None:
     body = (
         f"Нова заявка #{lead.pk}\n"
         f"{lead.name} · {lead.phone} · {lead.email}\n"
-        f"{lead.from_city} → {lead.to_city}\n"
+        f"{lead.from_city}, {lead.from_country} → {lead.to_city}, {lead.to_country}\n"
         f"{lead.cargo} / {lead.service}\n"
         f"{lead.message}"
     )

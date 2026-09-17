@@ -677,6 +677,24 @@
 .review-card__quote p + p { margin-top: 0.55rem; }
 .review-card__author { margin-top: auto; padding-top: 1rem; font-weight: 600; font-size: 0.9rem; color: var(--color-text-muted); }
 .review-card__flag { margin-top: 0.4rem; font-size: 0.75rem; color: var(--color-text-dim); }
+.review-card__source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.55rem;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+}
+.review-card__source-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+.review-card__source-link:hover,
+.review-card__source-link:focus-visible {
+  color: var(--color-text);
+}
 
 /* ---------- Breadcrumbs (page-header chrome → pages/inner.css) ---------- */
 .breadcrumbs { display: flex; gap: 0.4rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--color-text-dim); margin-bottom: 0.75rem; }

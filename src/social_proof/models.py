@@ -7,7 +7,10 @@ class Review(models.Model):
     quote_uk = models.TextField()
     quote_en = models.TextField(blank=True)
     author = models.CharField(max_length=120)
-    flag = models.CharField(max_length=80, blank=True)
+    flag = models.CharField(max_length=160, blank=True)
+    source = models.CharField(max_length=80, blank=True)
+    source_url = models.URLField(blank=True)
+    reviewed_on = models.DateField(blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_published = models.BooleanField(default=True)
 

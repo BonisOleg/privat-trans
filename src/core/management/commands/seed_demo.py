@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.management.base import BaseCommand
 
 from src.careers.models import Vacancy
@@ -129,71 +131,157 @@ FAQ = [
     ("Які документи потрібні?", "Which documents are needed?", "Інвойс, пакувальний лист, коди УКТЗЕД і довіреність — менеджер надішле чекліст.", "Invoice, packing list, HS codes and a power of attorney."),
 ]
 
+LARDI_REVIEWS_URL = (
+    "https://lardi-trans.com/log/user/15009884246/responses/?scopeType=POSITIVE"
+)
+
 REVIEWS = [
     {
-        "author": "ТОВ «Галицький імпорт»",
-        "flag": "Збірні · Польща → Львів",
+        "author": '"Всеукраїнська брокерська агенція", ТОВ',
+        "flag": "FR → UA · Loison-sous-Lens — Бородянка",
         "quote_uk": (
-            "Щотижневі збірні з Польщі йдуть за графіком. Менеджер тримає слот і документи, "
-            "на кордоні без сюрпризів."
+            "Дуже задоволені співпрацею з перевізником! Вантаж був доставлений вчасно "
+            "й у повній цілісності. Окреме дякуємо Станіславу за оперативний зв’язок, "
+            "відповідальний підхід та професійність на всіх етапах роботи. Рекомендуємо "
+            "до співпраці!"
         ),
         "quote_en": (
-            "Weekly groupage from Poland stays on schedule. The manager holds the slot "
-            "and papers — no surprises at the border."
+            "Very happy with this carrier! The cargo arrived on time and fully intact. "
+            "Special thanks to Stanislav for prompt contact, a responsible approach and "
+            "professionalism at every stage. We recommend working with them!"
         ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2026, 7, 20),
         "order": 1,
     },
     {
-        "author": "ПП «Карпати Фуд»",
-        "flag": "Рефрижератор · Німеччина",
-        "quote_uk": (
-            "FTL рефрижератор з Німеччини: температура в нормі весь шлях, розвантаження "
-            "в заявлений день."
-        ),
-        "quote_en": (
-            "Reefer FTL from Germany: temperature held the whole way, unloaded on the "
-            "promised day."
-        ),
+        "author": "Рибак Н.В., ФОП",
+        "flag": "DE → UA · Шмісберг — Київ",
+        "quote_uk": "Дякуємо за співпрацю! Бажаємо успіху! Рекомендуємо!",
+        "quote_en": "Thank you for the cooperation! We wish you success! Recommended!",
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2026, 5, 27),
         "order": 2,
     },
     {
-        "author": "ТОВ «Автокомплект Україна»",
-        "flag": "Митниця · T1 / EX1",
-        "quote_uk": (
-            "Транзит і митницю закрили під ключ. Один супровід від складу до складу — "
-            "без окремих брокерів."
-        ),
-        "quote_en": (
-            "Transit and customs handled turnkey. One team from warehouse to warehouse — "
-            "no extra brokers."
-        ),
+        "author": "Мар'юсік Катерина Борисівна, ФОП",
+        "flag": "FR → UA · Карвен — Вишневе",
+        "quote_uk": "Все згідно домовленостей! Рекомендуємо до співпраці!",
+        "quote_en": "Everything as agreed! We recommend working with them!",
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 11, 3),
         "order": 3,
     },
     {
-        "author": "ТОВ «Текстиль Плюс»",
-        "flag": "Склад · консолідація в ЄС",
+        "author": "Комишев Дмитро Миколайович, ФОП",
+        "flag": "PL → UA · Варшава — Київ",
         "quote_uk": (
-            "Перетарка й палетування на європейському складі зекономили нам фуру. Зручно "
-            "збирати партії під рейс."
+            "Дякуємо за співпрацю! Станістав увесь час був на звязку, все швидко чітко "
+            "згідно домовленостей! Надійний вантажовідправник! Рекомендуємо та "
+            "сподіваємось на подальшу співпрацю!)"
         ),
         "quote_en": (
-            "Re-packing and palletising at the EU warehouse saved us a full truck. Easy "
-            "to consolidate lots for a departure."
+            "Thank you for the cooperation! Stanislav stayed in touch the whole time — "
+            "fast, clear and as agreed! A reliable shipper! We recommend them and hope "
+            "to keep working together!)"
         ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 9, 12),
         "order": 4,
     },
     {
-        "author": "ПрАТ «ВерстатІмпорт»",
-        "flag": "Негабарит · Туреччина",
+        "author": "Granit Group",
+        "flag": "FR → UA · Saint-Pierre-lès-Elbeuf — Київ",
         "quote_uk": (
-            "Негабарит з Туреччини провели з дозволами й страховкою. Про обмеження на "
-            "маршруті попередили заздалегідь."
+            "Все пройшло чудово, вантаж доставили швидко та без проблем, дякую "
+            "Станіславу за відмінну роботу. Рекомендую!!!"
         ),
         "quote_en": (
-            "Oversized cargo from Turkey came with permits and insurance. Route limits "
-            "were flagged well in advance."
+            "Everything went great, the cargo was delivered quickly and without issues. "
+            "Thank you, Stanislav, for excellent work. Recommended!!!"
         ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 8, 12),
         "order": 5,
+    },
+    {
+        "author": "НЕОЛИТ",
+        "flag": "FR → UA · Карвен — Львів",
+        "quote_uk": (
+            "Робота виконана дуже професійно!!!!!Дякую за співпрацю!!!!Дякую Станіславу!!!!"
+        ),
+        "quote_en": (
+            "The work was done very professionally!!!!! Thank you for the cooperation!!!! "
+            "Thank you, Stanislav!!!!"
+        ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 6, 23),
+        "order": 6,
+    },
+    {
+        "author": "Gia grupė MB",
+        "flag": "BE → UA · Gent — Київ",
+        "quote_uk": (
+            "Хороший перевізник, вперше робили збірне перевезення — досвід позитивний. "
+            "Продовжимо співпрацю. Рекомендую компанію."
+        ),
+        "quote_en": (
+            "Good hauler, first time I did an LTL hauling, and it was a good experience. "
+            "We will keep working. I recommend the transportation company"
+        ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 6, 12),
+        "order": 7,
+    },
+    {
+        "author": "Ель Логістик, ТОВ",
+        "flag": "DE → UA · Берлін — Київ",
+        "quote_uk": (
+            "Дякую Владиславу за організацію перевезення, все було в рамках домовленостей, "
+            "швидко та професійно. Рекомендую до співпраці!"
+        ),
+        "quote_en": (
+            "Thanks to Vladyslav for organizing the shipment — everything was as agreed, "
+            "fast and professional. I recommend working with them!"
+        ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 5, 9),
+        "order": 8,
+    },
+    {
+        "author": "Кондратюк Олена Валеріївна, ФОП",
+        "flag": "UA → FR · Зоря — Петерсбак",
+        "quote_uk": (
+            "Дякуємо за співпрацю! Робота виконана якісно, оплата вчасна, відмінна "
+            "комунікація! Все супер, окрема поляка Станіславу! Будемо працювати й далі)"
+        ),
+        "quote_en": (
+            "Thank you for the cooperation! Quality work, on-time payment and excellent "
+            "communication! All great, special thanks to Stanislav! We will keep working "
+            "together)"
+        ),
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 4, 24),
+        "order": 9,
+    },
+    {
+        "author": "Штик Аліна Петрівна, ФОП",
+        "flag": "BE → UA · Генк — Київ",
+        "quote_uk": "Хороший вантажовідправник, все відповідально і вчасно, рекомендую",
+        "quote_en": "A good shipper — responsible and on time. I recommend them",
+        "source": "Lardi-Trans",
+        "source_url": LARDI_REVIEWS_URL,
+        "reviewed_on": date(2025, 1, 23),
+        "order": 10,
     },
 ]
 
@@ -326,6 +414,9 @@ class Command(BaseCommand):
                     "quote_uk": item["quote_uk"],
                     "quote_en": item["quote_en"],
                     "flag": item["flag"],
+                    "source": item.get("source", ""),
+                    "source_url": item.get("source_url", ""),
+                    "reviewed_on": item.get("reviewed_on"),
                     "order": item["order"],
                     "is_published": True,
                 },

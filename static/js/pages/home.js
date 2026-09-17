@@ -19,11 +19,23 @@ function setSelectValue(select, value) {
   select.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
+function setFieldValue(field, value) {
+  if (!field || value == null || value === "") return;
+  if (field instanceof HTMLSelectElement) {
+    setSelectValue(field, value);
+    return;
+  }
+  if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+    field.value = String(value);
+    field.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+}
+
 function fillLeadFromParams(params) {
   const leadForm = document.querySelector("[data-lead-form]");
   if (!leadForm) return;
-  setSelectValue(leadForm.querySelector("[name='from_city']"), params.get("from"));
-  setSelectValue(leadForm.querySelector("[name='to_city']"), params.get("to"));
+  setFieldValue(leadForm.querySelector("[name='from_city']"), params.get("from"));
+  setFieldValue(leadForm.querySelector("[name='to_city']"), params.get("to"));
   setSelectValue(leadForm.querySelector("[name='cargo']"), params.get("cargo"));
   const note = params.get("note");
   const message = leadForm.querySelector("[name='message']");
@@ -43,8 +55,8 @@ export function initQuoteBridge() {
       event.preventDefault();
       if (!heroForm.checkValidity()) return;
       const data = new FormData(heroForm);
-      setSelectValue(leadForm.querySelector("[name='from_city']"), data.get("from"));
-      setSelectValue(leadForm.querySelector("[name='to_city']"), data.get("to"));
+      setFieldValue(leadForm.querySelector("[name='from_city']"), data.get("from"));
+      setFieldValue(leadForm.querySelector("[name='to_city']"), data.get("to"));
       setSelectValue(leadForm.querySelector("[name='cargo']"), data.get("cargo"));
       const phone = leadForm.querySelector("[name='phone']");
       if (phone && !phone.value) phone.value = data.get("phone") || "";

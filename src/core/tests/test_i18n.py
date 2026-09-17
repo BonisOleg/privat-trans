@@ -33,9 +33,11 @@ class HealthAndPagesTests(TestCase):
         self.assertContains(response, "ПРИВАТ-ТРАНС")
         self.assertContains(response, 'href="#lead-form"')
         self.assertContains(response, 'data-qa="hero-quote-open"')
+        self.assertContains(response, 'data-qa="calc-teaser-cta"')
         self.assertContains(response, 'hero__badge-lead')
         self.assertContains(response, 'hero__badge-rest')
         self.assertNotContains(response, "data-hero-sheet-open")
+        self.assertNotContains(response, 'data-qa="nav-calculator"')
 
     def test_home_en(self):
         response = self.client.get("/en/")

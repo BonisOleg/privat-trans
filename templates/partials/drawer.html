@@ -11,13 +11,15 @@
       <a class="drawer__link" href="{% url 'pages:fleet' %}">{% trans "Автопарк" %}</a>
       <a class="drawer__link" href="{% url 'pages:about' %}">{% trans "Про нас" %}</a>
       <a class="drawer__link" href="{% url 'faq:list' %}">FAQ</a>
-      <a class="drawer__link" href="{% url 'calculator:page' %}">{% trans "Калькулятор" %}</a>
       <a class="drawer__link" href="{% url 'pages:contacts' %}">{% trans "Контакти" %}</a>
     </nav>
     <div class="drawer__foot">
       {% include "partials/lang_switch.html" %}
       <a class="btn btn--primary btn--block" href="{% url 'pages:home' %}#lead-form">{% block_plain 'site' 'cta_lead' %}</a>
       <a class="btn btn--secondary btn--block" href="tel:{{ site_settings.phone_href }}">{% block_plain 'site' 'cta_call' %}</a>
+      {% if site_settings.email %}
+      <a class="drawer__email" href="mailto:{{ site_settings.email }}" data-qa="drawer-email">{{ site_settings.email }}</a>
+      {% endif %}
     </div>
   </div>
 </div>

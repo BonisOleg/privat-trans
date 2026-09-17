@@ -37,13 +37,17 @@
 .atmosphere--lanes .section__parallax-layer { background: var(--atmosphere); }
 
 /* ---------- Chapters (канон фонів — тільки тут) ---------- */
-.chapter--regions {
-  background:
+.chapter--regions,
+#calc-teaser {
+  --atmosphere:
     url("../../media/patterns/arcs-light.svg") no-repeat 50% 12% / min(1400px, 170%) auto,
     radial-gradient(70% 80% at 0% 30%, rgba(29, 78, 216, 0.16), transparent 55%),
     radial-gradient(70% 80% at 100% 70%, rgba(217, 119, 6, 0.12), transparent 52%),
     #d0dcec;
+  --section-parallax-bg: var(--atmosphere);
+  background: var(--atmosphere);
 }
+#calc-teaser .section__parallax-layer { background: var(--atmosphere); }
 
 /* Сценарії: editorial dark без сітки — продовження hero */
 .atmosphere--editorial,
@@ -135,6 +139,10 @@
 #reviews .review-card__quote { color: var(--color-text-inverse-muted); }
 #reviews .review-card__author { color: #fff; }
 #reviews .review-card__flag { color: rgba(210, 192, 160, 0.72); }
+#reviews .review-card__source { color: rgba(210, 192, 160, 0.58); }
+#reviews .review-card__source-link { color: #d2c0a0; }
+#reviews .review-card__source-link:hover,
+#reviews .review-card__source-link:focus-visible { color: #fff; }
 @media (hover: hover) and (pointer: fine) {
   #reviews .review-card:hover {
     background: rgba(255, 255, 255, 0.08);
@@ -197,15 +205,6 @@
   background: var(--atmosphere);
 }
 #advantages .section__parallax-layer { background: var(--atmosphere); }
-
-#calculator-teaser {
-  --atmosphere:
-    url("../../media/patterns/arcs-light.svg") no-repeat 110% 120% / min(1100px, 140%) auto,
-    radial-gradient(80% 70% at 0% 0%, rgba(29, 78, 216, 0.16), transparent 50%),
-    #c3d2e6;
-  background: var(--atmosphere);
-}
-#calculator-teaser .section__parallax-layer { background: var(--atmosphere); }
 
 #faq {
   --atmosphere:
