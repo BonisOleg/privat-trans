@@ -278,6 +278,11 @@ UNFOLD = {
                         "link": reverse_lazy("admin:social_proof_partner_changelist"),
                     },
                     {
+                        "title": "Галерея робіт",
+                        "icon": "photo_library",
+                        "link": reverse_lazy("admin:social_proof_gallerywork_changelist"),
+                    },
+                    {
                         "title": "Вакансії",
                         "icon": "work",
                         "link": reverse_lazy("admin:careers_vacancy_changelist"),

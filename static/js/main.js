@@ -7,6 +7,7 @@ import { initCustomSelects } from "./modules/custom-select.js?v=2";
 import { initCalculator } from "./pages/calculator.js";
 import { initPartnersMarquee } from "./modules/partners-marquee.js";
 import { initReviewsCarousel } from "./modules/reviews-carousel.js";
+import { initGallery } from "./modules/gallery.js";
 import { initAnalytics } from "./modules/analytics.js";
 
 const PT_CITIES = [
@@ -57,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCalculator();
   initPartnersMarquee();
   initReviewsCarousel();
+  initGallery();
 });
 
 document.body.addEventListener("htmx:afterSwap", (event) => {
@@ -68,4 +70,5 @@ document.body.addEventListener("htmx:afterSwap", (event) => {
   initFaqAccordion(target);
   initPartnersMarquee(target);
   initReviewsCarousel(target);
+  initGallery(target);
 });

@@ -174,6 +174,25 @@ HOME_BODY_BLOCK_DEFAULTS: dict[tuple[str, str], dict] = {
         "Full financial and legal protection for your goods.",
         815,
     ),
+    ("home", "advantage_4_title"): _t("Перевага 4 — заголовок", "20 років досвіду", "20 years of experience", 816),
+    ("home", "advantage_4_text"): _t(
+        "Перевага 4 — текст",
+        "На ринку міжнародних перевезень з 2007 року.",
+        "On the international freight market since 2007.",
+        817,
+    ),
+    ("home", "advantage_5_title"): _t(
+        "Перевага 5 — заголовок",
+        "98% своєчасної доставки вантажів",
+        "98% on-time cargo delivery",
+        818,
+    ),
+    ("home", "advantage_5_text"): _t(
+        "Перевага 5 — текст",
+        "Рейси закриваємо в узгоджений термін.",
+        "We close lanes on the agreed date.",
+        819,
+    ),
     # —— Home / Process ——
     ("home", "process_eyebrow"): _t("Процес — eyebrow", "Маршрут угоди", "Deal journey", 900),
     ("home", "process_title"): _t("Процес — заголовок", "Як це відбувається", "How it works", 901),

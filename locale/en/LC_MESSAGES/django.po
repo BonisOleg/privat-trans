@@ -244,6 +244,26 @@ msgstr "Client reviews"
 msgid "Відгук %(n)s"
 msgstr "Review %(n)s"
 
+#: templates/pages/about.html
+msgid "Відкрити фото %(n)s"
+msgstr "Open photo %(n)s"
+
+#: templates/pages/about.html
+msgid "Галерея робіт"
+msgstr "Work gallery"
+
+#: templates/pages/about.html
+msgid "Закрити"
+msgstr "Close"
+
+#: templates/pages/about.html
+msgid "Попереднє фото"
+msgstr "Previous photo"
+
+#: templates/pages/about.html
+msgid "Наступне фото"
+msgstr "Next photo"
+
 #: templates/partials/header.html:11
 msgid "Основна навігація"
 msgstr "Primary navigation"

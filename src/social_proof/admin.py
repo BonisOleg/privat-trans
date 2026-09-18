@@ -1,8 +1,9 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from unfold.admin import ModelAdmin
 
 from src.core.admin_mixins import ReadableUnfoldFieldsMixin
-from src.social_proof.models import Partner, Review
+from src.social_proof.models import GalleryWork, Partner, Review
 
 
 @admin.register(Review)
@@ -35,3 +36,25 @@ class ReviewAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
 class PartnerAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
     list_display = ("name", "order", "is_published")
     list_editable = ("order", "is_published")
+
+
+@admin.register(GalleryWork)
+class GalleryWorkAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+    list_display = ("thumb", "alt_uk", "order", "is_published")
+    list_editable = ("order", "is_published")
+    list_filter = ("is_published",)
+    search_fields = ("alt_uk", "alt_en")
+    fieldsets = (
+        (None, {"fields": ("image", "order", "is_published")}),
+        ("Українська", {"classes": ["tab"], "fields": ("alt_uk",)}),
+        ("English", {"classes": ["tab"], "fields": ("alt_en",)}),
+    )
+
+    @admin.display(description="Фото")
+    def thumb(self, obj: GalleryWork) -> str:
+        if not obj.image:
+            return "—"
+        return format_html(
+            '<img src="{}" alt="" width="56" height="70">',
+            obj.image.url,
+        )

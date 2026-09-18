@@ -5,7 +5,7 @@ from src.core.models import PageSEO, SiteSettings
 from src.faq.models import FaqItem
 from src.leads.forms import LeadForm
 from src.services.models import Service
-from src.social_proof.models import Partner, Review
+from src.social_proof.models import GalleryWork, Partner, Review
 
 
 def _seo(slug: str, fallback_title: str, fallback_desc: str = ""):
@@ -46,6 +46,7 @@ def about(request):
             "meta_description": desc,
             "page_h1": h1,
             "vacancies": Vacancy.objects.filter(is_published=True),
+            "gallery_works": GalleryWork.objects.filter(is_published=True),
         },
     )
 

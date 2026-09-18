@@ -28,6 +28,41 @@
     </div>
   </div>
 </section>
+{% if gallery_works %}
+<section class="section section--dark atmosphere--editorial" id="gallery" data-gallery>
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="section__eyebrow">{% block_plain 'about' 'about_gallery_eyebrow' %}</p>
+      <h2 class="section__title">{% block_plain 'about' 'about_gallery_title' %}</h2>
+    </div>
+    <ul class="gallery-grid">
+      {% for work in gallery_works %}
+      <li class="gallery-grid__item reveal">
+        <button type="button" class="gallery-tile" data-gallery-open="{{ forloop.counter0 }}" aria-label="{% blocktranslate with n=forloop.counter %}Відкрити фото {{ n }}{% endblocktranslate %}">
+          <img src="{{ work.image.url }}" alt="{{ work.alt }}" width="800" height="1000" loading="{% if forloop.counter > 4 %}lazy{% else %}eager{% endif %}" decoding="async">
+        </button>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <dialog class="gallery-lightbox" data-gallery-dialog aria-label="{% trans 'Галерея робіт' %}">
+    <img class="gallery-lightbox__image" data-gallery-full alt="">
+    <button type="button" class="gallery-lightbox__close" data-gallery-close aria-label="{% trans 'Закрити' %}">
+      <span aria-hidden="true">×</span>
+    </button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--prev" data-gallery-prev aria-label="{% trans 'Попереднє фото' %}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--next" data-gallery-next aria-label="{% trans 'Наступне фото' %}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M9 6l6 6-6 6" />
+      </svg>
+    </button>
+  </dialog>
+</section>
+{% endif %}
 {% if vacancies %}
 <section class="section atmosphere--hubs" id="career">
   <div class="container">

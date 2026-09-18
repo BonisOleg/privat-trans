@@ -6,6 +6,7 @@ from src.careers.models import Vacancy
 from src.core.models import PageSEO, SiteBlock, SiteSettings
 from src.faq.models import FaqItem
 from src.services.models import Service
+from src.pages.gallery import seed_gallery_works
 from src.social_proof.models import Partner, Review
 
 SERVICES = [
@@ -423,6 +424,7 @@ class Command(BaseCommand):
             )
         for index, name in enumerate(["Partner A", "Partner B", "Partner C", "Partner D"], start=1):
             Partner.objects.update_or_create(name=name, defaults={"order": index})
+        seed_gallery_works()
         for slug, title_uk, title_en, desc_uk, desc_en in SEO:
             PageSEO.objects.update_or_create(
                 slug=slug,

@@ -27,6 +27,26 @@ class Review(models.Model):
         return localized(self, "quote")
 
 
+class GalleryWork(models.Model):
+    image = models.ImageField(upload_to="gallery/")
+    alt_uk = models.CharField(max_length=180)
+    alt_en = models.CharField(max_length=180, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_published = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Фото галереї"
+        verbose_name_plural = "Галерея робіт"
+
+    def __str__(self) -> str:
+        return self.alt_uk
+
+    @property
+    def alt(self) -> str:
+        return localized(self, "alt")
+
+
 class Partner(models.Model):
     name = models.CharField(max_length=120)
     logo = models.ImageField(upload_to="partners/", blank=True)

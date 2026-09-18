@@ -206,6 +206,19 @@
 }
 #advantages .section__parallax-layer { background: var(--atmosphere); }
 
+#gallery {
+  background:
+    url("../../media/patterns/grid-dark.svg") repeat,
+    radial-gradient(70% 60% at 0% 100%, rgba(196, 165, 116, 0.12), transparent 50%),
+    radial-gradient(75% 55% at 100% 0%, rgba(29, 78, 216, 0.2), transparent 52%),
+    linear-gradient(180deg, #152338 0%, #0f172a 100%);
+}
+#gallery .section__title { color: #fff; }
+#gallery .section__eyebrow { color: #d2c0a0; }
+@media (max-width: 1023px) and (min-width: 768px) {
+  #gallery { padding-block: clamp(2.75rem, 5vw, 4rem); }
+}
+
 #faq {
   --atmosphere:
     url("../../media/patterns/hubs-light.svg") repeat,
