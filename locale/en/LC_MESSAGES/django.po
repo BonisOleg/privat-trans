@@ -57,6 +57,10 @@ msgstr "Too many requests from your network. Please try again later."
 msgid "Сайт"
 msgstr "Website"
 
+#: templates/leads/_form.html
+msgid "Надсилання"
+msgstr "Sending"
+
 #: templates/base.html:43
 msgid "Перейти до змісту"
 msgstr "Skip to content"

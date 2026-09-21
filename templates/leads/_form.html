@@ -1,6 +1,7 @@
 {% load i18n site_content %}
 <form class="lead-form" method="post" action="{% url 'leads:create' %}" data-lead-form data-qa="lead-form"
-      hx-post="{% url 'leads:create' %}" hx-target="#lead-form-slot" hx-swap="innerHTML">
+      hx-post="{% url 'leads:create' %}" hx-target="#lead-form-slot" hx-swap="innerHTML"
+      hx-disabled-elt="find .lead-form__submit" hx-sync="this:drop">
   {% csrf_token %}
   <div class="lead-form__honeypot" aria-hidden="true">
     <label for="id_honeypot">{% trans "Сайт" %}</label>
@@ -66,5 +67,9 @@
     <span>{% trans "Погоджуюсь на обробку персональних даних згідно" %} <a href="{% url 'pages:privacy' %}">{% trans "політики конфіденційності" %}</a>.</span>
   </label>
   {% if lead_form.consent.errors %}<p class="field__error is-shown">{{ lead_form.consent.errors.0 }}</p>{% endif %}
-  <button type="submit" class="btn btn--primary btn--block field--mt" data-qa="lead-submit">{% block_plain 'site' 'lead_submit' %}</button>
+  <button type="submit" class="btn btn--primary btn--block field--mt lead-form__submit" data-qa="lead-submit">
+    <span class="lead-form__submit-label">{% block_plain 'site' 'lead_submit' %}</span>
+    <span class="lead-form__spinner" aria-hidden="true" data-qa="lead-submit-spinner"></span>
+    <span class="visually-hidden" data-lead-pending hidden>{% trans "Надсилання" %}</span>
+  </button>
 </form>

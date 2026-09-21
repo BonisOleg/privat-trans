@@ -68,6 +68,8 @@ class LeadFormTests(TestCase):
     def test_lead_form_renders_cargo_select(self):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'hx-disabled-elt="find .lead-form__submit"')
+        self.assertContains(response, 'data-qa="lead-submit-spinner"')
         self.assertContains(response, 'name="cargo"')
         self.assertContains(response, "data-pt-select")
         self.assertContains(response, 'value="ltl"')

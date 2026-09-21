@@ -41,6 +41,28 @@ function initCitySelects() {
   });
 }
 
+function initLeadFormPending() {
+  const pendingOf = (form) => form.querySelector("[data-lead-pending]");
+
+  document.body.addEventListener("htmx:beforeRequest", (event) => {
+    const form = event.detail.elt;
+    if (!(form instanceof HTMLFormElement) || !form.hasAttribute("data-lead-form")) {
+      return;
+    }
+    form.setAttribute("aria-busy", "true");
+    pendingOf(form)?.removeAttribute("hidden");
+  });
+
+  document.body.addEventListener("htmx:afterRequest", (event) => {
+    const form = event.detail.elt;
+    if (!(form instanceof HTMLFormElement) || !form.hasAttribute("data-lead-form")) {
+      return;
+    }
+    form.removeAttribute("aria-busy");
+    pendingOf(form)?.setAttribute("hidden", "");
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initAnalytics();
   initCityDatalists();
@@ -59,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPartnersMarquee();
   initReviewsCarousel();
   initGallery();
+  initLeadFormPending();
 });
 
 document.body.addEventListener("htmx:afterSwap", (event) => {
