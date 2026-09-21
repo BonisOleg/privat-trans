@@ -1,5 +1,6 @@
+from django.core import mail
 from django.core.cache import cache
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from src.leads.models import Lead
@@ -124,3 +125,33 @@ class LeadFormTests(TestCase):
         response = self.client.post(reverse("leads:create"), _lead_payload(email="not-an-email"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Lead.objects.count(), 0)
+
+    @override_settings(LEAD_NOTIFY_EMAIL="privat_trans@ukr.net")
+    def test_notify_email_sends_to_lead_notify(self):
+        response = self.client.post(reverse("leads:create"), _lead_payload(), HTTP_HX_REQUEST="true")
+        self.assertEqual(response.status_code, 200)
+        lead = Lead.objects.get()
+        self.assertEqual(len(mail.outbox), 1)
+        sent = mail.outbox[0]
+        self.assertEqual(sent.to, ["privat_trans@ukr.net"])
+        self.assertEqual(sent.subject, f"Нова заявка #{lead.pk}")
+        self.assertEqual(sent.reply_to, ["test@example.com"])
+        self.assertIn("Олена", sent.body)
+        self.assertIn("+380670000000", sent.body)
+
+    @override_settings(LEAD_NOTIFY_EMAIL="")
+    def test_notify_email_skipped_without_recipient(self):
+        response = self.client.post(reverse("leads:create"), _lead_payload())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Lead.objects.count(), 1)
+        self.assertEqual(len(mail.outbox), 0)
+
+    @override_settings(LEAD_NOTIFY_EMAIL="privat_trans@ukr.net")
+    def test_honeypot_does_not_send_email(self):
+        response = self.client.post(
+            reverse("leads:create"),
+            _lead_payload(honeypot="http://spam.example"),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Lead.objects.count(), 0)
+        self.assertEqual(len(mail.outbox), 0)

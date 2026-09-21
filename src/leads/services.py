@@ -4,6 +4,7 @@ import urllib.request
 
 from django.conf import settings
 from django.core.cache import cache
+from django.core.mail import EmailMessage
 
 from src.leads.models import Lead
 
@@ -57,6 +58,24 @@ def _notify_telegram(body: str) -> None:
         logger.exception("Lead telegram notify failed")
 
 
+def _notify_email(lead: Lead, body: str) -> None:
+    to = (settings.LEAD_NOTIFY_EMAIL or "").strip()
+    if not to:
+        return
+    reply_to = [lead.email] if lead.email else None
+    message = EmailMessage(
+        subject=f"Нова заявка #{lead.pk}",
+        body=body,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[to],
+        reply_to=reply_to,
+    )
+    try:
+        message.send(fail_silently=False)
+    except Exception:
+        logger.exception("Lead email notify failed")
+
+
 def _notify_crm(lead: Lead) -> None:
     webhook = settings.CRM_WEBHOOK_URL
     if not webhook:
@@ -96,5 +115,6 @@ def notify_lead(lead: Lead) -> None:
         f"{lead.cargo} / {lead.service}\n"
         f"{lead.message}"
     )
+    _notify_email(lead, body)
     _notify_telegram(body)
     _notify_crm(lead)
