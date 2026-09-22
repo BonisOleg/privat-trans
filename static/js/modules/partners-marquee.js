@@ -1,3 +1,5 @@
+const LOOP_PX_PER_SEC = 46;
+
 function debounce(fn, wait = 150) {
   let timer = 0;
   return (...args) => {
@@ -10,6 +12,24 @@ function sourceTiles(track) {
   const marked = [...track.querySelectorAll("[data-partner-source]")];
   if (marked.length) return marked;
   return [...track.children].filter((el) => !el.hasAttribute("aria-hidden"));
+}
+
+function whenImagesReady(root) {
+  const imgs = [...root.querySelectorAll("img")];
+  if (!imgs.length) return Promise.resolve();
+  return Promise.all(
+    imgs.map((img) => {
+      if (img.complete && img.naturalWidth) return Promise.resolve();
+      const loaded = new Promise((resolve) => {
+        img.addEventListener("load", resolve, { once: true });
+        img.addEventListener("error", resolve, { once: true });
+      });
+      if (typeof img.decode === "function") {
+        return img.decode().catch(() => loaded);
+      }
+      return loaded;
+    }),
+  );
 }
 
 function fillPartnersTrack(wrap, track) {
@@ -32,20 +52,25 @@ function fillPartnersTrack(wrap, track) {
     });
   };
 
-  // Grow one half until it covers the viewport (plus buffer).
   let guard = 0;
   do {
     appendSet(false);
     guard += 1;
   } while (track.scrollWidth < wrap.clientWidth + 24 && guard < 12);
 
-  // Exact duplicate for seamless translateX(-50%).
   const unitCount = track.children.length;
   for (let i = 0; i < unitCount; i += 1) {
     const clone = track.children[i].cloneNode(true);
     clone.setAttribute("aria-hidden", "true");
     track.appendChild(clone);
   }
+}
+
+function syncLoopDuration(track) {
+  const half = track.scrollWidth / 2;
+  if (half < 1) return;
+  const seconds = Math.max(18, Math.min(80, half / LOOP_PX_PER_SEC));
+  track.style.setProperty("--partners-duration", `${seconds.toFixed(1)}s`);
 }
 
 export function initPartnersMarquee(root = document) {
@@ -59,7 +84,6 @@ export function initPartnersMarquee(root = document) {
     if (!track) return;
 
     const rebuild = () => {
-      // Keep original sources as templates in a fragment store on first run.
       if (!wrap._partnerBlueprint) {
         wrap._partnerBlueprint = sourceTiles(track).map((node) => node.cloneNode(true));
       }
@@ -71,11 +95,24 @@ export function initPartnersMarquee(root = document) {
         }),
       );
       fillPartnersTrack(wrap, track);
+      syncLoopDuration(track);
     };
 
-    rebuild();
-    if (wrap.dataset.partnersReady === "true") return;
-    wrap.dataset.partnersReady = "true";
-    window.addEventListener("resize", debounce(rebuild, 180));
+    const rebuildWhenReady = () => {
+      const sourceRoot = wrap._partnerBlueprint
+        ? track
+        : wrap;
+      return whenImagesReady(sourceRoot).then(rebuild);
+    };
+
+    if (wrap.dataset.partnersBound === "true") {
+      rebuildWhenReady();
+      return;
+    }
+    wrap.dataset.partnersBound = "true";
+    rebuildWhenReady().then(() => {
+      wrap.dataset.partnersReady = "true";
+    });
+    window.addEventListener("resize", debounce(rebuildWhenReady, 180));
   });
 }

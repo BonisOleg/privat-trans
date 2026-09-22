@@ -63,6 +63,8 @@ class HomePartnersTests(TestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'id="partners"')
+        self.assertContains(response, 'data-qa="partners-marquee"')
+        self.assertContains(response, "data-partners-marquee")
         self.assertContains(response, partner.logo.url)
         self.assertContains(response, 'alt="Lardi-Trans"')
         self.assertContains(response, "Без лого")
