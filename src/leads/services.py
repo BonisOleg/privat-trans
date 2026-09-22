@@ -58,8 +58,25 @@ def _notify_telegram(body: str) -> None:
         logger.exception("Lead telegram notify failed")
 
 
+def lead_notify_recipients(raw=None) -> list[str]:
+    value = settings.LEAD_NOTIFY_EMAIL if raw is None else raw
+    if isinstance(value, (list, tuple)):
+        items = value
+    else:
+        items = str(value or "").replace(";", ",").split(",")
+    seen: set[str] = set()
+    recipients: list[str] = []
+    for item in items:
+        email = str(item).strip()
+        if not email or email in seen:
+            continue
+        seen.add(email)
+        recipients.append(email)
+    return recipients
+
+
 def _notify_email(lead: Lead, body: str) -> None:
-    to = (settings.LEAD_NOTIFY_EMAIL or "").strip()
+    to = lead_notify_recipients()
     if not to:
         return
     reply_to = [lead.email] if lead.email else None
@@ -67,7 +84,7 @@ def _notify_email(lead: Lead, body: str) -> None:
         subject=f"Нова заявка #{lead.pk}",
         body=body,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[to],
+        to=to,
         reply_to=reply_to,
     )
     try:

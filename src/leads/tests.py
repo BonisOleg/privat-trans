@@ -4,7 +4,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from src.leads.models import Lead
-from src.leads.services import LEAD_RATE_MAX
+from src.leads.services import LEAD_RATE_MAX, lead_notify_recipients
 
 
 def _lead_payload(**overrides):
@@ -147,6 +147,25 @@ class LeadFormTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Lead.objects.count(), 1)
         self.assertEqual(len(mail.outbox), 0)
+
+    @override_settings(
+        LEAD_NOTIFY_EMAIL="ptinfo@ukr.net, prometeylabsandriir@gmail.com, ptinfo@ukr.net"
+    )
+    def test_notify_email_sends_to_several_recipients(self):
+        response = self.client.post(reverse("leads:create"), _lead_payload(), HTTP_HX_REQUEST="true")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(
+            mail.outbox[0].to,
+            ["ptinfo@ukr.net", "prometeylabsandriir@gmail.com"],
+        )
+
+    def test_lead_notify_recipients_splits_and_dedupes(self):
+        self.assertEqual(lead_notify_recipients(""), [])
+        self.assertEqual(
+            lead_notify_recipients("a@x.test; b@x.test, a@x.test, "),
+            ["a@x.test", "b@x.test"],
+        )
 
     @override_settings(LEAD_NOTIFY_EMAIL="privat_trans@ukr.net")
     def test_honeypot_does_not_send_email(self):
