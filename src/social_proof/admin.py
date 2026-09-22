@@ -34,8 +34,19 @@ class ReviewAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
 
 @admin.register(Partner)
 class PartnerAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
-    list_display = ("name", "order", "is_published")
+    list_display = ("thumb", "name", "order", "is_published")
     list_editable = ("order", "is_published")
+    search_fields = ("name",)
+    fields = ("name", "logo", "order", "is_published")
+
+    @admin.display(description="Лого")
+    def thumb(self, obj: Partner) -> str:
+        if not obj.logo:
+            return "—"
+        return format_html(
+            '<img src="{}" alt="" width="72" height="36">',
+            obj.logo.url,
+        )
 
 
 @admin.register(GalleryWork)

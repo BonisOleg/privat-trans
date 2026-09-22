@@ -5,7 +5,7 @@ from django.core.files.base import ContentFile
 from django.test import TestCase
 from django.urls import reverse
 
-from src.social_proof.models import GalleryWork
+from src.social_proof.models import GalleryWork, Partner
 
 
 def _sample_image(name: str = "work-test.jpg") -> ContentFile:
@@ -43,3 +43,28 @@ class AboutGalleryTests(TestCase):
         response = self.client.get(reverse("pages:about"))
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, 'id="gallery"')
+
+
+class HomePartnersTests(TestCase):
+    def test_home_renders_partner_logo(self):
+        partner = Partner.objects.create(
+            name="Lardi-Trans",
+            logo=_sample_image("partner-lardi.png"),
+            order=1,
+            is_published=True,
+        )
+        Partner.objects.create(name="Без лого", order=2, is_published=True)
+        hidden = Partner.objects.create(
+            name="Прихований",
+            logo=_sample_image("partner-hidden.png"),
+            order=3,
+            is_published=False,
+        )
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'id="partners"')
+        self.assertContains(response, partner.logo.url)
+        self.assertContains(response, 'alt="Lardi-Trans"')
+        self.assertContains(response, "Без лого")
+        self.assertNotContains(response, hidden.logo.url)
+        self.assertNotContains(response, "Прихований")

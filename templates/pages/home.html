@@ -458,7 +458,13 @@
     <div class="partners-marquee" data-partners-marquee>
       <div class="partners-marquee__track" data-partners-track>
         {% for partner in partners %}
-        <div class="partner-tile" data-partner-source>{{ partner.name }}</div>
+        <div class="partner-tile{% if partner.logo %} partner-tile--logo{% endif %}" data-partner-source>
+          {% if partner.logo %}
+          <img class="partner-tile__logo" src="{{ partner.logo.url }}" alt="{{ partner.name }}" width="160" height="56" loading="lazy" decoding="async">
+          {% else %}
+          <span class="partner-tile__name">{{ partner.name }}</span>
+          {% endif %}
+        </div>
         {% endfor %}
       </div>
     </div>
