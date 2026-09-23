@@ -1,6 +1,7 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
+from src.core.images import RASTER_IMAGE_EXTENSIONS, convert_image_fields
 from src.core.utils import localized
 
 
@@ -43,14 +44,14 @@ class SiteSettings(models.Model):
     hero_poster = models.ImageField(
         upload_to="hero/",
         blank=True,
-        validators=[FileExtensionValidator(["jpg", "jpeg", "webp", "png"])],
-        help_text="Кадр-заставка (JPG/WEBP). Fallback: static/media/hero-poster.jpg",
+        validators=[FileExtensionValidator(RASTER_IMAGE_EXTENSIONS)],
+        help_text="JPG або PNG зберігається як WebP. Fallback: static/media/hero-poster.jpg",
     )
     og_image = models.ImageField(
         upload_to="seo/",
         blank=True,
-        validators=[FileExtensionValidator(["jpg", "jpeg", "webp", "png"])],
-        help_text="OG-прев’ю 1200×630. Якщо порожньо — hero poster або static/media/hero-poster.jpg",
+        validators=[FileExtensionValidator(RASTER_IMAGE_EXTENSIONS)],
+        help_text="OG-прев’ю 1200×630. JPG або PNG зберігається як WebP. Якщо порожньо — hero poster або static/media/hero-poster.jpg",
     )
     default_title_uk = models.CharField(
         max_length=180,
@@ -107,6 +108,15 @@ class SiteSettings(models.Model):
     @property
     def default_description(self) -> str:
         return localized(self, "default_description")
+
+    def save(self, *args, **kwargs):
+        convert_image_fields(
+            self,
+            "hero_poster",
+            "og_image",
+            update_fields=kwargs.get("update_fields"),
+        )
+        super().save(*args, **kwargs)
 
 
 class PageSEO(models.Model):
@@ -166,7 +176,12 @@ class SiteBlock(models.Model):
     )
     text_uk = models.TextField(blank=True)
     text_en = models.TextField(blank=True)
-    image = models.ImageField(upload_to="blocks/", blank=True)
+    image = models.ImageField(
+        upload_to="blocks/",
+        blank=True,
+        validators=[FileExtensionValidator(RASTER_IMAGE_EXTENSIONS)],
+        help_text="JPG або PNG зберігається як WebP.",
+    )
     link_url = models.CharField(max_length=512, blank=True)
     link_label = models.CharField(max_length=128, blank=True)
     video_embed_url = models.URLField(blank=True)
@@ -184,6 +199,10 @@ class SiteBlock(models.Model):
 
     def __str__(self) -> str:
         return f"{self.page}.{self.key}"
+
+    def save(self, *args, **kwargs):
+        convert_image_fields(self, "image", update_fields=kwargs.get("update_fields"))
+        super().save(*args, **kwargs)
 
     @property
     def cache_key(self) -> str:

@@ -1,5 +1,7 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
+from src.core.images import RASTER_IMAGE_EXTENSIONS, convert_image_fields
 from src.core.utils import localized
 
 
@@ -28,7 +30,11 @@ class Review(models.Model):
 
 
 class GalleryWork(models.Model):
-    image = models.ImageField(upload_to="gallery/")
+    image = models.ImageField(
+        upload_to="gallery/",
+        validators=[FileExtensionValidator(RASTER_IMAGE_EXTENSIONS)],
+        help_text="JPG або PNG зберігається як WebP.",
+    )
     alt_uk = models.CharField(max_length=180)
     alt_en = models.CharField(max_length=180, blank=True)
     order = models.PositiveIntegerField(default=0)
@@ -46,10 +52,19 @@ class GalleryWork(models.Model):
     def alt(self) -> str:
         return localized(self, "alt")
 
+    def save(self, *args, **kwargs):
+        convert_image_fields(self, "image", update_fields=kwargs.get("update_fields"))
+        super().save(*args, **kwargs)
+
 
 class Partner(models.Model):
     name = models.CharField(max_length=120)
-    logo = models.ImageField(upload_to="partners/", blank=True)
+    logo = models.ImageField(
+        upload_to="partners/",
+        blank=True,
+        validators=[FileExtensionValidator(RASTER_IMAGE_EXTENSIONS)],
+        help_text="JPG або PNG зберігається як WebP. Прозорість лишається.",
+    )
     order = models.PositiveIntegerField(default=0)
     is_published = models.BooleanField(default=True)
 
@@ -60,3 +75,7 @@ class Partner(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs):
+        convert_image_fields(self, "logo", update_fields=kwargs.get("update_fields"))
+        super().save(*args, **kwargs)
