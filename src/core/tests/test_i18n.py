@@ -1,5 +1,7 @@
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
+from django.utils import translation
+from django.utils.translation import gettext
 
 from src.core.i18n import collapse_double_prefix, localize_path, strip_language_prefix
 
@@ -45,6 +47,33 @@ class HealthAndPagesTests(TestCase):
         self.assertContains(response, "Services")
         self.assertContains(response, "Fleet")
         self.assertNotContains(response, ">Послуги<")
+
+    def test_en_chrome_not_in_admin(self):
+        contacts = self.client.get("/en/contacts/")
+        self.assertEqual(contacts.status_code, 200)
+        self.assertContains(contacts, "Country of origin")
+        self.assertContains(contacts, "Destination country")
+        self.assertContains(contacts, 'placeholder="Country"')
+        self.assertContains(contacts, "EDRPOU")
+        self.assertContains(contacts, "Tax ID")
+        self.assertNotContains(contacts, "Країна звідки")
+        self.assertNotContains(contacts, "ЄДРПОУ")
+
+        faq = self.client.get("/en/faq/")
+        self.assertContains(faq, "Frequently asked questions")
+        self.assertNotContains(faq, "Часті запитання")
+
+        privacy = self.client.get("/en/privacy/")
+        self.assertContains(privacy, "Documents")
+        self.assertContains(privacy, "EDRPOU")
+        self.assertNotContains(privacy, ">Документи<")
+
+        with translation.override("en"):
+            self.assertEqual(gettext("Послуга"), "Service")
+            self.assertEqual(gettext("Розрахунок"), "Estimate")
+            self.assertEqual(gettext("Вкажіть місто"), "Enter a city")
+            self.assertEqual(gettext("Вкажіть країну"), "Enter a country")
+            self.assertEqual(gettext("Місто"), "City")
 
     def test_set_language_roundtrip(self):
         to_en = self.client.post(

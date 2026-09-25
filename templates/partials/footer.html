@@ -10,7 +10,7 @@
       <div class="footer__legal">
         <p>{{ site_settings.address }}</p>
         <p><a href="tel:{{ site_settings.phone_href }}">{{ site_settings.phone }}</a> · <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
-        <p>ЄДРПОУ {{ site_settings.edrpou }} · ІПН {{ site_settings.ipn }}</p>
+        <p>{% trans "ЄДРПОУ" %} {{ site_settings.edrpou }} · {% trans "ІПН" %} {{ site_settings.ipn }}</p>
         <p>{{ site_settings.vat_note }}</p>
       </div>
     </div>

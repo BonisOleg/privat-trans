@@ -284,6 +284,54 @@ msgstr "Site language"
 msgid "Супутникова карта коридорів Європа — Азія"
 msgstr "Satellite map of Europe — Asia corridors"
 
+#: src/leads/forms.py
+msgid "Місто"
+msgstr "City"
+
+#: src/leads/forms.py
+msgid "Країна"
+msgstr "Country"
+
+#: src/leads/forms.py
+msgid "Країна звідки"
+msgstr "Country of origin"
+
+#: src/leads/forms.py
+msgid "Країна куди"
+msgstr "Destination country"
+
+#: src/leads/forms.py
+msgid "Вкажіть місто"
+msgstr "Enter a city"
+
+#: src/leads/forms.py
+msgid "Вкажіть країну"
+msgstr "Enter a country"
+
+#: templates/faq/list.html
+msgid "Часті запитання"
+msgstr "Frequently asked questions"
+
+#: templates/pages/privacy.html
+msgid "Документи"
+msgstr "Documents"
+
+#: templates/services/detail.html
+msgid "Послуга"
+msgstr "Service"
+
+#: templates/calculator/page.html
+msgid "Розрахунок"
+msgstr "Estimate"
+
+#: templates/partials/footer.html templates/pages/contacts.html templates/pages/privacy.html
+msgid "ЄДРПОУ"
+msgstr "EDRPOU"
+
+#: templates/partials/footer.html templates/pages/contacts.html
+msgid "ІПН"
+msgstr "Tax ID"
+
 #~ msgid "Залишити заявку"
 #~ msgstr "Request a quote"
 

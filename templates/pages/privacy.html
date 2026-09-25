@@ -12,7 +12,7 @@
 <section class="section">
   <div class="container prose reveal">
     {% block_html 'privacy' 'privacy_body' %}
-    <p>{{ site_settings.email }} · {{ site_settings.address }} · ЄДРПОУ {{ site_settings.edrpou }}</p>
+    <p>{{ site_settings.email }} · {{ site_settings.address }} · {% trans "ЄДРПОУ" %} {{ site_settings.edrpou }}</p>
   </div>
 </section>
 {% endblock %}
