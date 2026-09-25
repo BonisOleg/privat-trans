@@ -18,9 +18,9 @@
   <title>{% block title %}{{ page_title|default:site_settings.default_title }}{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}{{ meta_description|default:site_settings.default_description }}{% endblock %}">
   <link rel="canonical" href="{{ canonical_url }}">
-  <link rel="alternate" hreflang="uk" href="{{ request.scheme }}://{{ request.get_host }}{{ lang_switch_urls.uk }}">
-  <link rel="alternate" hreflang="en" href="{{ request.scheme }}://{{ request.get_host }}{{ lang_switch_urls.en }}">
-  <link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}{{ lang_switch_urls.uk }}">
+  <link rel="alternate" hreflang="uk" href="{{ public_origin }}{{ lang_switch_urls.uk }}">
+  <link rel="alternate" hreflang="en" href="{{ public_origin }}{{ lang_switch_urls.en }}">
+  <link rel="alternate" hreflang="x-default" href="{{ public_origin }}{{ lang_switch_urls.uk }}">
   <meta property="og:title" content="{{ page_title|default:site_settings.default_title }}">
   <meta property="og:description" content="{{ meta_description|default:site_settings.default_description }}">
   <meta property="og:type" content="website">

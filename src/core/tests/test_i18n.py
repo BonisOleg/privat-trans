@@ -1,4 +1,4 @@
-from django.test import SimpleTestCase, TestCase
+from django.test import SimpleTestCase, TestCase, override_settings
 from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import gettext
@@ -135,3 +135,20 @@ class HealthAndPagesTests(TestCase):
         self.assertIn('hreflang="en"', content)
         self.assertIn('hreflang="x-default"', content)
         self.assertIn("<lastmod>", content)
+
+    @override_settings(SITE_URL="https://privattrans.com.ua")
+    def test_public_origin_ignores_request_host(self):
+        page = self.client.get("/about/?utm_source=ad")
+        self.assertContains(page, 'rel="canonical" href="https://privattrans.com.ua/about/"')
+        self.assertContains(page, 'hreflang="uk" href="https://privattrans.com.ua/about/"')
+        self.assertContains(page, 'hreflang="en" href="https://privattrans.com.ua/en/about/"')
+        self.assertContains(page, 'hreflang="x-default" href="https://privattrans.com.ua/about/"')
+        self.assertNotContains(page, "testserver")
+
+        robots = self.client.get("/robots.txt")
+        self.assertContains(robots, "Sitemap: https://privattrans.com.ua/sitemap.xml")
+
+        sitemap = self.client.get("/sitemap.xml")
+        body = sitemap.content.decode()
+        self.assertIn("https://privattrans.com.ua/", body)
+        self.assertNotIn("testserver", body)

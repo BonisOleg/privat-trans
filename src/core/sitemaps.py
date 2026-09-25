@@ -1,7 +1,10 @@
+from urllib.parse import urlparse
+
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 from src.core.models import SiteSettings
+from src.core.seo import public_origin
 from src.services.models import Service
 
 STATIC_PRIORITIES = {
@@ -19,6 +22,18 @@ class I18nSitemap(Sitemap):
     i18n = True
     alternates = True
     x_default = True
+
+    def get_protocol(self, protocol=None):
+        origin = public_origin()
+        if origin:
+            return urlparse(origin).scheme
+        return super().get_protocol(protocol)
+
+    def get_domain(self, site=None):
+        origin = public_origin()
+        if origin:
+            return urlparse(origin).netloc
+        return super().get_domain(site)
 
 
 class StaticViewSitemap(I18nSitemap):

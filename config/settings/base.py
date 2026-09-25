@@ -11,6 +11,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost", cast=Csv())
 
+# Порожній у тестах і на HTTP-IP. На домені: https://privattrans.com.ua
+SITE_URL = config("SITE_URL", default="").strip().rstrip("/")
+
 INSTALLED_APPS = [
     "unfold",
     "unfold.contrib.filters",

@@ -2,10 +2,12 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.decorators.http import require_GET
 
+from src.core.seo import request_origin
+
 
 @require_GET
 def robots_txt(request):
-    sitemap_url = request.build_absolute_uri(reverse("django.contrib.sitemaps.views.sitemap"))
+    sitemap_url = request_origin(request) + reverse("django.contrib.sitemaps.views.sitemap")
     body = "\n".join(
         [
             "User-agent: *",

@@ -1,15 +1,28 @@
 import json
+from urllib.parse import urlparse
 
+from django.conf import settings
 from django.templatetags.static import static
 from django.utils.translation import get_language
 
 from src.core.i18n import localize_path
 
 
+def public_origin() -> str:
+    return (getattr(settings, "SITE_URL", "") or "").strip().rstrip("/")
+
+
+def request_origin(request) -> str:
+    origin = public_origin()
+    if origin:
+        return origin
+    return f"{request.scheme}://{request.get_host()}"
+
+
 def absolute_url(request, path: str) -> str:
     if path.startswith(("http://", "https://")):
         return path
-    return f"{request.scheme}://{request.get_host()}{path}"
+    return f"{request_origin(request)}{path}"
 
 
 def page_canonical_url(request) -> str:

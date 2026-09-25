@@ -6,6 +6,9 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 
 COMPOSE=(docker compose -f docker-compose.yml -f docker-compose.prod.yml)
+if [ -f .env ] && grep -qE '^USE_HTTPS=true' .env; then
+  COMPOSE+=(-f docker-compose.ssl.yml)
+fi
 EXPECTED_SERVICES=(db backend nginx)
 
 if [ "${1:-}" = "--pull" ]; then
@@ -117,5 +120,5 @@ echo "==> Smoke Host=${DROPLET_IP}"
 curl -sf http://127.0.0.1/healthz/ && echo " healthz OK" || echo "WARN: healthz failed"
 curl -sI -H "Host: ${DROPLET_IP}" http://127.0.0.1/ | head -5
 
-echo "==> Далі: seed_demo або sync-data.sh import, ПОТІМ createsuperuser"
+echo "==> Далі: RESTORE_YES=1 bash deploy/docker/restore-dump.sh (дамп тестового сервера), не seed_demo"
 echo "==> Логи: ${COMPOSE[*]} logs -f backend nginx"

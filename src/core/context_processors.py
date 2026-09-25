@@ -7,7 +7,13 @@ from django.utils.translation import get_language
 from src.core.cities import CITIES
 from src.core.i18n import lang_switch_map
 from src.core.models import SiteSettings
-from src.core.seo import og_image_meta, og_locales, organization_json_ld, page_canonical_url
+from src.core.seo import (
+    og_image_meta,
+    og_locales,
+    organization_json_ld,
+    page_canonical_url,
+    request_origin,
+)
 from src.core.site_blocks import get_site_blocks_map
 from src.services.models import Service
 
@@ -42,6 +48,7 @@ def site_chrome(request):
         "lang_switch_urls": lang_switch_map(request.path),
         "current_language": language,
         "canonical_url": page_canonical_url(request),
+        "public_origin": request_origin(request),
         "og_image": og_image_meta(request, settings_obj),
         "og_locale": og_locale,
         "og_locale_alternate": og_locale_alternate,
