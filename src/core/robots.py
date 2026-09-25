@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views.decorators.http import require_GET
@@ -11,7 +12,7 @@ def robots_txt(request):
     body = "\n".join(
         [
             "User-agent: *",
-            "Disallow: /admin/",
+            f"Disallow: /{settings.ADMIN_URL}",
             "Disallow: /leads/",
             f"Sitemap: {sitemap_url}",
             "",

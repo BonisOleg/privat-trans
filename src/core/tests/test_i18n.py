@@ -102,6 +102,8 @@ class HealthAndPagesTests(TestCase):
         response = self.client.get("/robots.txt")
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Sitemap:", response.content)
+        self.assertIn(b"Disallow: /k7m-route/", response.content)
+        self.assertNotIn(b"Disallow: /admin/", response.content)
 
     def test_lead_form_url(self):
         from django.utils import translation

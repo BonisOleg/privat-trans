@@ -10,7 +10,7 @@ from src.core.views import healthz
 from src.core.views_i18n import set_language
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
     path("tinymce/", include("tinymce.urls")),
     path("healthz/", healthz, name="healthz"),
     path("i18n/setlang/", set_language, name="set_language"),

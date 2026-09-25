@@ -14,6 +14,12 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost", cast=Csv())
 # Порожній у тестах і на HTTP-IP. На домені: https://privattrans.com.ua
 SITE_URL = config("SITE_URL", default="").strip().rstrip("/")
 
+_admin_path = config("ADMIN_URL", default="k7m-route").strip().strip("/")
+if not _admin_path or _admin_path.lower() == "admin":
+    _admin_path = "k7m-route"
+ADMIN_URL = f"{_admin_path}/"
+LOGIN_URL = "admin:login"
+
 INSTALLED_APPS = [
     "unfold",
     "unfold.contrib.filters",
@@ -111,7 +117,7 @@ CRM_WEBHOOK_URL = config("CRM_WEBHOOK_URL", default="")
 
 CONTENT_SECURITY_POLICY = {
     # Alpine.js (Unfold) needs unsafe-eval; admin is staff-only.
-    "EXCLUDE_URL_PREFIXES": ("/admin/",),
+    "EXCLUDE_URL_PREFIXES": (f"/{ADMIN_URL}",),
     "DIRECTIVES": {
         "default-src": ("'self'",),
         "script-src": (
